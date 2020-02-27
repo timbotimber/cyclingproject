@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const tripSchema = new Schema({
   title: String,
-  origin: Array,
-  destination: Array,
-  duration: Number,
-  distance: Number,
+  origin: Array, // First waypoint
+  destination: Array, // Last waypoint
+  duration: Number, // Comes from Mapbox
+  distance: Number, // Comes from Mapbox
   elevation: {
     enum: ["Mostly flat", "Hilly", "Mountainous"],
     type: String
@@ -14,7 +14,7 @@ const tripSchema = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  },
+  }, // Auto generated
   difficulty: {
     enum: ["Easy", "Intermediate", "Advanced"],
     type: String
@@ -25,16 +25,16 @@ const tripSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Waypoint"
     }
-  ],
+  ], // Comes from Mapbox, but needs modification...
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment"
     }
   ],
-  likes_count: Number,
-  path: [[]],
-  established_route: Boolean
+  likes_count: Number, // 
+  geometry: {}, // Comes from Mapbox
+  established_route: Boolean 
 });
 
 const Trip = mongoose.model("Trip", tripSchema);
