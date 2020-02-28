@@ -6,6 +6,7 @@ import PlotView from "./components/PlotView";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import TripReview from "./components/TripReview";
 import Trips from "./components/Trips";
 
 function App() {
