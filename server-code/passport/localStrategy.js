@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 // We'll need to pass email parameters through later:
 passport.use(
-  new LocalStrategy((username, password, cb) => {
+  new LocalStrategy({ usernameField: "email" }, (username, password, cb) => {
     User.findOne({ username: username })
       .then(foundUser => {
         if (!foundUser) {
