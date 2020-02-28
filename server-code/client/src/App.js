@@ -6,6 +6,7 @@ import PlotView from "./components/PlotView";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Trips from "./components/Trips";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/plotview" component={PlotView} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/trips" component={Trips} />
       </div>
     </div>
   );

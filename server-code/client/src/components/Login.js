@@ -23,15 +23,16 @@ export default class Login extends Component {
         password: this.state.password
       })
       .then(response => {
-        this.props.history.push("/");
-        console.log(response);
+        console.log(response.data);
         this.props.setUser(response.data);
+        this.props.history.push("/plotview");
       })
       .catch(err => {
-        console.log("error test", err.response.data.message);
+        console.log("error test");
         this.setState({
           message: err.response.data.message
         });
+        console.log("message", this.state.message);
       });
   };
 

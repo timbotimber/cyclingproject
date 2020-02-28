@@ -23,9 +23,9 @@ export default class Signup extends Component {
       })
       .then(response => {
         // redirect
-        this.props.history.push("/");
         // update state for user in <App/>
         this.props.setUser(response.data);
+        this.props.history.push("/");
       })
       .catch(err => {
         console.log("error test", err.response.data.message);
