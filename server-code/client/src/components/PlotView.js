@@ -211,7 +211,7 @@ export default class PlotView extends React.Component {
   render() {
     console.log(this.state.map);
     return (
-      <div className="map-wrapper">
+      <div>
         <div className="sidebarStyle">
           <div>
             Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
