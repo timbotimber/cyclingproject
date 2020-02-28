@@ -1,5 +1,15 @@
 .App {
+  position: fixed;
   text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  height: 100%;
 }
 
 .mapContainer {
@@ -21,4 +31,36 @@
   z-index: 1 !important;
   padding: 6px;
   font-weight: bold;
+}
+
+/* NAV BAR */
+nav {
+  width: 100vw;
+  height: 70px;
+  background-color: #fff;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.logo {
+  width: 33%;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.account-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 33%;
+  padding-right: 32px;
+}
+
+.account-links a {
+  padding-left: 16px;
+  text-decoration: none;
 }
