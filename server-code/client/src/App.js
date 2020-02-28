@@ -6,6 +6,7 @@ import PlotView from "./components/PlotView";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import TripReview from "./components/TripReview";
+import Trips from "./components/Trips";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <div className="content">
         <Route path="/plotview" component={PlotView} />
         <Route path="/login" component={Login} />
-        {/* <Route path="/addTrip/:id/review" component={TripReview} /> */}
+        <Route path="/trips" component={Trips} />
       </div>
     </div>
   );
