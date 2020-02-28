@@ -6,7 +6,7 @@ import MapBoxGLDraw from 'mapbox-gl-draw';
 mapboxgl.accessToken =
   'pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g';
 
-class App extends React.Component {
+class PlotView extends React.Component {
   // constructor(props) {
   //   super(props);
   state = {
