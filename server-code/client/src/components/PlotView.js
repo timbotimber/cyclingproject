@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 import MapBoxGLDraw from 'mapbox-gl-draw';
+import axios from 'axios';
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g';
@@ -15,8 +15,10 @@ export default class PlotView extends React.Component {
     lng: 5,
     lat: 34,
     zoom: 4,
+    uuid: '',
     duration: '',
     distance: '',
+    coordinates: [],
   };
 
   //
@@ -54,6 +56,15 @@ export default class PlotView extends React.Component {
     req.onload = () => {
       let jsonResponse = req.response;
       console.log('jsonReponse', jsonResponse);
+      this.setState(
+        {
+          distance: jsonResponse.routes[0].distance * 0.001,
+          duration: jsonResponse.routes[0].duration / 60,
+          coordinates: jsonResponse.routes[0].geometry.coordinates,
+          uuid: jsonResponse.uuid,
+        },
+        () => console.log(this.state)
+      );
       // let distance = jsonResponse.routes[0].distance * 0.001;
       // let duration = jsonResponse.routes[0].duration / 60;
       console.log(jsonResponse);
@@ -192,14 +203,23 @@ export default class PlotView extends React.Component {
     });
   };
 
+  axiosTest = () => {
+    const { lng, lat, zoom, distance, duration, coordinates, uuid } = this.state;
+    // const id = this.state.match.params.
+    axios
+      .post('/api/trips/addTrip', { lng, lat, zoom, distance, duration, coordinates, uuid })
+      .then(response => response);
+  };
+
   render() {
-    console.log(this.state.map);
+    console.log(this.state);
     return (
       <div>
         <div className="sidebarStyle">
           <div>
             Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}
           </div>
+          <button onClick={this.axiosTest}>Testing</button>
         </div>
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />
       </div>
