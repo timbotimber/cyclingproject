@@ -61,6 +61,8 @@ export default class Login extends Component {
           <button type="submit">Log in</button>
         </form>
         {this.state.message && <p>{this.state.message}</p>}
+
+        <a href="/auth/google">Login With Google</a>
       </>
     );
   }

@@ -9,18 +9,40 @@ import Signup from "./components/Signup";
 import TripReview from "./components/TripReview";
 import Trips from "./components/Trips";
 
-function App() {
-  return (
-    <div className="App">
-      <NavBar />
-      <div className="content">
-        <Route path="/plotview" component={PlotView} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/trips" component={Trips} />
+class App extends React.Component {
+  state = {
+    user: this.props.user
+  };
+
+  setUser = userObj => {
+    this.setState({
+      user: userObj
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <NavBar setUser={this.setUser} user={this.state.user} />
+        <div className="content">
+          <Route path="/plotview" component={PlotView} />
+          <Route
+            path="/login"
+            render={props => (
+              <Login history={props.history} setUser={this.setUser} />
+            )}
+          />
+          <Route
+            path="/signup"
+            render={props => (
+              <Signup history={props.history} setUser={this.setUser} />
+            )}
+          />
+          <Route path="/trips" component={Trips} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
