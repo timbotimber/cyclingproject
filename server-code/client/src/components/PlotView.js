@@ -2,6 +2,8 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapBoxGLDraw from 'mapbox-gl-draw';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import TripReview from './TripReview';
 
 mapboxgl.accessToken =
   'pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g';
@@ -10,6 +12,9 @@ export default class PlotView extends React.Component {
   // constructor(props) {
   //   super(props);
   state = {
+    title: '',
+    origin: [],
+    destination: [],
     map: null,
     draw: null,
     lng: 5,
@@ -19,6 +24,8 @@ export default class PlotView extends React.Component {
     duration: '',
     distance: '',
     coordinates: [],
+    waypoints: [],
+    reviewTrip: false,
   };
 
   //
@@ -62,6 +69,9 @@ export default class PlotView extends React.Component {
           duration: jsonResponse.routes[0].duration / 60,
           coordinates: jsonResponse.routes[0].geometry.coordinates,
           uuid: jsonResponse.uuid,
+          waypoints: jsonResponse.waypoints,
+          origin: jsonResponse.routes[0].geometry.coordinates[0],
+          destination: jsonResponse.routes[0].geometry.coordinates.length - 1,
         },
         () => console.log(this.state)
       );
@@ -203,23 +213,37 @@ export default class PlotView extends React.Component {
     });
   };
 
-  axiosTest = () => {
-    const { lng, lat, zoom, distance, duration, coordinates, uuid } = this.state;
-    // const id = this.state.match.params.
-    axios
-      .post('/api/trips/addTrip', { lng, lat, zoom, distance, duration, coordinates, uuid })
-      .then(response => response);
+  goToReviewTrip = () => {
+    this.setState({
+      reviewTrip: !this.state.reviewTrip,
+    });
+  };
+
+  updateTitle = text => {
+    this.setState({
+      title: text,
+    });
   };
 
   render() {
     console.log(this.state);
+    let tripReviewCard;
+    let text;
+    if (this.state.reviewTrip) {
+      text = 'Go Back';
+      tripReviewCard = <TripReview tripData={this.state} updateTitle={this.updateTitle} />;
+    } else {
+      text = 'Review Trip';
+    }
+
     return (
       <div>
         <div className="sidebarStyle">
           <div>
             Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}
           </div>
-          <button onClick={this.axiosTest}>Testing</button>
+          {tripReviewCard}
+          <button onClick={this.goToReviewTrip}>{text}</button>
         </div>
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />
       </div>
