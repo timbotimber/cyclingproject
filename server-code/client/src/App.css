@@ -115,6 +115,11 @@ nav {
   box-shadow: 7px 6px 36px -15px rgba(109, 109, 151, 0.4);
 }
 
+.trip-review-container {
+  width: 200px;
+  height: 200px;
+}
+
 .primary-content {
   text-align: left;
   line-height: 0.6;
