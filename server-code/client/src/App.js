@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import { Route } from "react-router-dom";
 import "./App.css";
 import PlotView from "./components/PlotView";
@@ -8,6 +7,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import TripReview from "./components/TripReview";
 import Trips from "./components/Trips";
+import Profile from "./components/Profile";
 
 class App extends React.Component {
   state = {
@@ -39,6 +39,10 @@ class App extends React.Component {
             )}
           />
           <Route path="/trips" component={Trips} />
+          <Route
+            path="/profile"
+            render={props => <Profile user={this.setUser} />}
+          />
         </div>
       </div>
     );

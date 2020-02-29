@@ -19,6 +19,7 @@ const NavBar = props => {
           <Link onClick={logout} to="/">
             Logout
           </Link>
+          <Link to="/profile">my profile</Link>
         </div>
       </nav>
     );
