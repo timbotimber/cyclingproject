@@ -27,6 +27,7 @@
 h2 {
   color: #1f3349;
   margin-top: 12px;
+  font-size: 20px;
 }
 
 h3 {
@@ -103,7 +104,7 @@ nav {
 .trip-card {
   width: 400px;
   height: auto;
-  padding: 24px;
+  padding: 18px;
   border-radius: 14px;
   border: 1px solid #6d6d97;
   display: flex;
@@ -138,3 +139,77 @@ nav {
   align-items: flex-start;
   text-align: left;
 }
+
+/* .timeline {
+  border-left: @line solid @color-primary;
+  border-bottom-right-radius: @radius;
+  border-top-right-radius: @radius;    
+  background: fade(@color-light, 3%);
+  color: fade(white, 80%);
+  font-family: @font-text;  
+  margin: @spacing auto;  
+  letter-spacing: 0.5px;   
+  position: relative;
+  line-height: 1.4em;
+  font-size: 1.03em;   
+  padding: @spacing;   
+  list-style: none;
+  text-align: left;  
+  font-weight: 100;  
+  max-width: 30%; 
+  
+  h1 {
+   font-family: @font-title;
+   letter-spacing: 1.5px;
+   font-weight: 100;
+   font-size: 1.4em;    
+  }
+  
+  h2, h3 {
+   font-family: @font-title;
+   letter-spacing: 1.5px;
+   font-weight: 400;
+   font-size: 1.4em;
+  }
+  
+  .event {
+    border-bottom: 1px dashed fade(@color-light, 10%);
+    padding-bottom: (@spacing * 0.5);
+    margin-bottom: @spacing;  
+    position: relative;
+
+    &:last-of-type { 
+      padding-bottom: 0;
+      margin-bottom: 0; 
+      border: none;      
+    }
+
+    &:before, &:after {
+      position: absolute;
+      display: block;
+      top: 0;
+    }
+
+    &:before {
+      left: (((@date * 0.6) + @spacing + @line + @dot + (@dotborder * 2)) * 1.5) * -1;    
+      color: fade(@color-light, 40%);    
+      content: attr(data-date);
+      text-align: right;
+      font-weight: 100;    
+      font-size: 0.9em;
+      min-width: @date;
+      font-family: @font-title;
+    }
+
+    &:after {
+      box-shadow: 0 0 0 @dotborder fade(@color-primary,100%);    
+      left: (@spacing + @line + (@dot * 0.35)) * -1;        
+      background: lighten(@background,5%);    
+      border-radius: 50%;  
+      height: @dot;
+      width: @dot;
+      content: "";
+      top: 5px;
+    }
+  }
+} */

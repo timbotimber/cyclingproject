@@ -6,8 +6,8 @@ export default class TripCard extends React.Component {
       <React.Fragment>
         <div className="trip-card">
           <div className="primary-content">
-            <h2>Amsterdam to Paris</h2>
-            <p>Mostly flat, and lots of worth-visiting cities along the way.</p>
+            <h2>AMS TO PARIS</h2>
+            <p>Amsterdam - Paris</p>
             <p>Duration: 1 week</p>
           </div>
 
