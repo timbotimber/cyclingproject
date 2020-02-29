@@ -39,10 +39,12 @@ class App extends React.Component {
             )}
           />
           <Route path="/trips" component={Trips} />
-          <Route
+          {/* <Route
             path="/profile"
-            render={props => <Profile user={this.setUser} />}
-          />
+            render={this.props => (
+            <Profile user={this.setUser} />
+            )}
+          /> */}
         </div>
       </div>
     );
