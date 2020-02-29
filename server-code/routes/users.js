@@ -3,24 +3,25 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const User = require("../models/User");
+// const Login = require("../client/src/components/Login")
 
 /* Here we'll write the routes dedicated to handle the user logic (auth) */
 
 router.post("/signup", (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username) {
-    return res.status(400).json({ message: "Username can't be empty" });
+  if (!email) {
+    return res.status(400).json({ message: "email can't be empty" });
   }
   if (password.length < 8) {
-    return res.status(400).json({ message: "Password is too short" });
+    return res.status(400).json({ message: "password is too short" });
   }
 
   // Later: change this to email
-  User.findOne({ username: username })
+  User.findOne({ email: email })
     .then(found => {
       if (found) {
-        return res.status(400).json({ message: "Username is already taken" });
+        return res.status(400).json({ message: "email is already in use" });
       }
       return bcrypt
         .genSalt()
@@ -28,7 +29,7 @@ router.post("/signup", (req, res) => {
           return bcrypt.hash(password, salt);
         })
         .then(hash => {
-          return User.create({ username: username, password: hash });
+          return User.create({ email: email, password: hash });
         })
         .then(newUser => {
           // passport login
@@ -50,7 +51,7 @@ router.post("/login", (req, res, next) => {
       return res.status(500).json({ message: "Error while authenticating" });
     }
     if (!user) {
-      // no user found with username or password didn't match
+      // no user found with email or password didn't match
       return res.status(400).json({ message: info.message });
     }
     // passport req.login
@@ -72,5 +73,22 @@ router.delete("/logout", (req, res) => {
 router.get("/loggedin", (req, res) => {
   res.json(req.user);
 });
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+);
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/private-page",
+    failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+  })
+);
 
 module.exports = router;
