@@ -1,6 +1,6 @@
 /* GLOBAL */
 .App {
-  position: fixed;
+  /* position: fixed; */
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -15,9 +15,9 @@
 
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .caption {
@@ -72,7 +72,7 @@ p {
 nav {
   width: 100vw;
   height: 70px;
-  background-color: #fff;
+  background-color: #8be1dc;
   z-index: 1;
   position: fixed;
   top: 0;
@@ -105,6 +105,7 @@ nav {
   width: 400px;
   height: auto;
   padding: 18px;
+  margin: 12px;
   border-radius: 14px;
   border: 1px solid #6d6d97;
   display: flex;
@@ -152,6 +153,7 @@ nav {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 10%;
 }
 
 .auth-box {
@@ -207,6 +209,98 @@ nav {
 
 .google-btn {
   background-color: #006eb2;
+}
+
+/* SEARCH BAR */
+.search {
+  height: 40px;
+  width: 60vw;
+  padding-left: 16px;
+  font-size: 14px;
+}
+
+.search-button {
+  height: 44px;
+  width: 100px;
+  border-radius: 22px;
+  background-color: navy;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+/* HOME */
+/* .parallax {
+  background-image: url("https://wallpaperplay.com/walls/full/6/0/0/60353.jpg");
+  height: 300px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+.home-container {
+  background-image: url("https://wallpaperplay.com/walls/full/6/0/0/60353.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.main {
+  height: 50%;
+  width: 40%;
+  margin-left: 7%;
+  margin-top: 5%;
+  color: #1f3349;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 1%;
+  border-radius: 7px;
+}
+
+.main h1 {
+  font-size: 34px;
+  font-weight: 300;
+}
+
+.main span {
+  font-weight: bolder;
+}
+
+.intro {
+  text-align: left;
+}
+
+.intro p {
+  font-size: 24px;
+}
+
+.home-btns-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 6%;
+  height: 10%;
+}
+
+.home-btn {
+  width: 230px;
+  height: 45px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  font-size: 18px;
+  color: #f5f0f0;
+  background-color: #334e6b;
+  padding: 0;
+  margin: 0;
+}
+
+.home-btns a {
+  text-decoration: none;
 }
 
 /* .timeline {

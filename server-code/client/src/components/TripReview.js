@@ -32,6 +32,7 @@ const TripReview = props => {
       zoom,
       distance,
       duration,
+      difficulty,
       coordinates,
       uuid,
       waypoints
@@ -50,6 +51,7 @@ const TripReview = props => {
         zoom,
         distance,
         duration,
+        difficulty,
         coordinates,
         uuid,
         waypoints
@@ -70,6 +72,7 @@ const TripReview = props => {
     zoom,
     distance,
     duration,
+    difficulty,
     coordinates,
     uuid,
     waypoints
