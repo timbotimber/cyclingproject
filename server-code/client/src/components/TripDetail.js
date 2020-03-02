@@ -10,13 +10,14 @@ export default class TripDetail extends Component {
   componentDidMount() {
     const id = this.props.match.params.id;
 
-    console.log("this.props", this.props);
+    console.log("ide value", id);
 
     axios.get(`/api/trips/trip/${id}`).then(response => {
       console.log("response", response);
       this.setState({
         trip: response.data
       });
+      console.log("Test the state:", this.state);
     });
   }
 

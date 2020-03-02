@@ -88,7 +88,7 @@ export default class PlotView extends React.Component {
       console.log(jsonResponse);
 
       // document.getElementById('calculated-line').innerHTML =
-      // 'Distance: ' + distance.toFixed(2) + ' km<br>Duration: ' + duration.toFixed(2) + ' minutes';
+      // 'Distance: ' + distance.toF + ' km<br>Duration: ' + duration.toF + ' minutes';
       let coords = jsonResponse.routes[0].geometry;
       // add the route to the map
       this.addRoute(coords);
@@ -145,13 +145,12 @@ export default class PlotView extends React.Component {
   };
 
   componentDidMount = () => {
-    const id = this.props.match.params.id;
-    axios.get(`/api/trips/trip/${id}`).then(response => {
-      console.log("response", response);
-      this.setState({
-        trip: response.data
-      });
+    let userCoords = this.props.coordinates.map(element => {
+      element.reverse();
+      return element;
     });
+
+    console.log("initial declaration", userCoords);
 
     const map = new mapboxgl.Map({
       container: this.mapContainer,
@@ -223,24 +222,36 @@ export default class PlotView extends React.Component {
       ]
     });
 
-    map.on("load", function() {
-      map.addSource("route", {
-        type: "geojson",
-        data: {
-          type: "Feature",
-          properties: {},
-          geometry: {
-            type: "LineString",
-            coordinates: [this.props.coordinates]
-          }
-        }
+    map.on("load", () => {
+      // console.log("On Load coords", userCoords);
+      console.log("props", this.props);
+
+      let userCoords = this.props.coordinates.map(element => {
+        return element.reverse().map(el => {
+          // let number = +el.toFixed(12);
+          let difference = 12 - el.length;
+          let number = Number(el.toFixed(11) + "1");
+          return number;
+        });
       });
+      console.log("hacked userCoords", userCoords);
+
       map.addLayer({
-        id: "route",
+        id: "layer1",
         type: "line",
-        source: "route",
+        source: {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            geometry: {
+              type: "LineString",
+              coordinates: [userCoords]
+            }
+          }
+        },
         layout: {
           "line-join": "round",
+
           "line-cap": "round"
         },
         paint: {
@@ -248,6 +259,31 @@ export default class PlotView extends React.Component {
           "line-width": 8
         }
       });
+
+      // map.addSource("route", {
+      //   type: "geojson",
+      //   data: {
+      //     type: "Feature",
+      //     properties: {},
+      //     geometry: {
+      //       type: "LineString",
+      //       coordinates: [userCoords]
+      //     }
+      //   }
+      // });
+      // map.addLayer({
+      //   id: "route",
+      //   type: "line",
+      //   source: "route",
+      //   layout: {
+      //     "line-join": "round",
+      //     "line-cap": "round"
+      //   },
+      //   paint: {
+      //     "line-color": "#888",
+      //     "line-width": 8
+      //   }
+      // });
     });
 
     this.setState({ map, draw }, () => {
@@ -266,7 +302,7 @@ export default class PlotView extends React.Component {
         this.setState({
           lng: map.getCenter().lng.toFixed(4),
           lat: map.getCenter().lat.toFixed(4),
-          zoom: map.getZoom().toFixed(2)
+          zoom: map.getZoom().toF
         });
       });
     });
@@ -351,7 +387,6 @@ export default class PlotView extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
