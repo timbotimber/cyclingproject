@@ -24,15 +24,12 @@ export default class Trips extends Component {
 
   render() {
     return this.state.trips.map((trip, index) => {
+      console.log('test id', trip._id);
+      console.log('duration', trip.duration);
       return (
         <>
-          {/* <div key={index}>
-            <p>Trip Title: {trip.title}</p>
-            <p>Trip Distance: {trip.distance ? trip.distance.toFixed(3) : 'No distance'} km</p>
-            <p>Trip Duration: {trip.duration.toFixed(3)}</p>
-          </div> */}
           <div key={index} className="wrapper">
-            <TripCard trips={this.state.trips} title={trip.title} duration={trip.duration} />
+            <TripCard trips={this.state.trips} title={trip.title} duration={trip.duration} myid={trip._id} />
           </div>
         </>
       );

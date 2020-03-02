@@ -1,7 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
-import { Component } from 'react';
+import React from "react";
+import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
+import { Component } from "react";
 
 const TripReview = props => {
   const handleChange = event => {
@@ -20,10 +20,13 @@ const TripReview = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
+
     const {
       title,
       origin,
+      origin_name,
       destination,
+      destination_name,
       lng,
       lat,
       zoom,
@@ -31,14 +34,17 @@ const TripReview = props => {
       duration,
       coordinates,
       uuid,
-      waypoints,
+      waypoints
     } = props.tripData;
+
     // const id = this.state.match.params.
     axios
-      .post('/api/trips/addTrip', {
+      .post("/api/trips/addTrip", {
         title,
         origin,
+        origin_name,
         destination,
+        destination_name,
         lng,
         lat,
         zoom,
@@ -46,7 +52,7 @@ const TripReview = props => {
         duration,
         coordinates,
         uuid,
-        waypoints,
+        waypoints
       })
       .then(response => {
         console.log(response);
@@ -56,7 +62,9 @@ const TripReview = props => {
   const {
     title,
     origin,
+    origin_name,
     destination,
+    destination_name,
     lng,
     lat,
     zoom,
@@ -64,20 +72,29 @@ const TripReview = props => {
     duration,
     coordinates,
     uuid,
-    waypoints,
+    waypoints
   } = props.tripData;
+
   // if this.state.redirect --> return <Redirect to="/profile" />
+
   return (
     <div>
       <form className="review-trip" onSubmit={handleSubmit}>
         <h1>Review your trip</h1>
         <label htmlFor="title">Trip name</label>
-        <input id="title" name="title" value={title} onChange={handleChange} type="text" placeholder="Name your trip" />
+        <input
+          id="title"
+          name="title"
+          value={title}
+          onChange={handleChange}
+          type="text"
+          placeholder="Name your trip"
+        />
         <div>
-          <p>Origin: {origin}</p>
-          <p>Destination: {destination}</p>
-          <p>Duration: {duration}</p>
-          <p>Distance: {distance}</p>
+          <p>Origin: {origin_name}</p>
+          <p>Destination: {destination_name}</p>
+          <p>Duration: {(duration / 60).toFixed(2)} hours</p>
+          <p>Distance: {distance.toFixed(2)} km</p>
           {/* <p>Waypoints: {waypoints}</p> */}
           <button>Save this trip</button>
         </div>

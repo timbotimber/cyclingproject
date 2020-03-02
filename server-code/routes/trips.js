@@ -15,8 +15,34 @@ router.get('/addTrip', (req, res) => {
     });
 });
 
+router.get('/trip/:id', (req, res) => {
+  const tripId = req.params.id;
+  console.log('hi', req);
+
+  Trip.findById(tripId)
+    .then(trip => {
+      res.json(trip);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
+
 router.post('/addTrip', (req, res, next) => {
-  const { title, uuid, duration, distance, coordinates, waypoints, origin, destination } = req.body;
+  const {
+    title,
+    uuid,
+    duration,
+    distance,
+    coordinates,
+    waypoints,
+    origin,
+    origin_name,
+    destination,
+    destination_name,
+  } = req.body;
   Trip.create({
     title,
     uuid,
@@ -25,7 +51,9 @@ router.post('/addTrip', (req, res, next) => {
     coordinates,
     waypoints,
     origin,
+    origin_name,
     destination,
+    destination_name,
   }).then(postTrip => {
     res.json(postTrip);
   });

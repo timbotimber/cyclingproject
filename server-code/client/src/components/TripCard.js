@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class TripCard extends React.Component {
   render() {
+    console.log('these are our props', this.props.trips);
+
     return (
       <React.Fragment>
         <div className="trip-card">
@@ -9,6 +12,10 @@ export default class TripCard extends React.Component {
             <h2>{this.props.title}</h2>
             <p>Mostly flat, and lots of worth-visiting cities along the way.</p>
             <p>Duration: {this.props.duration}</p>
+            <p>Id: {this.props.myid}</p>
+            <b>
+              <Link to={`/trip/${this.props.myid}`}> {this.props.title} </Link>
+            </b>
           </div>
 
           <div className="secondary-content">

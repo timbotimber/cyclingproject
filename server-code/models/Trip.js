@@ -1,10 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const tripSchema = new Schema({
   title: String,
   origin: Array, // First pair of coordinates
+  origin_name: String,
   destination: Array, // Last pair of coordinates --> currently storing the key instead of the coordinates array, need to fix!
+  destination_name: String,
   duration: Number, // Comes from Mapbox
   distance: Number, // Comes from Mapbox
   coordinates: Array,
@@ -12,16 +14,16 @@ const tripSchema = new Schema({
   //     enum: ["Mostly flat", "Hilly", "Mountainous"],
   //     type: String
   //   },
-  //   user: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "User"
-  //   }, // Auto generated
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }, // Auto generated
   //   difficulty: {
   //     enum: ["Easy", "Intermediate", "Advanced"],
   //     type: String
   //   },
   //   emissions: Number,
-  waypoints: Array
+  waypoints: Array,
   // [
   //   {
   //     type: mongoose.Schema.Types.ObjectId,
@@ -38,5 +40,5 @@ const tripSchema = new Schema({
   //   established_route: Boolean
 });
 
-const Trip = mongoose.model("Trip", tripSchema);
+const Trip = mongoose.model('Trip', tripSchema);
 module.exports = Trip;
