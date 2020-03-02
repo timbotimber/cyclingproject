@@ -223,6 +223,33 @@ export default class PlotView extends React.Component {
       ]
     });
 
+    map.on("load", function() {
+      map.addSource("route", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: [this.props.coordinates]
+          }
+        }
+      });
+      map.addLayer({
+        id: "route",
+        type: "line",
+        source: "route",
+        layout: {
+          "line-join": "round",
+          "line-cap": "round"
+        },
+        paint: {
+          "line-color": "#888",
+          "line-width": 8
+        }
+      });
+    });
+
     this.setState({ map, draw }, () => {
       const { map, draw } = this.state;
 
