@@ -26,7 +26,8 @@ router.post("/addTrip", (req, res, next) => {
     origin,
     origin_name,
     destination,
-    destination_name
+    destination_name,
+    difficulty
   } = req.body;
   Trip.create({
     title,
@@ -38,10 +39,16 @@ router.post("/addTrip", (req, res, next) => {
     origin,
     origin_name,
     destination,
-    destination_name
+    destination_name,
+    difficulty
   }).then(postTrip => {
     res.json(postTrip);
   });
   console.log(req.body);
 });
+
+// router.get("/search", (req, res) => {
+//   console.log("req.body", req.body);
+// });
+
 module.exports = router;

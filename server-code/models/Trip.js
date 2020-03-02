@@ -10,6 +10,7 @@ const tripSchema = new Schema({
   duration: Number, // Comes from Mapbox
   distance: Number, // Comes from Mapbox
   coordinates: Array,
+  difficulty: String,
   //   elevation: {
   //     enum: ["Mostly flat", "Hilly", "Mountainous"],
   //     type: String

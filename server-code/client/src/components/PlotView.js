@@ -25,6 +25,7 @@ export default class PlotView extends React.Component {
     uuid: "",
     duration: "",
     distance: "",
+    difficulty: "",
     coordinates: [],
     waypoints: [],
     reviewTrip: false
@@ -66,16 +67,29 @@ export default class PlotView extends React.Component {
       let jsonResponse = req.response;
       let arr = jsonResponse.routes[0].geometry.coordinates;
       console.log("jsonReponse", jsonResponse);
+      let distance = jsonResponse.routes[0].distance * 0.001;
+
+      let difficulty = "";
+
+      if (distance < 50) {
+        difficulty = "Easy";
+      } else if (distance >= 150) {
+        difficulty = "Advanced";
+      } else {
+        difficulty = "Intermediate";
+      }
+
       this.setState(
         {
-          distance: jsonResponse.routes[0].distance * 0.001,
+          distance: distance,
           duration: jsonResponse.routes[0].duration / 60,
           coordinates: jsonResponse.routes[0].geometry.coordinates,
           uuid: jsonResponse.uuid,
           waypoints: jsonResponse.waypoints,
           origin: jsonResponse.routes[0].geometry.coordinates[0],
           destination:
-            jsonResponse.routes[0].geometry.coordinates[arr.length - 1]
+            jsonResponse.routes[0].geometry.coordinates[arr.length - 1],
+          difficulty: difficulty
         },
         () => {
           console.log(this.state);
@@ -276,10 +290,7 @@ export default class PlotView extends React.Component {
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.destination[0]},${this.state.destination[1]}.json?access_token=${mapboxgl.accessToken}`
       )
       .then(response => {
-        console.log("full", response);
-
         let features = response.data.features;
-        console.log(features);
 
         const locality = features.find(el =>
           el.place_type.includes("locality")
@@ -331,10 +342,10 @@ export default class PlotView extends React.Component {
     return (
       <div>
         <div className="sidebarStyle">
-          <div>
+          {/* <div>
             Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
             {this.state.zoom}
-          </div>
+          </div> */}
           {tripReviewCard}
           <button onClick={this.goToReviewTrip}>{text}</button>
         </div>
