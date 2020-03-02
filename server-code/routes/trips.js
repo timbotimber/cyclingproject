@@ -3,8 +3,8 @@ const router = express.Router();
 const User = require("../models/User");
 const Trip = require("../models/Trip");
 
-router.get("/addTrip/:id/review", (req, res) => {
-  Trip.findById(req.params.id)
+router.get("/addTrip", (req, res) => {
+  Trip.find()
     .then(trip => {
       res.json(trip);
     })
