@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const tripSchema = new Schema({
@@ -12,16 +12,16 @@ const tripSchema = new Schema({
   //     enum: ["Mostly flat", "Hilly", "Mountainous"],
   //     type: String
   //   },
-  //   user: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "User"
-  //   }, // Auto generated
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }, // Auto generated
   //   difficulty: {
   //     enum: ["Easy", "Intermediate", "Advanced"],
   //     type: String
   //   },
   //   emissions: Number,
-  waypoints: Array
+  waypoints: Array,
   // [
   //   {
   //     type: mongoose.Schema.Types.ObjectId,
@@ -38,5 +38,5 @@ const tripSchema = new Schema({
   //   established_route: Boolean
 });
 
-const Trip = mongoose.model("Trip", tripSchema);
+const Trip = mongoose.model('Trip', tripSchema);
 module.exports = Trip;
