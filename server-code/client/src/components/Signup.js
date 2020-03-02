@@ -37,30 +37,45 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="email">Email: </label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
+      <div className="auth-wrapper">
+        <div className="auth-box">
+          <h2>Create an Account</h2>
 
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
+          <div className="auth-form">
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <label htmlFor="email"></label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </div>
 
-          <button type="submit">Sign up</button>
-        </form>
-        {this.state.message && <p>{this.state.message}</p>}
-      </>
+              <div>
+                <label htmlFor="password"></label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div>
+                <button className="auth-btn" type="submit">
+                  Sign up
+                </button>
+              </div>
+            </form>
+          </div>
+          {this.state.message && <p>{this.state.message}</p>}
+        </div>
+      </div>
     );
   }
 }

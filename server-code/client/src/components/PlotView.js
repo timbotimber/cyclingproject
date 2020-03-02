@@ -14,7 +14,9 @@ export default class PlotView extends React.Component {
   state = {
     title: '',
     origin: [],
+    origin_name: "",
     destination: [],
+    destination_name: "",
     map: null,
     draw: null,
     lng: 5,
@@ -74,7 +76,11 @@ export default class PlotView extends React.Component {
           origin: jsonResponse.routes[0].geometry.coordinates[0],
           destination: jsonResponse.routes[0].geometry.coordinates[arr.length - 1],
         },
-        () => console.log(this.state)
+        () => {
+          console.log(this.state);
+
+          this.reverseGeocode();
+        }
       );
       // let distance = jsonResponse.routes[0].distance * 0.001;
       // let duration = jsonResponse.routes[0].duration / 60;
@@ -212,6 +218,72 @@ export default class PlotView extends React.Component {
         });
       });
     });
+  };
+
+  reverseGeocode = () => {
+    // Reverse geocoding for Origin
+    axios
+      .get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.origin[0]},${this.state.origin[1]}.json?access_token=${mapboxgl.accessToken}`
+      )
+      .then(response => {
+        console.log("full", response);
+
+        let features = response.data.features;
+        console.log(features);
+
+        const locality = features.find(el =>
+          el.place_type.includes("locality")
+        );
+        if (locality) {
+          this.setState({ origin_name: locality.place_name });
+          return;
+        }
+
+        const place = features.find(el => el.place_type.includes("place"));
+        if (place) {
+          this.setState({ origin_name: place.place_name });
+          return;
+        }
+
+        const region = features.find(el => el.place_type.includes("region"));
+        if (region) {
+          this.setState({ origin_name: region.place_name });
+          return;
+        }
+      });
+
+    // Reverse geocoding with Destination
+    axios
+      .get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.destination[0]},${this.state.destination[1]}.json?access_token=${mapboxgl.accessToken}`
+      )
+      .then(response => {
+        console.log("full", response);
+
+        let features = response.data.features;
+        console.log(features);
+
+        const locality = features.find(el =>
+          el.place_type.includes("locality")
+        );
+        if (locality) {
+          this.setState({ destination_name: locality.place_name });
+          return;
+        }
+
+        const place = features.find(el => el.place_type.includes("place"));
+        if (place) {
+          this.setState({ destination_name: place.place_name });
+          return;
+        }
+
+        const region = features.find(el => el.place_type.includes("region"));
+        if (region) {
+          this.setState({ destination_name: region.place_name });
+          return;
+        }
+      });
   };
 
   goToReviewTrip = () => {

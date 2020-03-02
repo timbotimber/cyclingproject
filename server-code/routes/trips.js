@@ -31,7 +31,18 @@ router.get('/trip/:id', (req, res) => {
 });
 
 router.post('/addTrip', (req, res, next) => {
-  const { title, uuid, duration, distance, coordinates, waypoints, origin, destination } = req.body;
+  const {
+    title,
+    uuid,
+    duration,
+    distance,
+    coordinates,
+    waypoints,
+    origin,
+    origin_name,
+    destination,
+    destination_name,
+  } = req.body;
   Trip.create({
     title,
     uuid,
@@ -40,7 +51,9 @@ router.post('/addTrip', (req, res, next) => {
     coordinates,
     waypoints,
     origin,
+    origin_name,
     destination,
+    destination_name,
   }).then(postTrip => {
     res.json(postTrip);
   });
