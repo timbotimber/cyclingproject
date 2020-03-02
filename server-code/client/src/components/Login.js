@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default class Login extends Component {
@@ -73,12 +74,12 @@ export default class Login extends Component {
               </div>
             </form>
             <div>
-              <a href="/auth/google">
+              <Link to="api/auth/google">
                 {" "}
                 <button className="auth-btn google-btn">
                   Log in with Google
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
           {this.state.message && <p>{this.state.message}</p>}
