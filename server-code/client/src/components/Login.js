@@ -38,32 +38,52 @@ export default class Login extends Component {
 
   render() {
     return (
-      <>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="email">Email: </label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
+      <div className="auth-wrapper">
+        <div className="auth-box">
+          <h2>Log in</h2>
+          <div className="auth-form">
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <label htmlFor="email"></label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </div>
 
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-
-          <button type="submit">Log in</button>
-        </form>
-        {this.state.message && <p>{this.state.message}</p>}
-
-        <a href="/auth/google">Login With Google</a>
-      </>
+              <div>
+                <label htmlFor="password"></label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div>
+                <button className="auth-btn" type="submit">
+                  Log in
+                </button>
+              </div>
+            </form>
+            <div>
+              <a href="/auth/google">
+                {" "}
+                <button className="auth-btn google-btn">
+                  Log in with Google
+                </button>
+              </a>
+            </div>
+          </div>
+          {this.state.message && <p>{this.state.message}</p>}
+        </div>
+      </div>
     );
   }
 }
