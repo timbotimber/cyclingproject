@@ -67,6 +67,7 @@ router.post("/login", (req, res, next) => {
 router.delete("/logout", (req, res) => {
   // passport logout function
   req.logout();
+  console.log("WOOOORKKINNGG");
   res.json({ message: "Successful logout" });
 });
 
@@ -75,7 +76,8 @@ router.get("/loggedin", (req, res) => {
 });
 
 router.get("/google", (req, res) => {
-  console.log("WOOOORKKINNGG");
+  res.render();
+  console.log("WOOOORKKINNGG google");
 });
 
 // router.get(
@@ -91,24 +93,24 @@ router.get("/google", (req, res) => {
 //   })
 // );
 
-// router.get(
-//   "/auth/google",
-//   passport.authenticate("google", {
-//     scope: [
-//       "https://www.googleapis.com/auth/userinfo.profile",
-//       "https://www.googleapis.com/auth/userinfo.email"
-//     ]
-//   }),
-//   () => {
-//     console.log("is this working?");
-//   }
-// );
-// router.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", {
-//     successRedirect: "/plotview",
-//     failureRedirect: "/" // here you would redirect to the login page using traditional login approach
-//   })
-// );
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }),
+  () => {
+    console.log("is this working?");
+  }
+);
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/plotview",
+    failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+  })
+);
 
 module.exports = router;
