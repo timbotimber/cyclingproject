@@ -1,10 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React from 'react';
+import { Link, Route } from 'react-router-dom';
+import axios from 'axios';
+import App from '../App';
 
 const NavBar = props => {
   const logout = () => {
-    axios.delete("/api/auth/logout").then(() => {
+    axios.delete('/api/auth/logout').then(() => {
       props.setUser(null);
     });
   };
@@ -14,7 +15,9 @@ const NavBar = props => {
     return (
       <nav className="navbar">
         <p>hey {props.user.email}</p>
-        <div className="logo">Sykkel</div>
+        <div className="logo">
+          <Link to="/">Sykkel</Link>
+        </div>
         <div className="account-links">
           <Link onClick={logout} to="/">
             Logout
