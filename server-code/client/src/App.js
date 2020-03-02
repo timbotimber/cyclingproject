@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import './App.css';
 import PlotView from './components/PlotView';
 import NavBar from './components/NavBar';
@@ -8,6 +8,7 @@ import Signup from './components/Signup';
 import TripReview from './components/TripReview';
 import Trips from './components/Trips';
 import Profile from './components/Profile';
+// import Test from './components/Test';
 
 class App extends React.Component {
   state = {
@@ -29,6 +30,9 @@ class App extends React.Component {
           <Route path="/login" render={props => <Login history={props.history} setUser={this.setUser} />} />
           <Route path="/signup" render={props => <Signup history={props.history} setUser={this.setUser} />} />
           <Route path="/trips" component={Trips} />
+          <Link to="/plotview">Plan Your Next Trip</Link>
+          <Link to="/trips">Discover Trips</Link>
+
           {/* <Route
             path="/profile"
             render={this.props => (
