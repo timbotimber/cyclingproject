@@ -1,13 +1,14 @@
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: _____,
-      clientSecret: ____,
-      callbackURL: "http://localhost:5000/auth/google/callback"
+      clientID:
+        "186909102539 -kmsc91b6jp2h6dumt91usu51uqjfdpk5.apps.googleusercontent.com",
+      clientSecret: "dfqiGieaieU-WJ0KT1mDk4vj",
+      callbackURL: "http://localhost:5000/api/auth/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
       console.log("Google account details:", profile);
@@ -29,3 +30,8 @@ passport.use(
     }
   )
 );
+
+module.exports = app => {
+  app.use(passport.initialize());
+  app.use(passport.session());
+};
