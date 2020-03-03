@@ -12,6 +12,27 @@ import TripDetail from "./components/TripDetail";
 import Home from "./components/Home";
 // import Test from './components/Test';
 
+// testing out context:
+// create new context
+// const MyContext = React.createContext();
+
+// // create provider component
+// class MyProvider extends React.Component {
+//   state = {
+//     user: this.props.user
+//   };
+
+//   render() {
+//     return (
+//       <MyContext.Provider value={{ state: this.state }}>
+//         {this.props.children}
+//       </MyContext.Provider>
+//     );
+//   }
+// }
+
+// Context test until here ----------------------------
+
 class App extends React.Component {
   state = {
     user: this.props.user
@@ -26,6 +47,7 @@ class App extends React.Component {
   render() {
     // const id = this.props.match.params.tripId;
     return (
+      // <MyProvider>
       <div className="App">
         <NavBar setUser={this.setUser} user={this.state.user} />
         <div className="content">
@@ -45,15 +67,15 @@ class App extends React.Component {
           />
           <Route path="/trips" component={Trips} />
           <Route path="/trip/:id" component={TripDetail} />
-
-          {/* <Route
+          <Route
             path="/profile"
-            render={this.props => (
-            <Profile user={this.setUser} />
+            render={props => (
+              <Profile setUser={this.setUser} user={this.state.user} />
             )}
-          /> */}
+          />
         </div>
       </div>
+      // </MyProvider>
     );
   }
 }

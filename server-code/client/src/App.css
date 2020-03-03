@@ -441,6 +441,16 @@ nav {
   text-decoration: none;
 }
 
+/* PROFILE */
+.image-wrapper {
+}
+
+.profile-info-wrapper {
+}
+
+.my-trips-wrapper {
+}
+
 /* .timeline {
   border-left: @line solid @color-primary;
   border-bottom-right-radius: @radius;
