@@ -1,18 +1,18 @@
-import React from 'react';
-import mapboxgl from 'mapbox-gl';
-import MapBoxGLDraw from 'mapbox-gl-draw';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import TripReview from './TripReview';
+import React from "react";
+import mapboxgl from "mapbox-gl";
+import MapBoxGLDraw from "mapbox-gl-draw";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import TripReview from "./TripReview";
 
 mapboxgl.accessToken =
-  'pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g';
+  "pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g";
 
 export default class PlotView extends React.Component {
   // constructor(props) {
   //   super(props);
   state = {
-    title: '',
+    title: "",
     origin: [],
     origin_name: "",
     destination: [],
@@ -22,26 +22,20 @@ export default class PlotView extends React.Component {
     lng: 5,
     lat: 34,
     zoom: 4,
-<<<<<<< HEAD
     uuid: "",
     duration: "",
     distance: "",
     difficulty: "",
-=======
-    uuid: '',
-    duration: '',
-    distance: '',
->>>>>>> 584ee9d0b14e8e5b87ec8bf1564f05c87baa0219
     coordinates: [],
     waypoints: [],
-    reviewTrip: false,
+    reviewTrip: false
   };
 
   //
   removeRoute = () => {
-    if (this.state.map.getSource('route')) {
-      this.state.map.removeLayer('route');
-      this.state.map.removeSource('route');
+    if (this.state.map.getSource("route")) {
+      this.state.map.removeLayer("route");
+      this.state.map.removeSource("route");
       //  document.getElementById('calculated-line').innerHTML = '';
     } else {
       return;
@@ -51,28 +45,27 @@ export default class PlotView extends React.Component {
   updateRoute = () => {
     this.removeRoute(); // overwrite any existing layers
     let data = this.state.draw.getAll();
-    let answer = document.getElementById('calculated-line');
+    let answer = document.getElementById("calculated-line");
     let lastFeature = data.features.length - 1;
     let coords = data.features[lastFeature].geometry.coordinates;
-    let newCoords = coords.join(';');
+    let newCoords = coords.join(";");
     this.getMatch(newCoords);
   };
 
   getMatch = e => {
     let url =
-      'https://api.mapbox.com/directions/v5/mapbox/cycling/' +
+      "https://api.mapbox.com/directions/v5/mapbox/cycling/" +
       e +
-      '?geometries=geojson&steps=true&&access_token=' +
+      "?geometries=geojson&steps=true&&access_token=" +
       mapboxgl.accessToken;
 
     let req = new XMLHttpRequest();
-    console.log('req', req);
-    req.responseType = 'json';
-    req.open('GET', url, true);
+    console.log("req", req);
+    req.responseType = "json";
+    req.open("GET", url, true);
     req.onload = () => {
       let jsonResponse = req.response;
       let arr = jsonResponse.routes[0].geometry.coordinates;
-<<<<<<< HEAD
       console.log("jsonReponse", jsonResponse);
       let distance = jsonResponse.routes[0].distance * 0.001;
 
@@ -86,9 +79,6 @@ export default class PlotView extends React.Component {
         difficulty = "Intermediate";
       }
 
-=======
-      console.log('jsonReponse', jsonResponse);
->>>>>>> 584ee9d0b14e8e5b87ec8bf1564f05c87baa0219
       this.setState(
         {
           distance: distance,
@@ -97,13 +87,9 @@ export default class PlotView extends React.Component {
           uuid: jsonResponse.uuid,
           waypoints: jsonResponse.waypoints,
           origin: jsonResponse.routes[0].geometry.coordinates[0],
-<<<<<<< HEAD
           destination:
             jsonResponse.routes[0].geometry.coordinates[arr.length - 1],
           difficulty: difficulty
-=======
-          destination: jsonResponse.routes[0].geometry.coordinates[arr.length - 1],
->>>>>>> 584ee9d0b14e8e5b87ec8bf1564f05c87baa0219
         },
         () => {
           console.log(this.state);
@@ -127,44 +113,46 @@ export default class PlotView extends React.Component {
 
   addRoute = coords => {
     // check if the route is already loaded
-    if (this.state.map.getSource('route')) {
-      this.state.map.removeLayer('route');
-      this.state.map.removeSource('route');
+    if (this.state.map.getSource("route")) {
+      this.state.map.removeLayer("route");
+      this.state.map.removeSource("route");
     } else {
       this.state.map.addLayer({
-        id: 'route',
-        type: 'line',
+        id: "route",
+        type: "line",
         source: {
-          type: 'geojson',
+          type: "geojson",
           data: {
-            type: 'Feature',
+            type: "Feature",
             properties: {},
-            geometry: coords,
-          },
+            geometry: coords
+          }
         },
         layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
+          "line-join": "round",
+          "line-cap": "round"
         },
         paint: {
-          'line-color': '#3b9ddd',
-          'line-width': 8,
-          'line-opacity': 0.8,
-        },
+          "line-color": "#3b9ddd",
+          "line-width": 8,
+          "line-opacity": 0.8
+        }
       });
     }
   };
 
   getInstructions = data => {
     // Target the sidebar to add the instructions
-    let directions = document.getElementById('directions');
+    let directions = document.getElementById("directions");
     let legs = data.legs;
     let tripDirections = [];
     // Output the instructions for each step of each leg in the response object
     for (let i = 0; i < legs.length; i++) {
       let steps = legs[i].steps;
       for (let j = 0; j < steps.length; j++) {
-        tripDirections.push('<br><li>' + steps[j].maneuver.instruction + '</li>');
+        tripDirections.push(
+          "<br><li>" + steps[j].maneuver.instruction + "</li>"
+        );
       }
     }
     // directions.innerHTML = '<br><h2>Trip duration: ' + Math.floor(data.duration / 60) + ' min.</h2>' + tripDirections;
@@ -173,58 +161,72 @@ export default class PlotView extends React.Component {
   componentDidMount = () => {
     const map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: "mapbox://styles/mapbox/streets-v11",
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       duration: this.state.duration,
-      distance: this.state.distance,
+      distance: this.state.distance
     });
     // console.log('duration', duration);
     const draw = new MapBoxGLDraw({
       displayControlsDefault: false,
       controls: {
         line_string: true,
-        trash: true,
+        trash: true
       },
       styles: [
         // ACTIVE (being drawn)
         // line stroke
         {
-          id: 'gl-draw-line',
-          type: 'line',
-          filter: ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
+          id: "gl-draw-line",
+          type: "line",
+          filter: [
+            "all",
+            ["==", "$type", "LineString"],
+            ["!=", "mode", "static"]
+          ],
           layout: {
-            'line-cap': 'round',
-            'line-join': 'round',
+            "line-cap": "round",
+            "line-join": "round"
           },
           paint: {
-            'line-color': '#3b9ddd',
-            'line-dasharray': [0.2, 2],
-            'line-width': 4,
-            'line-opacity': 0.7,
-          },
+            "line-color": "#3b9ddd",
+            "line-dasharray": [0.2, 2],
+            "line-width": 4,
+            "line-opacity": 0.7
+          }
         },
         // vertex point halos
         {
-          id: 'gl-draw-polygon-and-line-vertex-halo-active',
-          type: 'circle',
-          filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+          id: "gl-draw-polygon-and-line-vertex-halo-active",
+          type: "circle",
+          filter: [
+            "all",
+            ["==", "meta", "vertex"],
+            ["==", "$type", "Point"],
+            ["!=", "mode", "static"]
+          ],
           paint: {
-            'circle-radius': 10,
-            'circle-color': '#FFF',
-          },
+            "circle-radius": 10,
+            "circle-color": "#FFF"
+          }
         },
         // vertex points
         {
-          id: 'gl-draw-polygon-and-line-vertex-active',
-          type: 'circle',
-          filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+          id: "gl-draw-polygon-and-line-vertex-active",
+          type: "circle",
+          filter: [
+            "all",
+            ["==", "meta", "vertex"],
+            ["==", "$type", "Point"],
+            ["!=", "mode", "static"]
+          ],
           paint: {
-            'circle-radius': 6,
-            'circle-color': '#3b9ddd',
-          },
-        },
-      ],
+            "circle-radius": 6,
+            "circle-color": "#3b9ddd"
+          }
+        }
+      ]
     });
 
     this.setState({ map, draw }, () => {
@@ -234,16 +236,16 @@ export default class PlotView extends React.Component {
       map.addControl(draw);
 
       // add create, update, or delete actions
-      map.on('draw.create', this.updateRoute);
-      map.on('draw.update', this.updateRoute);
-      map.on('draw.delete', this.removeRoute);
+      map.on("draw.create", this.updateRoute);
+      map.on("draw.update", this.updateRoute);
+      map.on("draw.delete", this.removeRoute);
 
       // Storing new coordinate (whatever the user interacts with)
-      map.on('move', () => {
+      map.on("move", () => {
         this.setState({
           lng: map.getCenter().lng.toFixed(4),
           lat: map.getCenter().lat.toFixed(4),
-          zoom: map.getZoom().toFixed(2),
+          zoom: map.getZoom().toFixed(2)
         });
       });
     });
@@ -314,13 +316,13 @@ export default class PlotView extends React.Component {
 
   goToReviewTrip = () => {
     this.setState({
-      reviewTrip: !this.state.reviewTrip,
+      reviewTrip: !this.state.reviewTrip
     });
   };
 
   updateTitle = text => {
     this.setState({
-      title: text,
+      title: text
     });
   };
 
@@ -329,25 +331,21 @@ export default class PlotView extends React.Component {
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
-      text = 'Go Back';
-      tripReviewCard = <TripReview tripData={this.state} updateTitle={this.updateTitle} />;
+      text = "Go Back";
+      tripReviewCard = (
+        <TripReview tripData={this.state} updateTitle={this.updateTitle} />
+      );
     } else {
-      text = 'Review Trip';
+      text = "Review Trip";
     }
 
     return (
       <div>
         <div className="sidebarStyle">
-<<<<<<< HEAD
           {/* <div>
             Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
             {this.state.zoom}
           </div> */}
-=======
-          <div>
-            Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}
-          </div>
->>>>>>> 584ee9d0b14e8e5b87ec8bf1564f05c87baa0219
           {tripReviewCard}
           <button onClick={this.goToReviewTrip}>{text}</button>
         </div>

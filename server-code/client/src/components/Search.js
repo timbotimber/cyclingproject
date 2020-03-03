@@ -15,7 +15,7 @@ export default class Search extends React.Component {
       <React.Fragment>
         <input
           type="text"
-          placeholder="Location, duration (hrs), distance (km), difficulty"
+          placeholder="Search for title, origin, or destination"
           className="search"
           value={this.props.query}
           onChange={this.handleChange}

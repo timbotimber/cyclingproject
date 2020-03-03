@@ -31,7 +31,11 @@ export default class Trips extends Component {
 
   executeSearch = () => {
     let filtered = this.state.trips.filter(obj => {
-      if (obj.title.includes(this.state.query)) {
+      if (
+        obj.title.includes(this.state.query) ||
+        obj.origin_name.includes(this.state.query) ||
+        obj.destination_name.includes(this.state.query)
+      ) {
         return true;
       }
     });
