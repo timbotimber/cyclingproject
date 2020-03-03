@@ -14,7 +14,7 @@
 
 .App {
   /* position: fixed; */
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -75,11 +75,30 @@ p {
   top: 0;
   left: 0;
   margin: 12px;
-  background-color: #404040;
+  background-color: #48527b;
   color: #fff;
   z-index: 1 !important;
   padding: 6px;
   font-weight: bold;
+  border-radius: 20px;
+}
+
+.popUp {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2px 60px;
+  background-color: #48527b;
+  color: white;
+  z-index: 1 !important;
+  padding: 3px 10px;
+  font-weight: bold;
+  border-radius: 15px;
+}
+
+.popUp :after {
+  content: '\22B3';
 }
 
 /* NAV BAR */
@@ -255,7 +274,7 @@ nav {
 } */
 
 .home-container {
-  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true");
+  background-image: url('https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true');
   height: 70vh;
   background-position: center;
   background-repeat: no-repeat;
