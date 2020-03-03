@@ -6,7 +6,7 @@ export default class TripCard extends React.Component {
     console.log("these are our props", this.props.trips);
 
     return (
-      <React.Fragment>
+      <div className="trips-list">
         {this.props.trips.map(trip => {
           return (
             <div className="trip-card">
@@ -38,11 +38,16 @@ export default class TripCard extends React.Component {
                     {(trip.duration / 60).toFixed(2)} hrs
                   </p>
                 </div>
+
+                <div>
+                  <p className="caption">Elevation gain</p>
+                  <p className="attribute">833 m</p>
+                </div>
               </div>
             </div>
           );
         })}
-      </React.Fragment>
+      </div>
     );
   }
 }

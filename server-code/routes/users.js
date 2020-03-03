@@ -67,7 +67,6 @@ router.post("/login", (req, res, next) => {
 router.delete("/logout", (req, res) => {
   // passport logout function
   req.logout();
-  console.log("WOOOORKKINNGG");
   res.json({ message: "Successful logout" });
 });
 
@@ -75,13 +74,16 @@ router.get("/loggedin", (req, res) => {
   res.json(req.user);
 });
 
-router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
 router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/auth/login",
-    successRedirect: `http://${process.env.REACT_APP_CLIENT_URL}/`
+    successRedirect: `http://localhost:3000/`
   })
 );
 
