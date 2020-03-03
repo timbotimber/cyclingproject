@@ -50,6 +50,7 @@ export default class PlotView extends React.Component {
     let newCoords = coords.join(';');
     this.getMatch(newCoords);
   };
+  // let primes = arr1.concat(arr2);
 
   getMatch = e => {
     let url =
@@ -57,7 +58,14 @@ export default class PlotView extends React.Component {
       e +
       '?geometries=geojson&steps=true&&access_token=' +
       mapboxgl.accessToken;
-
+    let userCoords = this.props.coordinates.map(element => {
+      return element.map(el => {
+        // let number = +el.toFixed(12);
+        // let difference = 12 - el.length;
+        let number = Number(el.toFixed(11) + '1');
+        return number;
+      });
+    });
     let req = new XMLHttpRequest();
     console.log('req', req);
     req.responseType = 'json';
@@ -70,7 +78,7 @@ export default class PlotView extends React.Component {
         {
           distance: jsonResponse.routes[0].distance * 0.001,
           duration: jsonResponse.routes[0].duration / 60,
-          coordinates: jsonResponse.routes[0].geometry.coordinates,
+          coordinates: jsonResponse.routes[0].geometry.coordinates.concat(userCoords),
           uuid: jsonResponse.uuid,
           waypoints: jsonResponse.waypoints,
           origin: jsonResponse.routes[0].geometry.coordinates[0],
@@ -148,11 +156,11 @@ export default class PlotView extends React.Component {
     });
 
     console.log('initial declaration', userCoords);
-
+    console.log('testing origin', this.props.origin[0]);
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat],
+      center: [this.props.origin[0], this.props.origin[1]],
       zoom: this.state.zoom,
       duration: this.state.duration,
       distance: this.state.distance,

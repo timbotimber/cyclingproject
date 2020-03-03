@@ -18,6 +18,7 @@ body {
 
 .App {
   /* position: fixed; */
+  font-family: "Open Sans", sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -336,8 +337,8 @@ nav {
 } */
 
 .home-container {
-  background-image: url("https://wallpaperplay.com/walls/full/6/0/0/60353.jpg");
-  height: 100vh;
+  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true");
+  height: 70vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -346,13 +347,28 @@ nav {
   align-items: flex-start;
 }
 
+.phone {
+  height: 600px;
+}
+
 .main {
   height: 50%;
   width: 40%;
   margin-left: 7%;
   margin-top: 5%;
+  margin-bottom: 5%;
   color: #1f3349;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1%;
+  border-radius: 7px;
+}
+
+.mainphone {
+  height: 50%;
+  width: 40%;
+  margin-left: 7%;
+  margin-top: 2%;
+  color: #1f3349;
   padding: 1%;
   border-radius: 7px;
 }

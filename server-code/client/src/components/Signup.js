@@ -45,6 +45,30 @@ export default class Signup extends Component {
           <div className="auth-form">
             <form onSubmit={this.handleSubmit}>
               <div>
+                <label htmlFor="firstName"></label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="first name (like Marcel)"
+                  value={this.state.firstName}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="lastName"></label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="last name (like Riek)"
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div>
                 <label htmlFor="email"></label>
                 <input
                   type="text"
@@ -75,12 +99,12 @@ export default class Signup extends Component {
             </form>
             <p>or...</p>
             <div>
-              <Link to="api/auth/google">
+              <a href={`${process.env.REACT_APP_SERVER_URL}/api/auth/google`}>
                 {" "}
                 <button className="auth-btn google-btn">
                   Sign up with Google
                 </button>
-              </Link>
+              </a>
             </div>
           </div>
           {this.state.message && <p>{this.state.message}</p>}

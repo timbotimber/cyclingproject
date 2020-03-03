@@ -8,14 +8,10 @@ export default class Home extends Component {
       <div className="home-container">
         <div className="main">
           <h1>
-            Welcome to <span>Sykkel</span>
+            <span>Sykkel</span>
           </h1>
           <div className="intro">
-            <p>
-              Plan your next bike trip your way. Discover trips from other
-              cyclists, customize your route, and save your trips to your
-              profile.
-            </p>
+            <p>Cycling. Really far.</p>
             <p>What would you like to do?</p>
           </div>
           <div className="home-btns-wrapper">
@@ -26,6 +22,13 @@ export default class Home extends Component {
               <button className="home-btn">Explore saved Trips</button>
             </Link>
           </div>
+        </div>
+        <div className="mainphone">
+          <img
+            className="phone"
+            src="https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/mobile_first.001.png?raw=true"
+            alt="phone"
+          />
         </div>
       </div>
     );
