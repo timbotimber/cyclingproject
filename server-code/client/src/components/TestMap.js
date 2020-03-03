@@ -8,15 +8,13 @@ import TripReview from "./TripReview";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g";
 
-export default class PlotView extends React.Component {
+export default class TestMap extends React.Component {
   // constructor(props) {
   //   super(props);
   state = {
     title: "",
     origin: [],
-    origin_name: "",
     destination: [],
-    destination_name: "",
     map: null,
     draw: null,
     lng: 5,
@@ -25,7 +23,6 @@ export default class PlotView extends React.Component {
     uuid: "",
     duration: "",
     distance: "",
-    difficulty: "",
     coordinates: [],
     waypoints: [],
     reviewTrip: false
@@ -67,35 +64,18 @@ export default class PlotView extends React.Component {
       let jsonResponse = req.response;
       let arr = jsonResponse.routes[0].geometry.coordinates;
       console.log("jsonReponse", jsonResponse);
-      let distance = jsonResponse.routes[0].distance * 0.001;
-
-      let difficulty = "";
-
-      if (distance < 50) {
-        difficulty = "Easy";
-      } else if (distance >= 150) {
-        difficulty = "Advanced";
-      } else {
-        difficulty = "Intermediate";
-      }
-
       this.setState(
         {
-          distance: distance,
+          distance: jsonResponse.routes[0].distance * 0.001,
           duration: jsonResponse.routes[0].duration / 60,
           coordinates: jsonResponse.routes[0].geometry.coordinates,
           uuid: jsonResponse.uuid,
           waypoints: jsonResponse.waypoints,
           origin: jsonResponse.routes[0].geometry.coordinates[0],
           destination:
-            jsonResponse.routes[0].geometry.coordinates[arr.length - 1],
-          difficulty: difficulty
+            jsonResponse.routes[0].geometry.coordinates[arr.length - 1]
         },
-        () => {
-          console.log(this.state);
-
-          this.reverseGeocode();
-        }
+        () => console.log(this.state)
       );
       // let distance = jsonResponse.routes[0].distance * 0.001;
       // let duration = jsonResponse.routes[0].duration / 60;
@@ -159,14 +139,6 @@ export default class PlotView extends React.Component {
   };
 
   componentDidMount = () => {
-    const id = this.props.match.params.id;
-    axios.get(`/api/trips/trip/${id}`).then(response => {
-      console.log("response", response);
-      this.setState({
-        trip: response.data
-      });
-    });
-
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -237,6 +209,59 @@ export default class PlotView extends React.Component {
       ]
     });
 
+    /////////// change for line drawing ///////
+
+    map.on("load", function() {
+      map.addSource("route", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: [
+              [-122.48369693756104, 37.83381888486939],
+              [-122.48348236083984, 37.83317489144141],
+              [-122.48339653015138, 37.83270036637107],
+              [-122.48356819152832, 37.832056363179625],
+              [-122.48404026031496, 37.83114119107971],
+              [-122.48404026031496, 37.83049717427869],
+              [-122.48348236083984, 37.829920943955045],
+              [-122.48356819152832, 37.82954808664175],
+              [-122.48507022857666, 37.82944639795659],
+              [-122.48610019683838, 37.82880236636284],
+              [-122.48695850372314, 37.82931081282506],
+              [-122.48700141906738, 37.83080223556934],
+              [-122.48751640319824, 37.83168351665737],
+              [-122.48803138732912, 37.832158048267786],
+              [-122.48888969421387, 37.83297152392784],
+              [-122.48987674713133, 37.83263257682617],
+              [-122.49043464660643, 37.832937629287755],
+              [-122.49125003814696, 37.832429207817725],
+              [-122.49163627624512, 37.832564787218985],
+              [-122.49223709106445, 37.83337825839438],
+              [-122.49378204345702, 37.83368330777276]
+            ]
+          }
+        }
+      });
+      map.addLayer({
+        id: "route",
+        type: "line",
+        source: "route",
+        layout: {
+          "line-join": "round",
+          "line-cap": "round"
+        },
+        paint: {
+          "line-color": "#888",
+          "line-width": 2
+        }
+      });
+    });
+
+    /////////// change for line drawing ///////
+
     this.setState({ map, draw }, () => {
       const { map, draw } = this.state;
 
@@ -258,75 +283,15 @@ export default class PlotView extends React.Component {
       });
     });
   };
+  // ///////////////////////////////  // ///////////////////////////////  // ///////////////////////////////
 
-  reverseGeocode = () => {
-    // Reverse geocoding for Origin
-    axios
-      .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.origin[0]},${this.state.origin[1]}.json?access_token=${mapboxgl.accessToken}`
-      )
-      .then(response => {
-        console.log("full", response);
-
-        let features = response.data.features;
-        console.log(features);
-
-        const locality = features.find(el =>
-          el.place_type.includes("locality")
-        );
-        if (locality) {
-          this.setState({ origin_name: locality.place_name });
-          return;
-        }
-
-        const place = features.find(el => el.place_type.includes("place"));
-        if (place) {
-          this.setState({ origin_name: place.place_name });
-          return;
-        }
-
-        const region = features.find(el => el.place_type.includes("region"));
-        if (region) {
-          this.setState({ origin_name: region.place_name });
-          return;
-        }
-      });
-
-    // Reverse geocoding with Destination
-    axios
-      .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.destination[0]},${this.state.destination[1]}.json?access_token=${mapboxgl.accessToken}`
-      )
-      .then(response => {
-        let features = response.data.features;
-
-        const locality = features.find(el =>
-          el.place_type.includes("locality")
-        );
-        if (locality) {
-          this.setState({ destination_name: locality.place_name });
-          return;
-        }
-
-        const place = features.find(el => el.place_type.includes("place"));
-        if (place) {
-          this.setState({ destination_name: place.place_name });
-          return;
-        }
-
-        const region = features.find(el => el.place_type.includes("region"));
-        if (region) {
-          this.setState({ destination_name: region.place_name });
-          return;
-        }
-      });
-  };
-
-  goToReviewTrip = () => {
+  PullCoords = () => {
     this.setState({
       reviewTrip: !this.state.reviewTrip
     });
   };
+
+  // ///////////////////////////////  // ///////////////////////////////  // ///////////////////////////////
 
   updateTitle = text => {
     this.setState({
@@ -335,7 +300,7 @@ export default class PlotView extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
@@ -350,15 +315,11 @@ export default class PlotView extends React.Component {
     return (
       <div>
         <div className="sidebarStyle">
-<<<<<<< HEAD
-          {/* <div>
-            Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
-            {this.state.zoom}
-          </div> */}
-=======
->>>>>>> e496d25493bc150488619a5efbb82af2f925ed26
+          <div>
+            <h1>Test map!!</h1>
+          </div>
           {tripReviewCard}
-          <button onClick={this.goToReviewTrip}>{text}</button>
+          <button onClick={this.PullCoords}>Show data</button>
         </div>
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />
       </div>
