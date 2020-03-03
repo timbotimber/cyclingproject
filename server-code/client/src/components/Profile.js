@@ -10,32 +10,26 @@ class Profile extends React.Component {
     console.log("props", this.props.setUser);
     console.log("user", this.props.user);
     return (
-      <div>
-        {/* <MyContext.Consumer>
-          {context => (
-            <React.Fragment> */}
-        <div>
-          <h1>This is your profile</h1>
-          <div>
-            <div className="image-wrapper">
-              <img src={this.props.user.profilePic} alt="Profile Image" />
-            </div>
-            <div className="profile-info-wrapper">
-              <p>
-                {this.props.user.firstName} {this.props.user.lastName}
-              </p>
-              <p>Email: {this.props.user.email}</p>
-            </div>
+      <div className="profile-container">
+        <div className="info-wrapper">
+          <h2>
+            {this.props.user.firstName} {this.props.user.lastName}
+          </h2>
+          <div className="image-wrapper">
+            <img
+              className="profile-img"
+              src={this.props.user.profilePic}
+              alt="Profile Image"
+            />
           </div>
-          <div className="my-trips-wrapper">
-            <h2>My Trips</h2>
-
-            {/* <TripCard /> */}
-          </div>
+          <p>
+            Email: <span>{this.props.user.email}</span>
+          </p>
         </div>
-        {/* </React.Fragment>
-          )}
-        </MyContext.Consumer> */}
+        <div className="trips-wrapper">
+          <h2>My Trips</h2>
+          <div>{/* <TripCard /> */}</div>
+        </div>
       </div>
     );
   }

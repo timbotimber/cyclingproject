@@ -442,13 +442,25 @@ nav {
 }
 
 /* PROFILE */
+
+.profile-container {
+  display: flex;
+}
+
+.info-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .image-wrapper {
 }
 
-.profile-info-wrapper {
+.profile-img {
+  width: 50%;
 }
 
-.my-trips-wrapper {
+.trips-wrapper {
+  display: flex;
 }
 
 /* .timeline {
