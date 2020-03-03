@@ -18,7 +18,7 @@ body {
 
 .App {
   /* position: fixed; */
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -77,11 +77,30 @@ p {
   top: 0;
   left: 0;
   margin: 12px;
-  background-color: #404040;
+  background-color: #48527b;
   color: #fff;
   z-index: 1 !important;
   padding: 6px;
   font-weight: bold;
+  border-radius: 20px;
+}
+
+.popUp {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2px 60px;
+  background-color: #48527b;
+  color: white;
+  z-index: 1 !important;
+  padding: 3px 10px;
+  font-weight: bold;
+  border-radius: 15px;
+}
+
+.popUp :after {
+  content: '\22B3';
 }
 
 /* NAV BAR */
@@ -303,7 +322,7 @@ nav {
   height: auto;
   padding: 18px;
   border-radius: 14px;
-  border: 1px solid #6d6d97;
+  border: 1px solid var(--cloud);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -331,7 +350,7 @@ nav {
 .auth-form input {
   width: 100%;
   height: 100%;
-  border: 1px solid grey;
+  border: 1px solid var(--cloud);
   border-radius: 7px;
   font-size: 16px;
   text-align: center;
@@ -341,16 +360,16 @@ nav {
 .auth-btn {
   width: 100%;
   height: 100%;
-  border: 1px solid grey;
+  border: 1px solid var(--cloud);
   border-radius: 7px;
   font-size: 16px;
-  color: #f5f0f0;
-  background-color: #3fa5b5;
+  color: var(--night);
+  background-color: var(--sunrise);
   padding: 0;
 }
 
 .google-btn {
-  background-color: #006eb2;
+  background-color: var(--sky);
 }
 
 /* HOME */
@@ -364,7 +383,7 @@ nav {
 } */
 
 .home-container {
-  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true");
+  background-image: url('https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true');
   height: 70vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -428,11 +447,11 @@ nav {
 .home-btn {
   width: 230px;
   height: 45px;
-  border: 1px solid grey;
+  border: 1px solid var(--cloud);
   border-radius: 7px;
   font-size: 18px;
   color: #f5f0f0;
-  background-color: #334e6b;
+  background-color: var(--sunrise);
   padding: 0;
   margin: 0;
 }
