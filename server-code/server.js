@@ -22,3 +22,8 @@ app.use(routes);
 app.listen(process.env.PORT, () => {
   console.log(`Express server listening to: ${process.env.PORT}`);
 });
+
+app.use((req, res) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "server-code/client/build/index.html");
+});
