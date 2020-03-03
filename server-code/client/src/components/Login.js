@@ -73,6 +73,7 @@ export default class Login extends Component {
                 </button>
               </div>
             </form>
+            <p>or...</p>
             <div>
               <Link to="api/auth/google">
                 {" "}
