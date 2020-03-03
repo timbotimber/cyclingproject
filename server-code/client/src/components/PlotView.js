@@ -29,6 +29,7 @@ export default class PlotView extends React.Component {
     coordinates: [],
     waypoints: [],
     reviewTrip: false,
+    user: '',
   };
 
   //
