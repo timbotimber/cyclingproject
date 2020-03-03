@@ -12,18 +12,18 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="search-wrapper">
         <input
           type="text"
-          placeholder="Search for title, origin, or destination"
-          className="search"
+          placeholder="Title, origin, or destination"
+          className="search-input"
           value={this.props.query}
           onChange={this.handleChange}
         />
         <button className="search-button" onClick={this.submitSearch}>
           Search
         </button>
-      </React.Fragment>
+      </div>
     );
   }
 }

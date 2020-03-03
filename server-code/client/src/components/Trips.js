@@ -7,7 +7,10 @@ import axios from "axios";
 export default class Trips extends Component {
   state = {
     trips: [],
-    query: ""
+    query: "",
+    Easy: false,
+    Intermediate: false,
+    Advanced: false
   };
 
   componentDidMount() {
@@ -46,21 +49,88 @@ export default class Trips extends Component {
     });
   };
 
+  mutateCheckboxBoolean = e => {
+    let key = e.target.name;
+    this.setState({ [key]: !this.state[key] });
+    console.log(key, this.state[key]);
+  };
+
+  executeFilter = e => {
+    e.preventDefault();
+    console.log("working");
+    let query = {};
+    Object.keys(this.state).forEach(key => {
+      console.log("object values", key);
+      if (this.state[key] === true) {
+        query[key] = this.state[key];
+        // queryKeys.push(key);
+      }
+      return query;
+    });
+    console.log("done arr", query);
+
+    let filteredResults = this.state.trips.filter(search, query);
+
+    function search(trip) {
+      return Object.keys(this).every(key => trip[key] === this[key]);
+    }
+
+    console.log("filteredResults", filteredResults);
+
+    // let filteredList = this.state.trips.filter(trip => {
+    //   for (const key in truthy) {
+    //     if (trip[key] !== truthy[key]) return false;
+    //   }
+    //   return true;
+    // });
+
+    // console.log("filtered list:", filteredList);
+
+    // users= users.filter(function(item) {
+    //   for (var key in filter) {
+    //     if (item[key] === undefined || item[key] != filter[key])
+    //       return false;
+    //   }
+    //   return true;
+    // });
+
+    // const place = features.find(el => el.place_type.includes("place"));
+    // if (place) {
+    //   this.setState({ destination_name: place.place_name });
+    //   return;
+    // }
+
+    // let filteredList = this.state.trips.filter(trip => {
+    //   for (const key of arr) {
+    //     if (trip.key) {
+    //       return true;
+    //     }
+    //   }
+    // });
+    // console.log(filteredList);
+  };
+
   render() {
-    console.log("render");
     return (
       <div className="wrapper">
-        <FilterPanel
-          updateSearchText={this.updateSearchText}
-          query={this.state.query}
-          executeSearch={this.executeSearch}
-        />
+        <div className="filter-wrapper">
+          <FilterPanel
+            updateSearchText={this.updateSearchText}
+            easy={this.state.easy}
+            mutate={this.mutateCheckboxBoolean}
+            query={this.state.query}
+            executeSearch={this.executeSearch}
+            executeFilter={this.executeFilter}
+          />
+        </div>
         {/* <Search
           updateSearchText={this.updateSearchText}
           query={this.state.query}
           executeSearch={this.executeSearch}
         /> */}
-        <TripCard trips={this.state.trips} />
+        <div className="trips-wrapper">
+          <TripCard trips={this.state.trips} />
+        </div>
       </div>
     );
   }

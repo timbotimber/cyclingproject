@@ -67,7 +67,6 @@ router.post("/login", (req, res, next) => {
 router.delete("/logout", (req, res) => {
   // passport logout function
   req.logout();
-  console.log("WOOOORKKINNGG");
   res.json({ message: "Successful logout" });
 });
 
@@ -75,41 +74,16 @@ router.get("/loggedin", (req, res) => {
   res.json(req.user);
 });
 
-router.get("/google", (req, res) => {
-  res.render();
-  console.log("WOOOORKKINNGG google");
-});
-
-// router.get(
-//   "auth/google",
-//   passport.authenticate("google", { scope: ["profile"] })
-// );
-
-// router.get(
-//   "/google/callback",
-//   passport.authenticate("google", {
-//     failureRedirect: "/auth/login",
-//     successRedirect: process.env.SUCCESS_URL
-//   })
-// );
-
 router.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email"
-    ]
-  }),
-  () => {
-    console.log("is this working?");
-  }
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
+
 router.get(
-  "/auth/google/callback",
+  "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/plotview",
-    failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+    failureRedirect: "/auth/login",
+    successRedirect: `http://localhost:3000/`
   })
 );
 
