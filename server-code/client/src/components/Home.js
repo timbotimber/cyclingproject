@@ -12,8 +12,8 @@ export default class Home extends Component {
           </h1>
           <div className="intro">
             <p>
-              Plan your next bike trip with ease. Discover trips from other
-              cyclists, explore your area en route, and save your trips to your
+              Plan your next bike trip your way. Discover trips from other
+              cyclists, customize your route, and save your trips to your
               profile.
             </p>
             <p>What would you like to do?</p>
@@ -23,7 +23,7 @@ export default class Home extends Component {
               <button className="home-btn">Plan a new Trip</button>
             </Link>
             <Link to="/trips">
-              <button className="home-btn">Explore existing Trips</button>
+              <button className="home-btn">Explore saved Trips</button>
             </Link>
           </div>
         </div>
