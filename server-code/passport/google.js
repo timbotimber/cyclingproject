@@ -22,7 +22,7 @@ passport.use(
           User.create({
             email: profile.emails[0].value,
             firstName: profile.name.givenName,
-            // lastName: profile.name[0].familyName,
+            lastName: profile.name.familyName,
             displayName: profile.displayName,
             profilePic: profile.photos[0].value,
             googleId: profile.id

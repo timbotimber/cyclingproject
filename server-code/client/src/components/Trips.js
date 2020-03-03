@@ -4,13 +4,20 @@ import Search from "./Search";
 import FilterPanel from "./FilterPanel";
 import axios from "axios";
 
+let tripsData;
+
 export default class Trips extends Component {
   state = {
     trips: [],
     query: "",
+    filteredTrips: [],
     Easy: false,
     Intermediate: false,
-    Advanced: false
+    Advanced: false,
+    oneDay: false,
+    threeDay: false,
+    oneWeek: false,
+    hardcore: false
   };
 
   componentDidMount() {
@@ -20,8 +27,10 @@ export default class Trips extends Component {
   getData = () => {
     // console.log("getData()");
     axios.get("/api/trips/addTrip").then(response => {
+      tripsData = response.data;
       this.setState({
-        trips: response.data
+        trips: tripsData,
+        filteredTrips: tripsData
       });
     });
   };
@@ -51,31 +60,60 @@ export default class Trips extends Component {
 
   mutateCheckboxBoolean = e => {
     let key = e.target.name;
-    this.setState({ [key]: !this.state[key] });
-    console.log(key, this.state[key]);
+    this.setState({ [key]: !this.state[key] }, () => {
+      console.log(key, this.state[key]);
+    });
   };
 
   executeFilter = e => {
     e.preventDefault();
-    console.log("working");
-    let query = {};
-    Object.keys(this.state).forEach(key => {
-      console.log("object values", key);
-      if (this.state[key] === true) {
-        query[key] = this.state[key];
-        // queryKeys.push(key);
-      }
-      return query;
+
+    let filteredTrips = this.state.trips.filter(trip => {
+      return (
+        (this.state.Easy && trip.difficulty === "Easy") ||
+        (this.state.Intermediate && trip.difficulty === "Intermediate") ||
+        (this.state.Advanced && trip.difficulty === "Advanced") ||
+        (this.state.oneDay && trip.duration <= 360) ||
+        (this.state.threeDay && 360 < trip.duration <= 1080) ||
+        (this.state.oneWeek && 1080 < trip.duration <= 2520) ||
+        (this.state.hardcore && trip.duration > 2520)
+      );
     });
-    console.log("done arr", query);
 
-    let filteredResults = this.state.trips.filter(search, query);
+    this.setState({
+      filteredTrips: filteredTrips
+    });
 
-    function search(trip) {
-      return Object.keys(this).every(key => trip[key] === this[key]);
+    if (
+      !this.state.Easy &&
+      !this.state.Intermediate &&
+      !this.state.Advanced &&
+      !this.state.oneDay &&
+      !this.state.threeDay &&
+      !this.state.oneWeek & !this.state.hardcore
+    ) {
+      this.setState({ filteredTrips: tripsData });
     }
 
-    console.log("filteredResults", filteredResults);
+    // let query = {};
+
+    // Object.keys(this.state).forEach(key => {
+    //   console.log("object values", key);
+    //   if (this.state[key] === true) {
+    //     query[key] = this.state[key];
+    //     // queryKeys.push(key);
+    //   }
+    //   return query;
+    // });
+    // console.log("done arr", query);
+
+    // let filteredResults = this.state.trips.filter(search, query);
+
+    // function search(trip) {
+    //   return Object.keys(this).every(key => trip[key] === this[key]);
+    // }
+
+    // console.log("filteredResults", filteredResults);
 
     // let filteredList = this.state.trips.filter(trip => {
     //   for (const key in truthy) {
@@ -129,7 +167,7 @@ export default class Trips extends Component {
           executeSearch={this.executeSearch}
         /> */}
         <div className="trips-wrapper">
-          <TripCard trips={this.state.trips} />
+          <TripCard trips={this.state.filteredTrips} />
         </div>
       </div>
     );

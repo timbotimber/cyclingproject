@@ -18,11 +18,11 @@ class Profile extends React.Component {
           <h1>This is your profile</h1>
           <div>
             <div className="image-wrapper">
-              <img src="" alt="Profile Image" />
+              <img src={this.props.user.profilePic} alt="Profile Image" />
             </div>
             <div className="profile-info-wrapper">
               <p>
-                {this.props.user.first_name} {this.props.user.last_name}
+                {this.props.user.firstName} {this.props.user.lastName}
               </p>
               <p>Email: {this.props.user.email}</p>
             </div>
