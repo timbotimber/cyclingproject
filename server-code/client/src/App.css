@@ -18,7 +18,7 @@ body {
 
 .App {
   /* position: fixed; */
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -100,14 +100,14 @@ p {
 }
 
 .popUp :after {
-  content: '\22B3';
+  content: "\22B3";
 }
 
 /* NAV BAR */
 nav {
   width: 100vw;
   height: 70px;
-  background-color: #8be1dc;
+  background-color: var(--dusk);
   z-index: 1;
   position: fixed;
   top: 0;
@@ -116,13 +116,19 @@ nav {
   justify-content: flex-end;
 }
 
+nav a {
+  color: var(--white);
+  text-decoration: none;
+}
 .logo {
   width: 33%;
-  font-weight: bold;
-  font-size: 18px;
+  font-family: "Lobster", sans-serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--white);
 }
 
-.account-links {
+.nav-links {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -130,9 +136,10 @@ nav {
   padding-right: 32px;
 }
 
-.account-links a {
+.nav-links a {
   padding-left: 16px;
   text-decoration: none;
+  color: var(--white);
 }
 
 /* TRIPS PAGE */
@@ -383,7 +390,7 @@ nav {
 } */
 
 .home-container {
-  background-image: url('https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true');
+  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true");
   height: 70vh;
   background-position: center;
   background-repeat: no-repeat;
