@@ -78,7 +78,7 @@ export default class PlotView extends React.Component {
         {
           distance: jsonResponse.routes[0].distance * 0.001,
           duration: jsonResponse.routes[0].duration / 60,
-          coordinates: jsonResponse.routes[0].geometry.coordinates.concat(userCoords),
+          coordinates: jsonResponse.routes[0].geometry.coordinates.concat(userCoords.reverse()),
           uuid: jsonResponse.uuid,
           waypoints: jsonResponse.waypoints,
           origin: jsonResponse.routes[0].geometry.coordinates[0],
@@ -396,18 +396,22 @@ export default class PlotView extends React.Component {
       text = 'Go Back';
       tripReviewCard = <TripReview tripData={this.state} updateTitle={this.updateTitle} />;
     } else {
-      text = 'Review Trip';
+      text = 'Save This Trip!';
     }
 
     return (
       <div>
-        <div className="sidebarStyle">
-          <div>
-            Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}
+        {this.state.distance && (
+          <div className="sidebarStyle">
+            {tripReviewCard}
+            <button onClick={this.goToReviewTrip}>{text}</button>
           </div>
-          {tripReviewCard}
-          <button onClick={this.goToReviewTrip}>{text}</button>
-        </div>
+        )}
+        {!this.state.distance && (
+          <div className="popUp">
+            <p>Plot out your trip and press enter </p>
+          </div>
+        )}
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />
       </div>
     );

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -9,21 +9,26 @@ const userSchema = new Schema({
   displayName: String,
   profilePic: String,
   googleId: String,
-  trips: Array,
+  trips: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Trip',
+    },
+  ],
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId, // We will have an array of Object IDs
-      ref: "Comment"
-    }
+      ref: 'Comment',
+    },
   ],
   liked_trips: [
     {
       type: mongoose.Schema.Types.ObjectId, // We will have an array of Object IDs
-      ref: "Trip"
-    }
+      ref: 'Trip',
+    },
   ],
-  image: String
+  image: String,
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;

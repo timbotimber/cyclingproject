@@ -4,8 +4,6 @@ import Search from "./Search";
 import FilterPanel from "./FilterPanel";
 import axios from "axios";
 
-let tripsData;
-
 export default class Trips extends Component {
   state = {
     trips: [],
@@ -27,10 +25,9 @@ export default class Trips extends Component {
   getData = () => {
     // console.log("getData()");
     axios.get("/api/trips/addTrip").then(response => {
-      tripsData = response.data;
       this.setState({
-        trips: tripsData,
-        filteredTrips: tripsData
+        trips: response.data,
+        filteredTrips: response.data
       });
     });
   };
@@ -43,7 +40,7 @@ export default class Trips extends Component {
   };
 
   executeSearch = () => {
-    let filtered = this.state.trips.filter(obj => {
+    let filteredTrips = this.state.trips.filter(obj => {
       if (
         obj.title.includes(this.state.query) ||
         obj.origin_name.includes(this.state.query) ||
@@ -53,8 +50,10 @@ export default class Trips extends Component {
       }
     });
 
+    console.log("filtered", filteredTrips);
+
     this.setState({
-      trips: filtered
+      filteredTrips: filteredTrips
     });
   };
 
@@ -83,17 +82,6 @@ export default class Trips extends Component {
     this.setState({
       filteredTrips: filteredTrips
     });
-
-    if (
-      !this.state.Easy &&
-      !this.state.Intermediate &&
-      !this.state.Advanced &&
-      !this.state.oneDay &&
-      !this.state.threeDay &&
-      !this.state.oneWeek & !this.state.hardcore
-    ) {
-      this.setState({ filteredTrips: tripsData });
-    }
 
     // let query = {};
 
@@ -149,6 +137,10 @@ export default class Trips extends Component {
   };
 
   render() {
+    // let filterTrips;
+    // this.state.trips.map(trip => {
+    //   //
+    // });
     return (
       <div className="wrapper">
         <div className="filter-wrapper">

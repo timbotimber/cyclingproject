@@ -77,18 +77,37 @@ p {
   top: 0;
   left: 0;
   margin: 12px;
-  background-color: #404040;
+  background-color: #48527b;
   color: #fff;
   z-index: 1 !important;
   padding: 6px;
   font-weight: bold;
+  border-radius: 20px;
+}
+
+.popUp {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2px 60px;
+  background-color: #48527b;
+  color: white;
+  z-index: 1 !important;
+  padding: 3px 10px;
+  font-weight: bold;
+  border-radius: 15px;
+}
+
+.popUp :after {
+  content: "\22B3";
 }
 
 /* NAV BAR */
 nav {
   width: 100vw;
   height: 70px;
-  background-color: #8be1dc;
+  background-color: var(--dusk);
   z-index: 1;
   position: fixed;
   top: 0;
@@ -97,13 +116,19 @@ nav {
   justify-content: flex-end;
 }
 
+nav a {
+  color: var(--white);
+  text-decoration: none;
+}
 .logo {
   width: 33%;
-  font-weight: bold;
-  font-size: 18px;
+  font-family: "Lobster", sans-serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--white);
 }
 
-.account-links {
+.nav-links {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -111,9 +136,10 @@ nav {
   padding-right: 32px;
 }
 
-.account-links a {
+.nav-links a {
   padding-left: 16px;
   text-decoration: none;
+  color: var(--white);
 }
 
 /* TRIPS PAGE */
