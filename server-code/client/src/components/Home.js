@@ -27,6 +27,13 @@ export default class Home extends Component {
             </Link>
           </div>
         </div>
+        <div className="mainphone">
+          <img
+            className="phone"
+            src="https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/mobile_first.001.png?raw=true"
+            alt="phone"
+          />
+        </div>
       </div>
     );
   }
