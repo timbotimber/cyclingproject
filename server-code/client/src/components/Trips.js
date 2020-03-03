@@ -40,7 +40,7 @@ export default class Trips extends Component {
   };
 
   executeSearch = () => {
-    let filtered = this.state.trips.filter(obj => {
+    let filteredTrips = this.state.trips.filter(obj => {
       if (
         obj.title.includes(this.state.query) ||
         obj.origin_name.includes(this.state.query) ||
@@ -50,8 +50,10 @@ export default class Trips extends Component {
       }
     });
 
+    console.log("filtered", filteredTrips);
+
     this.setState({
-      trips: filtered
+      filteredTrips: filteredTrips
     });
   };
 
@@ -135,10 +137,10 @@ export default class Trips extends Component {
   };
 
   render() {
-    let filterTrips;
-    this.state.trips.map(trip => {
-      //
-    });
+    // let filterTrips;
+    // this.state.trips.map(trip => {
+    //   //
+    // });
     return (
       <div className="wrapper">
         <div className="filter-wrapper">
