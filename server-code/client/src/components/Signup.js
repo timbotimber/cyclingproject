@@ -45,6 +45,30 @@ export default class Signup extends Component {
           <div className="auth-form">
             <form onSubmit={this.handleSubmit}>
               <div>
+                <label htmlFor="firstName"></label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="first name (like Marcel)"
+                  value={this.state.firstName}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="lastName"></label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="last name (like Riek)"
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
+                />
+              </div>
+
+              <div>
                 <label htmlFor="email"></label>
                 <input
                   type="text"
