@@ -350,13 +350,6 @@ export default class PlotView extends React.Component {
     return (
       <div>
         <div className="sidebarStyle">
-<<<<<<< HEAD
-          {/* <div>
-            Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{" "}
-            {this.state.zoom}
-          </div> */}
-=======
->>>>>>> e496d25493bc150488619a5efbb82af2f925ed26
           {tripReviewCard}
           <button onClick={this.goToReviewTrip}>{text}</button>
         </div>

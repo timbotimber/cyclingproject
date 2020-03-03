@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TripCard from "./TripCard";
 import Search from "./Search";
+import FilterPanel from "./FilterPanel";
 import axios from "axios";
 
 export default class Trips extends Component {
@@ -49,11 +50,16 @@ export default class Trips extends Component {
     console.log("render");
     return (
       <div className="wrapper">
-        <Search
+        <FilterPanel
           updateSearchText={this.updateSearchText}
           query={this.state.query}
           executeSearch={this.executeSearch}
         />
+        {/* <Search
+          updateSearchText={this.updateSearchText}
+          query={this.state.query}
+          executeSearch={this.executeSearch}
+        /> */}
         <TripCard trips={this.state.trips} />
       </div>
     );
