@@ -8,14 +8,10 @@ export default class Home extends Component {
       <div className="home-container">
         <div className="main">
           <h1>
-            Welcome to <span>Sykkel</span>
+            <span>Sykkel</span>
           </h1>
           <div className="intro">
-            <p>
-              Plan your next bike trip your way. Discover trips from other
-              cyclists, customize your route, and save your trips to your
-              profile.
-            </p>
+            <p>Cycling. Really far.</p>
             <p>What would you like to do?</p>
           </div>
           <div className="home-btns-wrapper">

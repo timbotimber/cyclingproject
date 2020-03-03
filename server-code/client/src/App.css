@@ -14,6 +14,7 @@
 
 .App {
   /* position: fixed; */
+  font-family: "Open Sans", sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -273,8 +274,9 @@ nav {
   width: 40%;
   margin-left: 7%;
   margin-top: 5%;
+  margin-bottom: 5%;
   color: #1f3349;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 1%;
   border-radius: 7px;
 }
