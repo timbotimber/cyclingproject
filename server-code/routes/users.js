@@ -75,41 +75,13 @@ router.get("/loggedin", (req, res) => {
   res.json(req.user);
 });
 
-router.get("/google", (req, res) => {
-  res.render();
-  console.log("WOOOORKKINNGG google");
-});
-
-// router.get(
-//   "auth/google",
-//   passport.authenticate("google", { scope: ["profile"] })
-// );
-
-// router.get(
-//   "/google/callback",
-//   passport.authenticate("google", {
-//     failureRedirect: "/auth/login",
-//     successRedirect: process.env.SUCCESS_URL
-//   })
-// );
+router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
 
 router.get(
-  "/auth/google",
+  "/google/callback",
   passport.authenticate("google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email"
-    ]
-  }),
-  () => {
-    console.log("is this working?");
-  }
-);
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    successRedirect: "/plotview",
-    failureRedirect: "/" // here you would redirect to the login page using traditional login approach
+    failureRedirect: "/auth/login",
+    successRedirect: `http://${process.env.REACT_APP_CLIENT_URL}/`
   })
 );
 
