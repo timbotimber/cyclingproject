@@ -14,7 +14,7 @@ const NavBar = props => {
     console.log(props.user.email);
     return (
       <nav className="navbar">
-        <p>hey {props.user.email}</p>
+        <p>Hey {props.user.email}</p>
         <div className="logo">
           <Link to="/">Sykkel</Link>
         </div>
