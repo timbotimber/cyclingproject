@@ -28,9 +28,6 @@ class Profile extends React.Component {
   render() {
     return (
       <div>
-        {/* <MyContext.Consumer>
-          {context => (
-            <React.Fragment> */}
         <div>
           <h1>This is your profile</h1>
           <div>
@@ -49,9 +46,6 @@ class Profile extends React.Component {
             <TripCard trips={this.state.trips}></TripCard> />
           </div>
         </div>
-        {/* </React.Fragment>
-          )}
-        </MyContext.Consumer> */}
       </div>
     );
   }
