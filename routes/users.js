@@ -87,4 +87,16 @@ router.get(
   })
 );
 
+router.get("/likedtrips", (req, res) => {
+  User.find({ likedtrips: req.liked_trips })
+    .then(likedTrips => {
+      res.json(likedTrips);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message
+      });
+    });
+});
+
 module.exports = router;
