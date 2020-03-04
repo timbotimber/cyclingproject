@@ -33,7 +33,7 @@ body {
 .caption-strong {
   font-size: 12px;
   font-weight: bold;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
 }
 h2 {
   font-family: "Montserrat", sans-serif;
@@ -47,7 +47,7 @@ h3 {
 }
 p {
   font-size: 14px;
-  line-height: 0.3;
+  line-height: 0.4;
 }
 .attribute {
   color: #1f3349;
@@ -153,12 +153,11 @@ p {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 2px 60px;
-  background-color: #48527b;
+  margin: 10px 60px;
+  background-color: var(--night);
   color: white;
   z-index: 1 !important;
   padding: 3px 10px;
-  font-weight: bold;
   border-radius: 15px;
 }
 .popUp :after {
@@ -235,7 +234,7 @@ nav a {
   height: 75%;
   padding: 24px 32px;
   background-color: var(--cloud);
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -309,7 +308,7 @@ nav a {
   height: auto;
   padding: 18px;
   margin-bottom: 24px;
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid var(--cloud);
   display: flex;
   flex-direction: column;
