@@ -1,35 +1,47 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const User = require("../models/User");
-const Trip = require("../models/Trip");
+const User = require('../models/User');
+const Trip = require('../models/Trip');
 
-router.get("/addTrip", (req, res) => {
+router.get('/addTrip', (req, res) => {
   Trip.find()
     .then(trip => {
       res.json(trip);
     })
     .catch(err => {
       res.status(500).json({
-        message: err.message
+        message: err.message,
       });
     });
 });
 
-router.get("/user", (req, res) => {
+router.get('/user', (req, res) => {
   Trip.find({ user: req.user._id })
     .then(trip => {
       res.json(trip);
     })
     .catch(err => {
       res.status(500).json({
-        message: err.message
+        message: err.message,
       });
     });
 });
 
-router.get("/trip/:id", (req, res) => {
+router.get('/gid', (req, res) => {
+  Trip.find({ user: req.googleId })
+    .then(trip => {
+      res.json(trip);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
+
+router.get('/trip/:id', (req, res) => {
   const tripId = req.params.id;
-  console.log("hi", req);
+  console.log('hi', req);
 
   Trip.findById(tripId)
     .then(trip => {
@@ -37,12 +49,12 @@ router.get("/trip/:id", (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        message: err.message
+        message: err.message,
       });
     });
 });
 
-router.post("/addTrip", (req, res, next) => {
+router.post('/addTrip', (req, res, next) => {
   const {
     title,
     uuid,
@@ -55,7 +67,7 @@ router.post("/addTrip", (req, res, next) => {
     destination,
     destination_name,
     difficulty,
-    user
+    user,
   } = req.body;
   Trip.create({
     title,
@@ -69,7 +81,7 @@ router.post("/addTrip", (req, res, next) => {
     destination,
     destination_name,
     difficulty,
-    user: req.user._id
+    user: req.user._id,
   }).then(postTrip => {
     res.json(postTrip);
   });

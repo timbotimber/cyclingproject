@@ -28,6 +28,7 @@ class Profile extends React.Component {
   render() {
     console.log('props', this.props.setUser);
     console.log('user', this.props.user);
+    console.log('gid test', this.props.user.googleId);
     return (
       <div className="wrapper">
         <div className="profile-wrapper">
