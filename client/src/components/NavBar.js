@@ -14,7 +14,9 @@ const NavBar = props => {
     console.log(props.user.email);
     return (
       <nav className="navbar">
-        <p>hey {props.user.firstName}</p>
+        <div className="nav-greeting">
+          <p>Hey {props.user.firstName}!</p>
+        </div>
         <div className="logo">
           <Link to="/">Sykkel</Link>
         </div>
@@ -32,6 +34,7 @@ const NavBar = props => {
   } else {
     return (
       <nav className="navbar">
+        <div className="nav-greeting"></div>
         <div className="logo">
           <a href="/">Sykkel</a>
         </div>

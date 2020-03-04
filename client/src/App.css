@@ -183,7 +183,7 @@ p {
   color: white;
   z-index: 1 !important;
   padding: 3px 10px;
-  border-radius: 15px;
+  border-radius: 4px;
 }
 .popUp :after {
   content: "\22B3";
@@ -203,6 +203,15 @@ nav {
 nav a {
   color: var(--white);
   text-decoration: none;
+}
+
+.nav-greeting {
+  width: 33%;
+  color: var(--white);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 32px;
 }
 .logo {
   width: 33%;
