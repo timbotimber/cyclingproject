@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 export default class TripCard extends React.Component {
   state = {
-    userInfo: []
+    userInfo: [],
+    fave: true
   };
 
   componentDidMount() {
@@ -12,22 +13,32 @@ export default class TripCard extends React.Component {
   }
   getData = () => {
     axios.get("/api/auth/likedtrips").then(response => {
+      console.log("this is the response.data", response.data);
       this.setState({
-        userInfo: response.data
+        userInfo: response.data[0].liked_trips
       });
     });
   };
 
   faveTrip = id => {
+    console.log("Markus");
     axios.post(`/api/trips/updatefaves/${id}`).then(response => {
-      this.setState({
-        posts: response.data
-      });
+      console.log("Heldrup", response.data.liked_trips);
+
+      this.setState(
+        {
+          // posts: response.data,
+          userInfo: response.data.liked_trips
+        },
+        () => {
+          console.log(this.state.userInfo);
+        }
+      );
     });
   };
 
   render() {
-    console.log("testee state", this.state.userInfo[0]);
+    console.log("is this the liked trip?", this.state);
 
     return (
       <div className="trips-list">
@@ -72,16 +83,18 @@ export default class TripCard extends React.Component {
                 <div>
                   <p className="caption">favourite</p>
                   <p className="attribute">
-                    <button onClick={() => this.faveTrip(trip._id)}>
-                      {/* {this.state.liked_trips.includes(trip.id)
-                        ? "It is favourite"
-                        : "Click here to fav"} */}
+                    <button onClick={() => this.faveTrip(trip._id, trip)}>
+                      {this.state.userInfo.includes(trip._id)
+                        ? "Unfave"
+                        : "fave"}
                     </button>
                   </p>
                   {/* <p className="caption">test</p>
                   <p className="attribute">
                     <button onClick={() => this.getData()}>
-                      click to test
+
+
+
                     </button>
                   </p> */}
                 </div>
