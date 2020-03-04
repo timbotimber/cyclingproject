@@ -8,12 +8,18 @@ export default class TripCard extends React.Component {
     fave: true
   };
 
+  // checkFave = () => {
+  //   this.state.userInfo.includes(trip._id) ? true : false;
+  // };
+
   componentDidMount() {
     this.getData();
   }
   getData = () => {
     axios.get("/api/auth/likedtrips").then(response => {
       console.log("this is the response.data", response.data);
+      // let faveChecker
+      // this.checkFave();
       this.setState({
         userInfo: response.data[0].liked_trips
       });
@@ -76,9 +82,7 @@ export default class TripCard extends React.Component {
 
                 <div>
                   <p className="caption">Elevation gain</p>
-                  <p className="attribute">
-                    {Math.floor(Math.random() * (400 - 20) + 20)}m
-                  </p>
+                  <p className="attribute">100m</p>
                 </div>
                 <div>
                   <p className="caption">favourite</p>
