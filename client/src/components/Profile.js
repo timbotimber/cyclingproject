@@ -47,7 +47,9 @@ class Profile extends React.Component {
         </div>
         <div className="my-trips-wrapper">
           <h2>My Trips</h2>
-          <div>{/* <TripCard /> */}</div>
+          <div>
+            <TripCard trips={this.state.trips} />
+          </div>
         </div>
       </div>
     );
