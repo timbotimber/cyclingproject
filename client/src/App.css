@@ -69,6 +69,7 @@ p {
   font-size: 14px;
   font-weight: bold;
   border: none;
+  letter-spacing: 0.2px;
 }
 .button-solid-dark {
   height: 44px;
@@ -81,6 +82,7 @@ p {
   font-weight: bold;
   border: none;
   margin-right: 16px;
+  letter-spacing: 0.2px;
 }
 .button-ghost {
   height: 44px;
@@ -93,6 +95,7 @@ p {
   font-weight: bold;
   min-width: 120px;
   margin: 12px 0px;
+  letter-spacing: 0.2px;
 }
 
 .button-pill {
@@ -298,13 +301,7 @@ nav a {
   align-content: center;
   margin-left: -8px;
 }
-/* .filter-panel div {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-} */
+
 .filter-panel label {
   color: var(--night);
   display: block;
@@ -334,7 +331,7 @@ nav a {
   text-indent: 12px;
 }
 .search-button {
-  height: 44px;
+  height: 40px;
   width: 100%;
   border-radius: 6px;
   background-color: var(--sunrise);
@@ -343,6 +340,7 @@ nav a {
   font-weight: bold;
   margin: 8px;
   border: none;
+  letter-spacing: 0.2px;
 }
 /* TRIP CARD */
 .trip-card {
