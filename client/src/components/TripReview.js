@@ -74,7 +74,9 @@ const TripReview = props => {
     <div>
       <form className="review-trip" onSubmit={handleSubmit}>
         <h2>Review your trip</h2>
+        <div className="vertical-space"></div>
         <p className="caption-strong">Trip Name:</p>
+
         {/* <label htmlFor="title">Trip name</label> */}
         <input
           className="input-text"
@@ -85,16 +87,27 @@ const TripReview = props => {
           type="text"
           placeholder="Name your trip"
         />
+        <div className="divider"></div>
         <div>
           <p className="caption-strong">Origin:</p>
           <p>{origin_name}</p>
+          <br />
           <p className="caption-strong">Destination:</p>
           <p>{destination_name}</p>
-          <p className="caption-strong">Duration:</p>
-          <p>{(duration / 60).toFixed(2)} hours</p>
-          <p className="caption-strong">Distance:</p>
-          <p>{distance.toFixed(2)} km</p>
+          <br />
+          <div className="review-trip-attributes">
+            <div>
+              <p className="caption-strong">Duration:</p>
+              <p>{(duration / 60).toFixed(2)} hours</p>
+            </div>
+            <div>
+              <p className="caption-strong">Distance:</p>
+              <p>{distance.toFixed(2)} km</p>
+            </div>
+          </div>
+          <br />
           {/* <p>Waypoints: {waypoints}</p> */}
+
           <button className="button-solid">Save this trip</button>
         </div>
       </form>

@@ -184,10 +184,10 @@ export default class PlotView extends React.Component {
             "line-join": "round"
           },
           paint: {
-            "line-color": "#3b9ddd",
+            "line-color": "#48c1fc", // Color: "sky"
             "line-dasharray": [0.2, 2],
             "line-width": 4,
-            "line-opacity": 0.7
+            "line-opacity": 1.0
           }
         },
         // vertex point halos
@@ -294,11 +294,13 @@ export default class PlotView extends React.Component {
         }
       });
   };
+
   goToReviewTrip = () => {
     this.setState({
       reviewTrip: !this.state.reviewTrip
     });
   };
+
   updateTitle = text => {
     this.setState({
       title: text
@@ -311,7 +313,9 @@ export default class PlotView extends React.Component {
     if (this.state.reviewTrip) {
       text = "Go Back";
       tripReviewCard = (
-        <TripReview tripData={this.state} updateTitle={this.updateTitle} />
+        <div className="sidebarReview">
+          <TripReview tripData={this.state} updateTitle={this.updateTitle} />
+        </div>
       );
     } else {
       text = "Review Trip";
@@ -319,7 +323,7 @@ export default class PlotView extends React.Component {
     return (
       <div>
         {this.state.distance && (
-          <div className="sidebarStyle">
+          <div className="sidebar">
             {tripReviewCard}
             <button className="button-ghost" onClick={this.goToReviewTrip}>
               {text}

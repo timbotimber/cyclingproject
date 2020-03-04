@@ -16,7 +16,7 @@ body {
 }
 .App {
   position: fixed;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Work Sans", sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -36,7 +36,9 @@ body {
   letter-spacing: 1px;
 }
 h2 {
-  color: #1f3349;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  color: var(--night);
   margin-top: 12px;
   font-size: 20px;
 }
@@ -45,7 +47,7 @@ h3 {
 }
 p {
   font-size: 14px;
-  line-height: 1;
+  line-height: 0.3;
 }
 .attribute {
   color: #1f3349;
@@ -55,7 +57,7 @@ p {
 }
 .button-solid {
   height: 44px;
-  padding: 0px 16px;
+  padding: 0px 24px;
   border-radius: 6px;
   background-color: var(--sunrise);
   color: #fff;
@@ -65,24 +67,39 @@ p {
 }
 .button-ghost {
   height: 44px;
-  padding: 0px 16px;
-  border: 2px solid var(--sunrise);
+  padding: 0px 24px;
+  border: 2px solid var(--dusk);
   border-radius: 6px;
   background-color: var(--white);
-  color: var(--sunrise);
+  color: var(--dusk);
   font-size: 14px;
   font-weight: bold;
   min-width: 120px;
   margin: 12px 0px;
 }
+
 .input-text {
   height: 40px;
-  /* width: 100%; */
+  width: 100%;
   font-size: 14px;
   border: 1px solid var(--cloud);
   border-radius: 6px;
   text-indent: 12px;
 }
+.divider {
+  border-bottom: 1px solid var(--cloud);
+  margin: 24px 8px 24px 0px;
+}
+
+.vertical-space {
+  height: 8px;
+  margin: 0;
+}
+
+.red-text {
+  color: var(--dusk);
+}
+
 /* MAP */
 .mapContainer {
   position: absolute;
@@ -91,21 +108,46 @@ p {
   left: 0;
   bottom: 0;
 }
-.sidebarStyle {
+
+.sidebar {
+  display: inline-block;
+  position: absolute;
+  width: 20vw;
+  top: 0px;
+  left: 0px;
+  left: 14px;
+  margin: 12px;
+  z-index: 1 !important;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.sidebarReview {
   display: inline-block;
   position: absolute;
   width: 25vw;
-  /* height: 60vh; */
-  padding: 16px;
-  top: 12px;
-  left: 12px;
-  margin: 12px;
+  padding: 12px 24px 24px 24px;
+  top: 10px;
+  left: 0px;
   background-color: var(--white);
   color: var(--night);
   z-index: 1 !important;
-  border-radius: 16px;
+  border-radius: 4px;
   text-align: left;
 }
+
+.review-trip-attributes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.review-trip-attributes div {
+  width: 50%;
+}
+
 .popUp {
   display: inline-block;
   position: absolute;
@@ -153,7 +195,7 @@ nav a {
   padding-right: 32px;
 }
 .nav-links a {
-  padding-left: 16px;
+  padding-left: 32px;
   text-decoration: none;
   color: var(--white);
 }
@@ -263,7 +305,7 @@ nav a {
 }
 /* TRIP CARD */
 .trip-card {
-  width: 85%;
+  width: 75%;
   height: auto;
   padding: 18px;
   margin-bottom: 24px;
@@ -376,7 +418,7 @@ nav a {
   background-size: cover;
 } */
 .home-container {
-  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true");
+  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/client/public/img/bike4.jpeg?raw=true");
   height: 70vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -443,12 +485,43 @@ nav a {
   text-decoration: none;
 }
 /* PROFILE */
+.profile-wrapper {
+  width: 35%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.info-wrapper {
+  width: 60%;
+  height: 75%;
+  padding: 24px 32px;
+  background-color: var(--cloud);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .image-wrapper {
 }
-.profile-info-wrapper {
+.profile-img {
+  width: 60%;
+  clip-path: circle(50% at center);
 }
-.my-trips-wrapper {
+
+.my-trips-headline {
+  width: 85%;
+  height: auto;
+  padding: 18px;
+  margin-right: 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
+
 /* .timeline {
   border-left: @line solid @color-primary;
   border-bottom-right-radius: @radius;
