@@ -91,6 +91,7 @@ export default class PlotView extends React.Component {
       // let distance = jsonResponse.routes[0].distance * 0.001;
       // let duration = jsonResponse.routes[0].duration / 60;
       console.log(jsonResponse);
+      console.log('TESTING THE STATE AGAIN', this.state);
 
       // document.getElementById('calculated-line').innerHTML =
       // 'Distance: ' + distance.toF + ' km<br>Duration: ' + duration.toF + ' minutes';
@@ -214,28 +215,10 @@ export default class PlotView extends React.Component {
     map.on('load', () => {
       // console.log("On Load coords", userCoords);
       console.log('props', this.props);
-      let workingCoords = [
-        [40.998026998026, 14.098482998026],
-        [41.020649020649, 14.098132020649],
-        [41.020474020649, 14.110666020649],
-        [41.024281020649, 14.107097020649],
-        [41.044168020649, 14.100123020649],
-        [41.044122020649, 14.087687020649],
-        [41.065196020649, 14.101628020649],
-        [41.086844020649, 14.102352020649],
-        [41.087572020649, 14.104416020649],
-        [41.093916020649, 14.106363020649],
-        [41.097221020649, 14.104472020649],
-        [41.108311020649, 14.109544020649],
-        [41.130772020649, 14.060963020649],
-        [41.134644020649, 14.064113020649],
-        [41.137796020649, 14.053121020649],
-      ];
       let userCoords = this.props.coordinates.map(element => {
         return element.reverse();
       });
       console.log('hacked userCoords', userCoords);
-      console.log('Working Coords', workingCoords);
       map.addLayer({
         id: 'layer1',
         type: 'line',
@@ -383,26 +366,32 @@ export default class PlotView extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
       text = 'Go Back';
-      tripReviewCard = <TripReview tripData={this.state} updateTitle={this.updateTitle} />;
+      tripReviewCard = (
+        <div className="sidebarReview">
+          <TripReview tripData={this.state} updateTitle={this.updateTitle} />
+        </div>
+      );
     } else {
-      text = 'Save This Trip!';
+      text = 'Review Trip';
     }
-
     return (
       <div>
         {this.state.distance && (
-          <div className="sidebarStyle">
+          <div className="sidebar">
             {tripReviewCard}
-            <button onClick={this.goToReviewTrip}>{text}</button>
+            <button className="button-ghost" onClick={this.goToReviewTrip}>
+              {text}
+            </button>
           </div>
         )}
         {!this.state.distance && (
           <div className="popUp">
-            <p>Plot out your trip and press enter </p>
+            <p className="caption-strong">Plot out your trip and press enter </p>
           </div>
         )}
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />

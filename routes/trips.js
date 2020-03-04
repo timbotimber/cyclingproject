@@ -92,4 +92,28 @@ router.post('/addTrip', (req, res, next) => {
 //   console.log("req.body", req.body);
 // });
 
+router.post("/updatefaves/:id", (req, res, next) => {
+  const tripId = req.params.id;
+  console.log(tripId, "TRIPPPPID ");
+  User.findById({ _id: req.user._id }).then(user => {
+    if (user.liked_trips.includes(tripId)) {
+      User.findByIdAndUpdate(
+        user._id,
+        { $pull: { liked_trips: tripId } },
+        { new: true }
+      ).then(res => {
+        console.log(res);
+      });
+    } else {
+      User.findByIdAndUpdate(
+        { _id: req.user._id },
+        { $addToSet: { liked_trips: tripId } },
+        { new: true }
+      ).then(res => {
+        console.log(res);
+      });
+    }
+  });
+});
+
 module.exports = router;

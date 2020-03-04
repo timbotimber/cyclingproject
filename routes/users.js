@@ -83,16 +83,16 @@ router.get(
   })
 );
 
-// router.get('/gid', (req, res) => {
-//   User.find({ googleId: req.googleId })
-//     .then(gid => {
-//       res.json(gid);
-//     })
-//     .catch(err => {
-//       res.status(500).json({
-//         message: err.message,
-//       });
-//     });
-// });
+router.get('/likedtrips', (req, res) => {
+  User.find({ likedtrips: req.liked_trips })
+    .then(likedTrips => {
+      res.json(likedTrips);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
 
 module.exports = router;
