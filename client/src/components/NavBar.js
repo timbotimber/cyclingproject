@@ -18,14 +18,14 @@ const NavBar = props => {
         <div className="logo">
           <Link to="/">Sykkel</Link>
         </div>
-        <div className="account-links">
-          <Link onClick={logout} to="/">
-            Logout
-          </Link>
+        <div className="nav-links">
           <Link to="/profile">Profile</Link>
           <Link to="/plotview">Plan</Link>
 
           <Link to="/trips">Explore</Link>
+          <Link onClick={logout} to="/">
+            Logout
+          </Link>
         </div>
       </nav>
     );
@@ -37,10 +37,12 @@ const NavBar = props => {
         </div>
 
         <div className="nav-links">
-          <Link to="/login">Log in</Link>
-          <Link to="/signup">Sign up</Link>
           <Link to="/plotview">Plan</Link>
           <Link to="/trips">Explore</Link>
+          <Link to="/login">Log in</Link>
+          <Link to="/signup">
+            <button className="button-pill">Sign up</button>
+          </Link>
         </div>
       </nav>
     );
