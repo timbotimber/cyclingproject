@@ -12,7 +12,7 @@ export default class TripCard extends React.Component {
     // this.tripsFilter();
   }
   getData = () => {
-    axios.get("/api/trips/likedtrips").then(response => {
+    axios.get("/api/auth/likedtrips").then(response => {
       this.setState({
         liked_trips: response.data
       });
@@ -79,12 +79,12 @@ export default class TripCard extends React.Component {
                       click to favourite
                     </button>
                   </p>
-                  <p className="caption">test</p>
+                  {/* <p className="caption">test</p>
                   <p className="attribute">
                     <button onClick={() => this.getData()}>
                       click to test
                     </button>
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
