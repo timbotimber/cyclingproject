@@ -15,15 +15,15 @@ const userSchema = new Schema({
       ref: "Trip"
     }
   ],
-  comments: [
-    {
-      type: mongoose.Schema.Types.ObjectId, // We will have an array of Object IDs
-      ref: "Comment"
-    }
-  ],
+  // comments: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId, // We will have an array of Object IDs
+  //     ref: "Comment"
+  //   }
+  // ],
   liked_trips: [
     {
-      type: mongoose.Schema.Types.ObjectId, // We will have an array of Object IDs
+      type: Schema.Types.ObjectId, // We will have an array of Object IDs
       ref: "Trip"
     }
   ],

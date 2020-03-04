@@ -1,7 +1,17 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default class TripCard extends React.Component {
+  faveTrip = id => {
+    console.log(id, "IDDDD");
+    axios.post(`/api/trips/updatefaves/${id}`).then(response => {
+      this.setState({
+        posts: response.data
+      });
+    });
+  };
+
   render() {
     console.log("these are our props", this.props.trips);
 
@@ -48,7 +58,9 @@ export default class TripCard extends React.Component {
                 <div>
                   <p className="caption">favourite this trip</p>
                   <p className="attribute">
-                    <button>click to favourite</button>
+                    <button onClick={() => this.faveTrip(trip._id)}>
+                      click to favourite
+                    </button>
                   </p>
                 </div>
               </div>
