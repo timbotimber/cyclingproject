@@ -32,7 +32,7 @@ class Profile extends React.Component {
       <div className="wrapper">
         <div className="profile-wrapper">
           <div className="info-wrapper">
-            <div className="image-wrapper">
+            <div>
               <img
                 className="profile-img"
                 src={this.props.user.profilePic}
@@ -46,8 +46,9 @@ class Profile extends React.Component {
           </div>
         </div>
         <div className="trips-wrapper">
-          <div className="my-trips-headline">
-            <h2>My Trips</h2>
+          <div className="button-wrapper">
+            <button className="my-trips-button">My Trips</button>
+            <button className="my-trips-button">My Favorites</button>
           </div>
           <TripCard trips={this.state.trips} />
         </div>
