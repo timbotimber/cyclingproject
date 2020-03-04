@@ -4,24 +4,21 @@ import { Link } from "react-router-dom";
 
 export default class TripCard extends React.Component {
   state = {
-    liked_trips: []
+    userInfo: []
   };
 
   componentDidMount() {
     this.getData();
-    // this.tripsFilter();
   }
   getData = () => {
     axios.get("/api/auth/likedtrips").then(response => {
       this.setState({
-        liked_trips: response.data
+        userInfo: response.data
       });
-      console.log("testee user", response.data);
     });
   };
 
   faveTrip = id => {
-    console.log(id, "IDDDD");
     axios.post(`/api/trips/updatefaves/${id}`).then(response => {
       this.setState({
         posts: response.data
@@ -30,7 +27,7 @@ export default class TripCard extends React.Component {
   };
 
   render() {
-    console.log("these are our user's props", this.props.user);
+    console.log("testee state", this.state.userInfo[0]);
 
     return (
       <div className="trips-list">
@@ -73,10 +70,12 @@ export default class TripCard extends React.Component {
                   </p>
                 </div>
                 <div>
-                  <p className="caption">favourite this trip</p>
+                  <p className="caption">favourite</p>
                   <p className="attribute">
                     <button onClick={() => this.faveTrip(trip._id)}>
-                      click to favourite
+                      {/* {this.state.liked_trips.includes(trip.id)
+                        ? "It is favourite"
+                        : "Click here to fav"} */}
                     </button>
                   </p>
                   {/* <p className="caption">test</p>
