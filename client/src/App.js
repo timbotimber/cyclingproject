@@ -65,7 +65,7 @@ class App extends React.Component {
               <Signup history={props.history} setUser={this.setUser} />
             )}
           />
-          <Route path="/trips" component={Trips} />
+          <Route exact path="/trips" component={Trips} />
           <Route path="/trip/:id" component={TripDetail} />
           <Route
             path="/profile"
