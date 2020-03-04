@@ -29,27 +29,27 @@ class Profile extends React.Component {
     console.log("props", this.props.setUser);
     console.log("user", this.props.user);
     return (
-      <div className="profile-container">
-        <div className="info-wrapper">
-          <h2>
-            {this.props.user.firstName} {this.props.user.lastName}
-          </h2>
-          <div className="image-wrapper">
-            <img
-              className="profile-img"
-              src={this.props.user.profilePic}
-              alt="Profile Image"
-            />
+      <div className="wrapper">
+        <div className="profile-wrapper">
+          <div className="info-wrapper">
+            <div className="image-wrapper">
+              <img
+                className="profile-img"
+                src={this.props.user.profilePic}
+                alt="Profile Image"
+              />
+            </div>
+            <h2>
+              {this.props.user.firstName} {this.props.user.lastName}
+            </h2>
+            <p>{this.props.user.email}</p>
           </div>
-          <p>
-            Email: <span>{this.props.user.email}</span>
-          </p>
         </div>
-        <div className="my-trips-wrapper">
-          <h2>My Trips</h2>
-          <div>
-            <TripCard trips={this.state.trips} />
+        <div className="trips-wrapper">
+          <div className="my-trips-headline">
+            <h2>My Trips</h2>
           </div>
+          <TripCard trips={this.state.trips} />
         </div>
       </div>
     );
