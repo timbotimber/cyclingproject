@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import TripReview from "./TripReview";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g";
+
+let map;
+
 export default class PlotView extends React.Component {
-  // constructor(props) {
-  //   super(props);
   state = {
     title: "",
     origin: [],
@@ -29,7 +30,8 @@ export default class PlotView extends React.Component {
     reviewTrip: false,
     user: ""
   };
-  //
+
+  // REMOVE ROUTE
   removeRoute = () => {
     if (this.state.map.getSource("route")) {
       this.state.map.removeLayer("route");
@@ -39,6 +41,8 @@ export default class PlotView extends React.Component {
       return;
     }
   };
+
+  // UPDATE ROUTE
   updateRoute = () => {
     this.removeRoute(); // overwrite any existing layers
     let data = this.state.draw.getAll();
@@ -48,6 +52,8 @@ export default class PlotView extends React.Component {
     let newCoords = coords.join(";");
     this.getMatch(newCoords);
   };
+
+  // RENDERING MATCHED ROUTE
   getMatch = e => {
     let url =
       "https://api.mapbox.com/directions/v5/mapbox/cycling/" +
@@ -86,6 +92,7 @@ export default class PlotView extends React.Component {
         () => {
           console.log(this.state);
           this.reverseGeocode();
+          this.snapToBounds();
         }
       );
       // let distance = jsonResponse.routes[0].distance * 0.001;
@@ -100,6 +107,8 @@ export default class PlotView extends React.Component {
     };
     req.send();
   };
+
+  // ADD ROUTE
   addRoute = coords => {
     // check if the route is already loaded
     if (this.state.map.getSource("route")) {
@@ -129,6 +138,8 @@ export default class PlotView extends React.Component {
       });
     }
   };
+
+  // GET NAVIGATION INSTRUCTIONS
   getInstructions = data => {
     // Target the sidebar to add the instructions
     let directions = document.getElementById("directions");
@@ -145,6 +156,8 @@ export default class PlotView extends React.Component {
     }
     // directions.innerHTML = '<br><h2>Trip duration: ' + Math.floor(data.duration / 60) + ' min.</h2>' + tripDirections;
   };
+
+  // COMPONENT DID MOUNT
   componentDidMount = () => {
     const id = this.props.match.params.id;
     axios.get(`/api/trips/trip/${id}`).then(response => {
@@ -153,7 +166,7 @@ export default class PlotView extends React.Component {
         trip: response.data
       });
     });
-    const map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
       container: this.mapContainer,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [this.state.lng, this.state.lat],
@@ -240,8 +253,10 @@ export default class PlotView extends React.Component {
       });
     });
   };
+
+  // REVERSE GEOCODING: GETTING LOCATION NAME FROM COORDINATES
   reverseGeocode = () => {
-    // Reverse geocoding for Origin
+    // Origin
     axios
       .get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.origin[0]},${this.state.origin[1]}.json?access_token=${mapboxgl.accessToken}`
@@ -268,7 +283,7 @@ export default class PlotView extends React.Component {
           return;
         }
       });
-    // Reverse geocoding with Destination
+    // Destination
     axios
       .get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.destination[0]},${this.state.destination[1]}.json?access_token=${mapboxgl.accessToken}`
@@ -295,17 +310,32 @@ export default class PlotView extends React.Component {
       });
   };
 
+  // TOGGLE MAP SIDEBAR VIEW
   goToReviewTrip = () => {
     this.setState({
       reviewTrip: !this.state.reviewTrip
     });
   };
 
+  // UPDATE TITLE OF TRIP
   updateTitle = text => {
     this.setState({
       title: text
     });
   };
+
+  // ROUTE: ZOOM TO FIT
+  snapToBounds = () => {
+    let coordinates = this.state.coordinates;
+    let bounds = coordinates.reduce((bounds, coord) => {
+      return bounds.extend(coord);
+    }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
+
+    map.fitBounds(bounds, {
+      padding: 100
+    });
+  };
+
   render() {
     console.log(this.state);
     let tripReviewCard;
@@ -332,7 +362,9 @@ export default class PlotView extends React.Component {
         )}
         {!this.state.distance && (
           <div className="popUp">
-            <p className="with-arrow">Plot out your trip and press enter </p>
+            <p className="caption-strong">
+              Plot out your trip and press enter{" "}
+            </p>
           </div>
         )}
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />

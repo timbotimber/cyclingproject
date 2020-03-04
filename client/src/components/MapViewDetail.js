@@ -58,27 +58,25 @@ export default class PlotView extends React.Component {
       e +
       '?geometries=geojson&steps=true&&access_token=' +
       mapboxgl.accessToken;
-    let userCoords = this.props.coordinates.map(element => {
-      return element.map(el => {
-        // let number = +el.toFixed(12);
-        // let difference = 12 - el.length;
-        let number = Number(el.toFixed(11) + '1');
-        return number;
-      });
-    });
+
     let req = new XMLHttpRequest();
     console.log('req', req);
     req.responseType = 'json';
     req.open('GET', url, true);
     req.onload = () => {
       let jsonResponse = req.response;
+      let userCoords = this.props.coordinates.map(element => {
+        return element;
+      });
       let arr = jsonResponse.routes[0].geometry.coordinates;
+      let combinedCoords = userCoords.concat(arr);
       console.log('jsonReponse', jsonResponse);
+      console.log('CombinedCoords', combinedCoords);
       this.setState(
         {
           distance: jsonResponse.routes[0].distance * 0.001,
           duration: jsonResponse.routes[0].duration / 60,
-          coordinates: jsonResponse.routes[0].geometry.coordinates.concat(userCoords.reverse()),
+          coordinates: combinedCoords,
           uuid: jsonResponse.uuid,
           waypoints: jsonResponse.waypoints,
           origin: jsonResponse.routes[0].geometry.coordinates[0],
@@ -86,7 +84,7 @@ export default class PlotView extends React.Component {
         },
         () => {
           console.log(this.state);
-
+          console.log('combinedCoords = ', combinedCoords);
           this.reverseGeocode();
         }
       );
@@ -234,12 +232,7 @@ export default class PlotView extends React.Component {
         [41.137796020649, 14.053121020649],
       ];
       let userCoords = this.props.coordinates.map(element => {
-        return element.reverse().map(el => {
-          // let number = +el.toFixed(12);
-          let difference = 12 - el.length;
-          let number = Number(el.toFixed(11) + '1');
-          return number;
-        });
+        return element.reverse();
       });
       console.log('hacked userCoords', userCoords);
       console.log('Working Coords', workingCoords);
