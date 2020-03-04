@@ -554,21 +554,31 @@ nav a {
   align-items: center;
 }
 
-.image-wrapper {
-}
 .profile-img {
   width: 60%;
   clip-path: circle(50% at center);
 }
 
-.my-trips-headline {
-  width: 85%;
+.button-wrapper {
+  width: 100%;
   height: auto;
   padding: 18px;
-  margin-right: 24px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.my-trips-button {
+  width: 15%;
+  height: 44px;
+  padding: 0px 10px;
+  margin-right: 10px;
+  border-radius: 6px;
+  background-color: var(--sunrise);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
 }
 
 /* .timeline {
