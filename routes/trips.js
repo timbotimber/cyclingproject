@@ -15,6 +15,18 @@ router.get('/addTrip', (req, res) => {
     });
 });
 
+router.get('/user', (req, res) => {
+  Trip.find({ user: req.user._id })
+    .then(trip => {
+      res.json(trip);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
+
 router.get('/trip/:id', (req, res) => {
   const tripId = req.params.id;
   console.log('hi', req);
