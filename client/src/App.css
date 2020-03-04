@@ -11,57 +11,78 @@
   --cloud: #e7e7ec; /* For borders, backgrounds */
   --sand: #f9f5f0; /* For subtle micro-interactions */
 }
-
 body {
   color: var(--night);
 }
-
 .App {
-  /* position: fixed; */
+  position: fixed;
   font-family: "Open Sans", sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
 }
-
 .content {
   position: absolute;
   top: 70px;
   width: 100%;
   height: 100%;
 }
-
 .caption {
   font-size: 12px;
 }
-
 .caption-strong {
   font-size: 12px;
   font-weight: bold;
+  letter-spacing: 1px;
 }
-
 h2 {
   color: #1f3349;
   margin-top: 12px;
   font-size: 20px;
 }
-
 h3 {
   font-weight: normal;
 }
-
 p {
   font-size: 14px;
   line-height: 1;
 }
-
 .attribute {
   color: #1f3349;
   font-size: 14px;
   font-weight: bold;
   margin: 0;
 }
-
+.button-solid {
+  height: 44px;
+  padding: 0px 16px;
+  border-radius: 6px;
+  background-color: var(--sunrise);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+}
+.button-ghost {
+  height: 44px;
+  padding: 0px 16px;
+  border: 2px solid var(--sunrise);
+  border-radius: 6px;
+  background-color: var(--white);
+  color: var(--sunrise);
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 120px;
+  margin: 12px 0px;
+}
+.input-text {
+  height: 40px;
+  /* width: 100%; */
+  font-size: 14px;
+  border: 1px solid var(--cloud);
+  border-radius: 6px;
+  text-indent: 12px;
+}
 /* MAP */
 .mapContainer {
   position: absolute;
@@ -70,21 +91,21 @@ p {
   left: 0;
   bottom: 0;
 }
-
 .sidebarStyle {
   display: inline-block;
   position: absolute;
-  top: 0;
-  left: 0;
+  width: 25vw;
+  /* height: 60vh; */
+  padding: 16px;
+  top: 12px;
+  left: 12px;
   margin: 12px;
-  background-color: #48527b;
-  color: #fff;
+  background-color: var(--white);
+  color: var(--night);
   z-index: 1 !important;
-  padding: 6px;
-  font-weight: bold;
-  border-radius: 20px;
+  border-radius: 16px;
+  text-align: left;
 }
-
 .popUp {
   display: inline-block;
   position: absolute;
@@ -98,11 +119,9 @@ p {
   font-weight: bold;
   border-radius: 15px;
 }
-
 .popUp :after {
   content: "\22B3";
 }
-
 /* NAV BAR */
 nav {
   width: 100vw;
@@ -115,7 +134,6 @@ nav {
   align-items: center;
   justify-content: flex-end;
 }
-
 nav a {
   color: var(--white);
   text-decoration: none;
@@ -127,7 +145,6 @@ nav a {
   letter-spacing: 1px;
   color: var(--white);
 }
-
 .nav-links {
   display: flex;
   flex-direction: row;
@@ -135,13 +152,11 @@ nav a {
   width: 33%;
   padding-right: 32px;
 }
-
 .nav-links a {
   padding-left: 16px;
   text-decoration: none;
   color: var(--white);
 }
-
 /* TRIPS PAGE */
 .wrapper {
   width: 100%;
@@ -153,7 +168,6 @@ nav a {
   justify-content: space-between;
   align-items: flex-start;
 }
-
 .filter-wrapper {
   width: 35%;
   height: 100%;
@@ -161,7 +175,6 @@ nav a {
   display: flex;
   justify-content: center;
 }
-
 .trips-wrapper {
   width: 65%;
   height: 100%;
@@ -174,7 +187,6 @@ nav a {
   justify-content: flex-start;
   align-items: center;
 }
-
 /* SEARCH & FILTER PANEL */
 .filter-panel {
   width: 60%;
@@ -187,7 +199,6 @@ nav a {
   justify-content: space-between;
   align-items: flex-start;
 }
-
 .search-filters {
   width: 100%;
   display: flex;
@@ -196,7 +207,6 @@ nav a {
   align-content: flex-start;
   text-align: left;
 }
-
 .filter-panel-button {
   width: 100%;
   display: flex;
@@ -205,7 +215,6 @@ nav a {
   align-content: center;
   margin-left: -8px;
 }
-
 /* .filter-panel div {
   width: 100%;
   display: flex;
@@ -213,7 +222,6 @@ nav a {
   justify-content: flex-start;
   align-items: center;
 } */
-
 .filter-panel label {
   color: var(--night);
   display: block;
@@ -221,11 +229,9 @@ nav a {
   margin: 6px;
   font-size: 14px;
 }
-
 .checkbox {
   margin-right: 12px;
 }
-
 .search-wrapper {
   width: 100%;
   display: flex;
@@ -236,7 +242,6 @@ nav a {
   padding-bottom: 24px;
   margin-bottom: 24px;
 }
-
 .search-input {
   height: 40px;
   width: 100%;
@@ -245,7 +250,6 @@ nav a {
   border-radius: 6px;
   text-indent: 12px;
 }
-
 .search-button {
   height: 44px;
   width: 100%;
@@ -257,7 +261,6 @@ nav a {
   margin: 8px;
   border: none;
 }
-
 /* TRIP CARD */
 .trip-card {
   width: 85%;
@@ -274,23 +277,19 @@ nav a {
   -moz-box-shadow: 7px 6px 36px -15px rgba(109, 109, 151, 0.4);
   box-shadow: 7px 6px 36px -15px rgba(109, 109, 151, 0.4);
 }
-
 .trip-card a {
   text-decoration: none;
   color: var(--night);
 }
-
 .trip-review-container {
   width: 200px;
   height: 200px;
 }
-
 .primary-content {
   text-align: left;
   line-height: 0.6;
   margin-bottom: 16px;
 }
-
 .secondary-content {
   width: 100%;
   display: flex;
@@ -298,7 +297,6 @@ nav a {
   justify-content: space-evenly;
   margin-bottom: 12px;
 }
-
 .secondary-content div {
   width: 25%;
   line-height: 0;
@@ -308,14 +306,11 @@ nav a {
   align-items: flex-start;
   text-align: left;
 }
-
 .trips-list {
   width: 100%;
   margin-bottom: 150px;
 }
-
 /* SIGNUP / LOGIN */
-
 .auth-wrapper {
   display: flex;
   flex-direction: row;
@@ -323,7 +318,6 @@ nav a {
   align-items: center;
   margin-top: 10%;
 }
-
 .auth-box {
   width: 300px;
   height: auto;
@@ -338,22 +332,18 @@ nav a {
   -moz-box-shadow: 7px 6px 36px -15px rgba(109, 109, 151, 0.4);
   box-shadow: 7px 6px 36px -15px rgba(109, 109, 151, 0.4);
 }
-
 .auth-form {
   display: flex;
   flex-direction: column;
 }
-
 .auth-form div {
   width: 250px;
   height: 35px;
   padding: 10px;
 }
-
 .auth-form a {
   text-decoration: none;
 }
-
 .auth-form input {
   width: 100%;
   height: 100%;
@@ -363,7 +353,6 @@ nav a {
   text-align: center;
   padding: 0;
 }
-
 .auth-btn {
   width: 100%;
   height: 100%;
@@ -374,11 +363,9 @@ nav a {
   background-color: var(--sunrise);
   padding: 0;
 }
-
 .google-btn {
   background-color: var(--sky);
 }
-
 /* HOME */
 /* .parallax {
   background-image: url("https://wallpaperplay.com/walls/full/6/0/0/60353.jpg");
@@ -388,9 +375,8 @@ nav a {
   background-repeat: no-repeat;
   background-size: cover;
 } */
-
 .home-container {
-  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/client/public/img/bike4.jpeg?raw=true");
+  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/server-code/client/public/img/bike4.jpeg?raw=true");
   height: 70vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -399,11 +385,9 @@ nav a {
   justify-content: flex-start;
   align-items: flex-start;
 }
-
 .phone {
   height: 600px;
 }
-
 .main {
   height: 50%;
   width: 40%;
@@ -415,7 +399,6 @@ nav a {
   padding: 1%;
   border-radius: 7px;
 }
-
 .mainphone {
   height: 50%;
   width: 40%;
@@ -425,24 +408,19 @@ nav a {
   padding: 1%;
   border-radius: 7px;
 }
-
 .main h1 {
   font-size: 34px;
   font-weight: 300;
 }
-
 .main span {
   font-weight: bolder;
 }
-
 .intro {
   text-align: left;
 }
-
 .intro p {
   font-size: 24px;
 }
-
 .home-btns-wrapper {
   display: flex;
   justify-content: space-evenly;
@@ -450,7 +428,6 @@ nav a {
   margin-top: 6%;
   height: 10%;
 }
-
 .home-btn {
   width: 230px;
   height: 45px;
@@ -462,33 +439,16 @@ nav a {
   padding: 0;
   margin: 0;
 }
-
 .home-btns a {
   text-decoration: none;
 }
-
 /* PROFILE */
-
-.profile-container {
-  display: flex;
-}
-
-.info-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
 .image-wrapper {
 }
-
-.profile-img {
-  width: 50%;
+.profile-info-wrapper {
 }
-
-.trips-wrapper {
-  display: flex;
+.my-trips-wrapper {
 }
-
 /* .timeline {
   border-left: @line solid @color-primary;
   border-bottom-right-radius: @radius;
@@ -506,39 +466,33 @@ nav a {
   text-align: left;  
   font-weight: 100;  
   max-width: 30%; 
-  
   h1 {
    font-family: @font-title;
    letter-spacing: 1.5px;
    font-weight: 100;
    font-size: 1.4em;    
   }
-  
   h2, h3 {
    font-family: @font-title;
    letter-spacing: 1.5px;
    font-weight: 400;
    font-size: 1.4em;
   }
-  
   .event {
     border-bottom: 1px dashed fade(@color-light, 10%);
     padding-bottom: (@spacing * 0.5);
     margin-bottom: @spacing;  
     position: relative;
-
     &:last-of-type { 
       padding-bottom: 0;
       margin-bottom: 0; 
       border: none;      
     }
-
     &:before, &:after {
       position: absolute;
       display: block;
       top: 0;
     }
-
     &:before {
       left: (((@date * 0.6) + @spacing + @line + @dot + (@dotborder * 2)) * 1.5) * -1;    
       color: fade(@color-light, 40%);    
@@ -549,7 +503,6 @@ nav a {
       min-width: @date;
       font-family: @font-title;
     }
-
     &:after {
       box-shadow: 0 0 0 @dotborder fade(@color-primary,100%);    
       left: (@spacing + @line + (@dot * 0.35)) * -1;        

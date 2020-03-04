@@ -2,25 +2,19 @@ import React from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import { Component } from "react";
-
 const TripReview = props => {
   const handleChange = event => {
     props.updateTitle(event.target.value);
   };
-
   //   handleSubmit = event => {
   //     event.preventDefault();
-
   //     // send to api
   //     // response from api
   //     // change state.redirect to true
   //   };
-
   // console.log('trip data here:', this.props.tripData);
-
   const handleSubmit = event => {
     event.preventDefault();
-
     const {
       title,
       origin,
@@ -37,7 +31,6 @@ const TripReview = props => {
       uuid,
       waypoints
     } = props.tripData;
-
     // const id = this.state.match.params.
     axios
       .post("/api/trips/addTrip", {
@@ -60,7 +53,6 @@ const TripReview = props => {
         console.log(response);
       });
   };
-
   const {
     title,
     origin,
@@ -77,15 +69,15 @@ const TripReview = props => {
     uuid,
     waypoints
   } = props.tripData;
-
   // if this.state.redirect --> return <Redirect to="/profile" />
-
   return (
     <div>
       <form className="review-trip" onSubmit={handleSubmit}>
-        <h1>Review your trip</h1>
-        <label htmlFor="title">Trip name</label>
+        <h2>Review your trip</h2>
+        <p className="caption-strong">Trip Name:</p>
+        {/* <label htmlFor="title">Trip name</label> */}
         <input
+          className="input-text"
           id="title"
           name="title"
           value={title}
@@ -94,16 +86,19 @@ const TripReview = props => {
           placeholder="Name your trip"
         />
         <div>
-          <p>Origin: {origin_name}</p>
-          <p>Destination: {destination_name}</p>
-          <p>Duration: {(duration / 60).toFixed(2)} hours</p>
-          <p>Distance: {distance.toFixed(2)} km</p>
+          <p className="caption-strong">Origin:</p>
+          <p>{origin_name}</p>
+          <p className="caption-strong">Destination:</p>
+          <p>{destination_name}</p>
+          <p className="caption-strong">Duration:</p>
+          <p>{(duration / 60).toFixed(2)} hours</p>
+          <p className="caption-strong">Distance:</p>
+          <p>{distance.toFixed(2)} km</p>
           {/* <p>Waypoints: {waypoints}</p> */}
-          <button>Save this trip</button>
+          <button className="button-solid">Save this trip</button>
         </div>
       </form>
     </div>
   );
 };
-
 export default TripReview;
