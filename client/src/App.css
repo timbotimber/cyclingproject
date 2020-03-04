@@ -476,24 +476,43 @@ nav a {
   text-decoration: none;
 }
 /* PROFILE */
-.profile-container {
+.profile-wrapper {
+  width: 35%;
+  height: 100%;
+  position: absolute;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  margin-top: 5%;
+  justify-content: center;
 }
+
 .info-wrapper {
+  width: 60%;
+  height: 75%;
+  padding: 24px 32px;
+  background-color: var(--cloud);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
+
 .image-wrapper {
 }
 .profile-img {
-  width: 50%;
+  width: 60%;
+  clip-path: circle(50% at center);
 }
-.my-trips-wrapper {
+
+.my-trips-headline {
+  width: 85%;
+  height: auto;
+  padding: 18px;
+  margin-right: 24px;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
+
 /* .timeline {
   border-left: @line solid @color-primary;
   border-bottom-right-radius: @radius;
