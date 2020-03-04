@@ -25,6 +25,14 @@ class Profile extends React.Component {
     });
   };
 
+  // showFavorites = id => {
+  //
+  // };
+
+  // showMyTrips = id => {
+  //
+  // };
+
   render() {
     console.log('props', this.props.setUser);
     console.log('user', this.props.user);
@@ -42,9 +50,19 @@ class Profile extends React.Component {
           </div>
         </div>
         <div className="trips-wrapper">
-          <div className="button-wrapper">
-            <button className="my-trips-button">My Trips</button>
-            <button className="my-trips-button">My Favorites</button>
+          <div className="sort-button-wrapper">
+            <button
+              className="sort-button"
+              // onClick={() => this.showMyTrips()}
+            >
+              My Trips
+            </button>
+            <button
+              className="sort-button"
+              // onClick={() => this.showFavorites()}
+            >
+              My Favorites
+            </button>
           </div>
           <TripCard trips={this.state.trips} />
         </div>

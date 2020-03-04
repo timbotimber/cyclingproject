@@ -6,29 +6,26 @@ export default class Home extends Component {
   render() {
     return (
       <div className="home-container">
-        <div className="main">
-          <h1>
-            <span>Sykkel</span>
-          </h1>
-          <div className="intro">
-            <p>Cycling. Really far.</p>
-            <p>What would you like to do?</p>
-          </div>
-          <div className="home-btns-wrapper">
-            <Link to="/plotview">
-              <button className="home-btn">Plan a new Trip</button>
-            </Link>
-            <Link to="/trips">
-              <button className="home-btn">Explore saved Trips</button>
-            </Link>
+        <div className="home-left">
+          <div className="main">
+            <h1>Cycling.</h1>
+            <h1>Really far.</h1>
+            <p className="intro-description">
+              Introducing Sykkel. A social platform for cyclists to discover and
+              plan long-distance cycling trips in and around Europe.
+            </p>
+            <div className="home-btns-wrapper">
+              <Link to="/plotview">
+                <button className="button-solid-dark">Plan a new Trip</button>
+              </Link>
+              <Link to="/trips">
+                <button className="button-solid">Explore saved Trips</button>
+              </Link>
+            </div>
           </div>
         </div>
-        <div className="mainphone">
-          <img
-            className="phone"
-            src="https://github.com/timbotimber/cyclingproject/blob/master/client/public/img/mobile_first.001.png?raw=true"
-            alt="phone"
-          />
+        <div className="home-right">
+          <img src="/img/home-teaser.png" alt="home-teaser" />
         </div>
       </div>
     );

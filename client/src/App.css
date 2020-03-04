@@ -20,6 +20,7 @@ body {
   text-align: center;
   width: 100vw;
   height: 100vh;
+  /* letter-spacing: 0.6px; */
 }
 .content {
   position: absolute;
@@ -29,14 +30,16 @@ body {
 }
 .caption {
   font-size: 12px;
+  letter-spacing: 0.2px;
 }
 .caption-strong {
   font-size: 12px;
   font-weight: bold;
+  letter-spacing: 0.2px;
   /* letter-spacing: 1px; */
 }
 h2 {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Spartan", sans-serif;
   font-weight: 700;
   color: var(--night);
   margin-top: 12px;
@@ -50,10 +53,12 @@ p {
   line-height: 0.4;
 }
 .attribute {
-  color: #1f3349;
+  color: var(--night);
+  font-family: "Spartan", sans-serif;
   font-size: 14px;
   font-weight: bold;
   margin: 0;
+  margin-top: 8px;
 }
 .button-solid {
   height: 44px;
@@ -64,6 +69,20 @@ p {
   font-size: 14px;
   font-weight: bold;
   border: none;
+  letter-spacing: 0.2px;
+}
+.button-solid-dark {
+  height: 44px;
+  min-width: 150px;
+  padding: 0px 24px;
+  border-radius: 6px;
+  background-color: var(--dusk);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  margin-right: 16px;
+  letter-spacing: 0.2px;
 }
 .button-ghost {
   height: 44px;
@@ -76,6 +95,19 @@ p {
   font-weight: bold;
   min-width: 120px;
   margin: 12px 0px;
+  letter-spacing: 0.2px;
+}
+
+.button-pill {
+  height: 36px;
+  border-radius: 18px;
+  border: 2px solid var(--white);
+  background-color: transparent;
+  padding: 0px 16px;
+  color: var(--white);
+  font-size: 12px;
+  font-family: "Spartan", sans-serif;
+  font-weight: 500;
 }
 
 .input-text {
@@ -94,10 +126,6 @@ p {
 .vertical-space {
   height: 8px;
   margin: 0;
-}
-
-.red-text {
-  color: var(--dusk);
 }
 
 /* MAP */
@@ -158,7 +186,7 @@ p {
   color: white;
   z-index: 1 !important;
   padding: 3px 10px;
-  border-radius: 15px;
+  border-radius: 4px;
 }
 .popUp :after {
   content: "\22B3";
@@ -179,24 +207,41 @@ nav a {
   color: var(--white);
   text-decoration: none;
 }
+
+.nav-greeting {
+  width: 33%;
+  color: var(--white);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 32px;
+}
 .logo {
   width: 33%;
-  font-family: "Lobster", sans-serif;
-  font-size: 28px;
-  letter-spacing: 1px;
+  font-family: "Spartan", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  /* letter-spacing: 0.5px; */
   color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .nav-links {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
   width: 33%;
   padding-right: 32px;
 }
 .nav-links a {
+  font-family: "Spartan", sans-serif;
   padding-left: 32px;
   text-decoration: none;
   color: var(--white);
+  font-size: 12px;
+  font-weight: 500;
 }
 /* TRIPS PAGE */
 .wrapper {
@@ -256,13 +301,7 @@ nav a {
   align-content: center;
   margin-left: -8px;
 }
-/* .filter-panel div {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-} */
+
 .filter-panel label {
   color: var(--night);
   display: block;
@@ -292,7 +331,7 @@ nav a {
   text-indent: 12px;
 }
 .search-button {
-  height: 44px;
+  height: 40px;
   width: 100%;
   border-radius: 6px;
   background-color: var(--sunrise);
@@ -301,6 +340,7 @@ nav a {
   font-weight: bold;
   margin: 8px;
   border: none;
+  letter-spacing: 0.2px;
 }
 /* TRIP CARD */
 .trip-card {
@@ -328,7 +368,6 @@ nav a {
 }
 .primary-content {
   text-align: left;
-  line-height: 0.6;
   margin-bottom: 16px;
 }
 .secondary-content {
@@ -417,11 +456,11 @@ nav a {
   background-size: cover;
 } */
 .home-container {
-  background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/client/public/img/bike4.jpeg?raw=true");
-  height: 70vh;
-  background-position: center;
+  /* background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/client/public/img/bike4.jpeg?raw=true"); */
+  height: 100vh;
+  /* background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -431,45 +470,63 @@ nav a {
 }
 .main {
   height: 50%;
-  width: 40%;
-  margin-left: 7%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  width: 500px;
   color: #1f3349;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 1%;
-  border-radius: 7px;
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  text-align: left;
 }
-.mainphone {
-  height: 50%;
-  width: 40%;
-  margin-left: 7%;
-  margin-top: 2%;
+
+.home-left {
+  height: 100vh;
+  width: 35%;
+  background-color: var(--white);
+  z-index: 1;
+}
+
+.home-right {
+  height: 100vh;
+  width: 65%;
+  background-color: #d3d3df;
   color: #1f3349;
-  padding: 1%;
-  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.home-right > img {
+  margin: 5% 0px 0px 7%;
+  height: 80%;
+  width: auto;
 }
 .main h1 {
-  font-size: 34px;
-  font-weight: 300;
+  font-family: "Spartan", sans-serif;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 0.7;
+  letter-spacing: 2px;
 }
 .main span {
   font-weight: bolder;
 }
-.intro {
-  text-align: left;
-}
-.intro p {
-  font-size: 24px;
+
+.intro-description {
+  font-size: 16px;
+  line-height: 1.5;
+  width: 275px;
+  letter-spacing: 0.2px;
 }
 .home-btns-wrapper {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 6%;
+  margin-top: 10%;
   height: 10%;
+  width: 100%;
 }
-.home-btn {
+
+/* .home-btn {
   width: 230px;
   height: 45px;
   border: 1px solid var(--cloud);
@@ -482,10 +539,10 @@ nav a {
 }
 .home-btns a {
   text-decoration: none;
-}
+} */
 /* PROFILE */
 .profile-wrapper {
-  width: 35%;
+  width: 38%;
   height: 100%;
   position: absolute;
   display: flex;
@@ -493,7 +550,7 @@ nav a {
 }
 
 .info-wrapper {
-  width: 60%;
+  width: 57%;
   height: 75%;
   padding: 24px 32px;
   background-color: var(--cloud);
@@ -509,26 +566,26 @@ nav a {
   clip-path: circle(50% at center);
 }
 
-.button-wrapper {
+.sort-button-wrapper {
   width: 100%;
   height: auto;
-  padding: 18px;
+  padding: 0 18px 18px 18px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.my-trips-button {
-  width: 15%;
+.sort-button {
+  min-width: 120px;
   height: 44px;
   padding: 0px 10px;
-  margin-right: 10px;
+  margin: 0px 5px;
+  border: 2px solid var(--dusk);
   border-radius: 6px;
-  background-color: var(--sunrise);
-  color: #fff;
+  background-color: var(--white);
+  color: var(--dusk);
   font-size: 14px;
   font-weight: bold;
-  border: none;
 }
 
 /* .timeline {
