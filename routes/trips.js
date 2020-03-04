@@ -89,16 +89,18 @@ router.post("/updatefaves/:id", (req, res, next) => {
         user._id,
         { $pull: { liked_trips: tripId } },
         { new: true }
-      ).then(res => {
-        console.log(res);
+      ).then(result => {
+        console.log("RESULT", result);
+        res.json(result);
       });
     } else {
       User.findByIdAndUpdate(
         { _id: req.user._id },
         { $addToSet: { liked_trips: tripId } },
         { new: true }
-      ).then(res => {
-        console.log(res);
+      ).then(result => {
+        console.log("MARKUS", result);
+        res.json(result);
       });
     }
   });
