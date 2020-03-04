@@ -41,7 +41,15 @@ export default class TripCard extends React.Component {
 
                 <div>
                   <p className="caption">Elevation gain</p>
-                  <p className="attribute">833 m</p>
+                  <p className="attribute">
+                    {Math.floor(Math.random() * (400 - 20) + 20)}m
+                  </p>
+                </div>
+                <div>
+                  <p className="caption">favourite this trip</p>
+                  <p className="attribute">
+                    <button>click to favourite</button>
+                  </p>
                 </div>
               </div>
             </div>
