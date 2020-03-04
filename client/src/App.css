@@ -38,7 +38,7 @@ body {
 h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  color: #1f3349;
+  color: var(--night);
   margin-top: 12px;
   font-size: 20px;
 }
@@ -89,6 +89,15 @@ p {
 .divider {
   border-bottom: 1px solid var(--cloud);
   margin: 24px 8px 24px 0px;
+}
+
+.vertical-space {
+  height: 8px;
+  margin: 0;
+}
+
+.red-text {
+  color: var(--dusk);
 }
 
 /* MAP */
@@ -296,7 +305,7 @@ nav a {
 }
 /* TRIP CARD */
 .trip-card {
-  width: 85%;
+  width: 75%;
   height: auto;
   padding: 18px;
   margin-bottom: 24px;

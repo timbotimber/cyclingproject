@@ -74,8 +74,9 @@ const TripReview = props => {
     <div>
       <form className="review-trip" onSubmit={handleSubmit}>
         <h2>Review your trip</h2>
-        <br />
+        <div className="vertical-space"></div>
         <p className="caption-strong">Trip Name:</p>
+
         {/* <label htmlFor="title">Trip name</label> */}
         <input
           className="input-text"
