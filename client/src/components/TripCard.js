@@ -21,7 +21,7 @@ export default class TripCard extends React.Component {
       // let faveChecker
       // this.checkFave();
       this.setState({
-        userInfo: response.data[0].liked_trips
+        userInfo: response.data
       });
     });
   };

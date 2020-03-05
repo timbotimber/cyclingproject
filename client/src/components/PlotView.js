@@ -348,7 +348,7 @@ export default class PlotView extends React.Component {
         </div>
       );
     } else {
-      text = "Review Trip";
+      text = "Check out your Details!";
     }
     return (
       <div>

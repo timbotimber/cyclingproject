@@ -85,13 +85,15 @@ p {
   letter-spacing: 0.2px;
 }
 .button-ghost {
-  height: 44px;
+  height: 100px;
+  width: 250px;
+  font-size: large;
   padding: 0px 24px;
-  border: 2px solid var(--dusk);
+  border: 2px solid #fff;
   border-radius: 6px;
-  background-color: var(--white);
-  color: var(--dusk);
-  font-size: 14px;
+  background-color: var(--sunrise);
+  color: #fff;
+  font-size: 25px;
   font-weight: bold;
   min-width: 120px;
   margin: 12px 0px;
