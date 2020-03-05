@@ -101,12 +101,12 @@ export default class Signup extends Component {
             <div>
               <a href={`${process.env.REACT_APP_SERVER_URL}/api/auth/google`}>
                 {" "}
-                <button className="auth-btn google-btn">
+                <button className="auth-btn sort-button">
                   Sign up with Google
                 </button>
               </a>
             </div>
-            <p>
+            <p id="auth-line">
               Already have an account?{" "}
               <Link className="auth-links" to="/login">
                 Login

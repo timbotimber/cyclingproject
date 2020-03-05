@@ -10,6 +10,7 @@ import Trips from "./components/Trips";
 import Profile from "./components/Profile";
 import TripDetail from "./components/TripDetail";
 import Home from "./components/Home";
+import ElevationChart from "./components/ElevationChart";
 // import Test from './components/Test';
 
 // testing out context:
@@ -66,6 +67,7 @@ class App extends React.Component {
             )}
           />
           <Route exact path="/trips" component={Trips} />
+          <Route path="/chart/:id" component={ElevationChart} />
           <Route path="/trip/:id" component={TripDetail} />
           <Route
             path="/profile"

@@ -1,7 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import { Link, Redirect, withRouter } from 'react-router-dom';
-import { Component } from 'react';
+import React from "react";
+import axios from "axios";
+import { Link, Redirect, withRouter } from "react-router-dom";
+import { Component } from "react";
 const TripReview = props => {
   const handleChange = event => {
     props.updateTitle(event.target.value);
@@ -25,11 +25,11 @@ const TripReview = props => {
       elevation_gain,
       coordinates,
       uuid,
-      waypoints,
+      waypoints
     } = props.tripData;
     // const id = this.state.match.params.
     axios
-      .post('/api/trips/addTrip', {
+      .post("/api/trips/addTrip", {
         title,
         origin,
         origin_name,
@@ -45,11 +45,11 @@ const TripReview = props => {
         elevation_gain,
         coordinates,
         uuid,
-        waypoints,
+        waypoints
       })
       .then(response => {
         console.log(response);
-        props.history.push('/profile');
+        props.history.push("/profile");
       });
   };
   const {
@@ -68,7 +68,7 @@ const TripReview = props => {
     elevation_gain,
     coordinates,
     uuid,
-    waypoints,
+    waypoints
   } = props.tripData;
 
   return (
