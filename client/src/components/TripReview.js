@@ -1,7 +1,7 @@
-import React from "react";
-import axios from "axios";
-import { Link, Redirect } from "react-router-dom";
-import { Component } from "react";
+import React from 'react';
+import axios from 'axios';
+import { Link, Redirect } from 'react-router-dom';
+import { Component } from 'react';
 const TripReview = props => {
   const handleChange = event => {
     props.updateTitle(event.target.value);
@@ -29,11 +29,11 @@ const TripReview = props => {
       difficulty,
       coordinates,
       uuid,
-      waypoints
+      waypoints,
     } = props.tripData;
     // const id = this.state.match.params.
     axios
-      .post("/api/trips/addTrip", {
+      .post('/api/trips/addTrip', {
         title,
         origin,
         origin_name,
@@ -47,7 +47,7 @@ const TripReview = props => {
         difficulty,
         coordinates,
         uuid,
-        waypoints
+        waypoints,
       })
       .then(response => {
         console.log(response);
@@ -67,9 +67,15 @@ const TripReview = props => {
     difficulty,
     coordinates,
     uuid,
-    waypoints
+    waypoints,
   } = props.tripData;
+
   // if this.state.redirect --> return <Redirect to="/profile" />
+
+  const renderRedirect = () => {
+    return <Redirect to="/profile" />;
+  };
+
   return (
     <div>
       <form className="review-trip" onSubmit={handleSubmit}>
@@ -107,8 +113,9 @@ const TripReview = props => {
           </div>
           <br />
           {/* <p>Waypoints: {waypoints}</p> */}
-
+          {/* {renderRedirect()} */}
           <button className="button-solid">Save this trip</button>
+          {renderRedirect()}
         </div>
       </form>
     </div>

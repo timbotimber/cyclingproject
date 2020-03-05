@@ -4,33 +4,47 @@ import { Link } from "react-router-dom";
 
 export default class TripCard extends React.Component {
   state = {
-    liked_trips: []
+    userInfo: [],
+    fave: true
   };
+
+  // checkFave = () => {
+  //   this.state.userInfo.includes(trip._id) ? true : false;
+  // };
 
   componentDidMount() {
     this.getData();
-    // this.tripsFilter();
   }
   getData = () => {
     axios.get("/api/auth/likedtrips").then(response => {
+      console.log("this is the response.data", response.data);
+      // let faveChecker
+      // this.checkFave();
       this.setState({
-        liked_trips: response.data
+        userInfo: response.data
       });
-      console.log("testee user", response.data);
     });
   };
 
   faveTrip = id => {
-    console.log(id, "IDDDD");
+    console.log("Markus");
     axios.post(`/api/trips/updatefaves/${id}`).then(response => {
-      this.setState({
-        posts: response.data
-      });
+      console.log("Heldrup", response.data.liked_trips);
+
+      this.setState(
+        {
+          // posts: response.data,
+          userInfo: response.data.liked_trips
+        },
+        () => {
+          console.log(this.state.userInfo);
+        }
+      );
     });
   };
 
   render() {
-    console.log("these are our user's props", this.props.user);
+    console.log("is this the liked trip?", this.state);
 
     return (
       <div className="trips-list">
@@ -38,14 +52,38 @@ export default class TripCard extends React.Component {
           return (
             <div className="trip-card">
               <div className="primary-content">
-                <h2>
-                  <Link to={`/trip/${trip._id}`}>{trip.title}</Link>
-                </h2>
-                <p>From: {trip.origin_name}</p>
-                <p>To: {trip.destination_name}</p>
-                {/* <p>Duration: {(this.props.duration / 60).toFixed(2)} hours</p> */}
+                <div>
+                  <h2>
+                    <Link to={`/trip/${trip._id}`}>{trip.title}</Link>
+                  </h2>
+                  <p>From: {trip.origin_name}</p>
+                  <p>To: {trip.destination_name}</p>
+                  {/* <p>Duration: {(this.props.duration / 60).toFixed(2)} hours</p> */}
+                </div>
+                <div className="favebutton">
+                  <div onClick={() => this.faveTrip(trip._id, trip)}>
+                    {this.state.userInfo.includes(trip._id) ? (
+                      <>
+                        <p className="caption">unfavourite this route</p>
+                        <img
+                          className="heart"
+                          src="./img/heart.png"
+                          alt="heart"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <p className="caption">favourite this route</p>
+                        <img
+                          className="heart"
+                          src="./img/empty_heart.png"
+                          alt="empty heart"
+                        />
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
-
               <div className="secondary-content">
                 <div>
                   <p className="caption">Difficulty</p>
@@ -68,23 +106,7 @@ export default class TripCard extends React.Component {
 
                 <div>
                   <p className="caption">Elevation gain</p>
-                  <p className="attribute">
-                    {Math.floor(Math.random() * (400 - 20) + 20)}m
-                  </p>
-                </div>
-                <div>
-                  <p className="caption">favourite this trip</p>
-                  <p className="attribute">
-                    <button onClick={() => this.faveTrip(trip._id)}>
-                      click to favourite
-                    </button>
-                  </p>
-                  {/* <p className="caption">test</p>
-                  <p className="attribute">
-                    <button onClick={() => this.getData()}>
-                      click to test
-                    </button>
-                  </p> */}
+                  <p className="attribute">100m</p>
                 </div>
               </div>
             </div>

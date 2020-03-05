@@ -168,7 +168,7 @@ export default class PlotView extends React.Component {
           "line-cap": "round"
         },
         paint: {
-          "line-color": "#3b9ddd",
+          "line-color": "#ff6962",
           "line-width": 8,
           "line-opacity": 0.8
         }
@@ -235,7 +235,7 @@ export default class PlotView extends React.Component {
             "line-join": "round"
           },
           paint: {
-            "line-color": "#48c1fc", // Color: "sky"
+            "line-color": "#ff6962", // Color: "sky"
             "line-dasharray": [0.2, 2],
             "line-width": 4,
             "line-opacity": 1.0
@@ -268,7 +268,7 @@ export default class PlotView extends React.Component {
           ],
           paint: {
             "circle-radius": 6,
-            "circle-color": "#3b9ddd"
+            "circle-color": "#ff6962"
           }
         }
       ]
@@ -386,7 +386,7 @@ export default class PlotView extends React.Component {
         </div>
       );
     } else {
-      text = "Review Trip";
+      text = "Check out your Details!";
     }
     return (
       <div>
