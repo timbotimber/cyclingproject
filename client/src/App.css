@@ -84,6 +84,13 @@ p {
   margin-right: 16px;
   letter-spacing: 0.2px;
 }
+
+/* .button-solid-dark:hover {
+  background-color: var(--white);
+  color: var(--dusk);
+  border: 2px solid var(--dusk);
+} */
+
 .button-ghost {
   height: 44px;
   padding: 0px 24px;
@@ -566,6 +573,12 @@ nav a {
   clip-path: circle(50% at center);
 }
 
+/* .avatar-img {
+  width: 60%;
+  clip-path: circle(50% at center);
+
+} */
+
 .sort-button-wrapper {
   width: 100%;
   height: auto;
@@ -586,6 +599,16 @@ nav a {
   color: var(--dusk);
   font-size: 14px;
   font-weight: bold;
+}
+
+.sort-button:hover {
+  background-color: var(--dusk);
+  color: var(--white);
+}
+
+.sort-button:active {
+  background-color: var(--sunrise);
+  border: 2px solid var(--sunrise);
 }
 
 @media screen and (max-width: 600px) {
