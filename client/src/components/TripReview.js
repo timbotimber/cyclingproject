@@ -27,6 +27,8 @@ const TripReview = props => {
       distance,
       duration,
       difficulty,
+      elevations,
+      elevation_gain,
       coordinates,
       uuid,
       waypoints
@@ -45,6 +47,8 @@ const TripReview = props => {
         distance,
         duration,
         difficulty,
+        elevations,
+        elevation_gain,
         coordinates,
         uuid,
         waypoints
@@ -65,6 +69,8 @@ const TripReview = props => {
     distance,
     duration,
     difficulty,
+    elevations,
+    elevation_gain,
     coordinates,
     uuid,
     waypoints
@@ -110,12 +116,16 @@ const TripReview = props => {
               <p className="caption-strong">Distance:</p>
               <p>{distance.toFixed(2)} km</p>
             </div>
+            <div>
+              <p className="caption-strong">Elevation gain:</p>
+              <p>{elevation_gain} m</p>
+            </div>
           </div>
           <br />
           {/* <p>Waypoints: {waypoints}</p> */}
           {/* {renderRedirect()} */}
-          <button className="button-solid">Save this trip</button>
-          {/* {renderRedirect()} */}
+          {/* <button className="button-solid">Save this trip</button>
+          {renderRedirect()} */}
         </div>
       </form>
     </div>
