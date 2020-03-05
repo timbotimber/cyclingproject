@@ -224,10 +224,10 @@ nav a {
 }
 .logo {
   width: 33%;
-  font-family: "Spartan", sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  /* letter-spacing: 0.5px; */
+  font-family: "Bitter", sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 0.7px;
   color: var(--white);
   display: flex;
   align-items: center;
