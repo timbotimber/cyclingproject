@@ -115,7 +115,7 @@ const TripReview = props => {
           {/* <p>Waypoints: {waypoints}</p> */}
           {/* {renderRedirect()} */}
           <button className="button-solid">Save this trip</button>
-          {renderRedirect()}
+          {/* {renderRedirect()} */}
         </div>
       </form>
     </div>

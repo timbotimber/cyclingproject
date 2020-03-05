@@ -65,7 +65,7 @@ p {
   padding: 0px 24px;
   border-radius: 6px;
   background-color: var(--sunrise);
-  color: #fff;
+  color: var(--white);
   font-size: 14px;
   font-weight: bold;
   border: none;
@@ -92,15 +92,13 @@ p {
 } */
 
 .button-ghost {
-  height: 100px;
-  width: 250px;
-  font-size: large;
+  height: 44px;
+  font-size: 14px;
   padding: 0px 24px;
-  border: 2px solid #fff;
+  border: 2px solid var(--dusk);
   border-radius: 6px;
-  background-color: var(--sunrise);
-  color: #fff;
-  font-size: 25px;
+  background-color: var(--white);
+  color: var(--dusk);
   font-weight: bold;
   min-width: 120px;
   margin: 12px 0px;
@@ -150,7 +148,7 @@ p {
   display: inline-block;
   position: absolute;
   width: 20vw;
-  top: 0px;
+  top: 10px;
   left: 0px;
   left: 14px;
   margin: 12px;
@@ -164,7 +162,7 @@ p {
   position: absolute;
   width: 25vw;
   padding: 12px 24px 24px 24px;
-  top: 10px;
+  top: 0px;
   left: 0px;
   background-color: var(--white);
   color: var(--night);

@@ -90,7 +90,7 @@ export default class PlotView extends React.Component {
       // let distance = jsonResponse.routes[0].distance * 0.001;
       // let duration = jsonResponse.routes[0].duration / 60;
       console.log(jsonResponse);
-      console.log('TESTING THE STATE AGAIN', this.state);
+      console.log("TESTING THE STATE AGAIN", this.state);
 
       // document.getElementById('calculated-line').innerHTML =
       // 'Distance: ' + distance.toF + ' km<br>Duration: ' + duration.toF + ' minutes';
@@ -229,11 +229,11 @@ export default class PlotView extends React.Component {
 
     map.on("load", () => {
       // console.log("On Load coords", userCoords);
-      console.log('props', this.props);
+      console.log("props", this.props);
       let userCoords = this.props.coordinates.map(element => {
         return element.reverse();
       });
-      console.log('hacked userCoords', userCoords);
+      console.log("hacked userCoords", userCoords);
       map.addLayer({
         id: "layer1",
         type: "line",
@@ -253,10 +253,10 @@ export default class PlotView extends React.Component {
           "line-cap": "round"
         },
         paint: {
-          'line-color': '#ff6962',
-          'line-width': 8,
+          "line-color": "#ff6962",
+          "line-width": 8,
           "line-opacity": 0.8
-        },
+        }
       });
 
       // map.addSource("route", {
@@ -390,29 +390,30 @@ export default class PlotView extends React.Component {
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
-      text = 'Go Back';
+      text = "Go Back";
       tripReviewCard = (
         <div className="sidebarReview">
           <TripReview tripData={this.state} updateTitle={this.updateTitle} />
         </div>
       );
     } else {
-      text = 'Review Trip';
+      text = "Review Trip";
     }
     return (
       <div>
         {this.state.distance && (
           <div className="sidebar">
             {tripReviewCard}
-            
-              <button className="button-ghost" onClick={this.goToReviewTrip}>
-                {text}
-              </button>{' '}
+            <button className="button-ghost" onClick={this.goToReviewTrip}>
+              {text}
+            </button>{" "}
           </div>
         )}
         {!this.state.distance && (
           <div className="popUp">
-            <p className="caption-strong">Plot out your trip and press enter </p>
+            <p className="caption-strong">
+              Plot out your trip and press enter{" "}
+            </p>
           </div>
         )}
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />
