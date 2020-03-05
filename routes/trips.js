@@ -1,35 +1,35 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const User = require("../models/User");
-const Trip = require("../models/Trip");
+const User = require('../models/User');
+const Trip = require('../models/Trip');
 
-router.get("/addTrip", (req, res) => {
+router.get('/addTrip', (req, res) => {
   Trip.find()
     .then(trip => {
       res.json(trip);
     })
     .catch(err => {
       res.status(500).json({
-        message: err.message
+        message: err.message,
       });
     });
 });
 
-router.get("/user", (req, res) => {
+router.get('/user', (req, res) => {
   Trip.find({ user: req.user._id })
-    .then(trip => {
-      res.json(trip);
+    .then(trips => {
+      res.json(trips);
     })
     .catch(err => {
       res.status(500).json({
-        message: err.message
+        message: err.message,
       });
     });
 });
 
-router.get("/trip/:id", (req, res) => {
+router.get('/trip/:id', (req, res) => {
   const tripId = req.params.id;
-  console.log("hi", req);
+  console.log('hi', req);
 
   Trip.findById(tripId)
     .then(trip => {
@@ -37,12 +37,12 @@ router.get("/trip/:id", (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        message: err.message
+        message: err.message,
       });
     });
 });
 
-router.post("/addTrip", (req, res, next) => {
+router.post('/addTrip', (req, res, next) => {
   const {
     title,
     uuid,
@@ -55,7 +55,7 @@ router.post("/addTrip", (req, res, next) => {
     destination,
     destination_name,
     difficulty,
-    user
+    user,
   } = req.body;
   Trip.create({
     title,
@@ -69,7 +69,7 @@ router.post("/addTrip", (req, res, next) => {
     destination,
     destination_name,
     difficulty,
-    user: req.user._id
+    user: req.user._id,
   }).then(postTrip => {
     res.json(postTrip);
   });
@@ -80,30 +80,39 @@ router.post("/addTrip", (req, res, next) => {
 //   console.log("req.body", req.body);
 // });
 
-router.post("/updatefaves/:id", (req, res, next) => {
+router.post('/updatefaves/:id', (req, res, next) => {
   const tripId = req.params.id;
-  console.log(tripId, "TRIPPPPID ");
+  console.log(tripId, 'TRIPPPPID ');
   User.findById({ _id: req.user._id }).then(user => {
     if (user.liked_trips.includes(tripId)) {
-      User.findByIdAndUpdate(
-        user._id,
-        { $pull: { liked_trips: tripId } },
-        { new: true }
-      ).then(result => {
-        console.log("RESULT", result);
+      User.findByIdAndUpdate(user._id, { $pull: { liked_trips: tripId } }, { new: true }).then(result => {
+        console.log('RESULT', result);
         res.json(result);
       });
     } else {
-      User.findByIdAndUpdate(
-        { _id: req.user._id },
-        { $addToSet: { liked_trips: tripId } },
-        { new: true }
-      ).then(result => {
-        console.log("MARKUS", result);
-        res.json(result);
-      });
+      User.findByIdAndUpdate({ _id: req.user._id }, { $addToSet: { liked_trips: tripId } }, { new: true }).then(
+        result => {
+          console.log('MARKUS', result);
+          res.json(result);
+        }
+      );
     }
   });
+});
+
+router.get('/trips/likedtrips', (req, res) => {
+  console.log('DALINA', req.liked_trips);
+  User.findById(req.user._id)
+    .populate('liked_trips')
+    .then(user => {
+      console.log(user);
+      res.json(user.liked_trips);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
 });
 
 module.exports = router;

@@ -1,22 +1,23 @@
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const User = require("../models/User");
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const User = require('../models/User');
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.SERVER_URL}/api/auth/google/callback`
+      callbackURL: `${process.env.SERVER_URL}/api/auth/google/callback`,
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log("Google account details:", profile);
-      console.log("this is supposed to be the photo?", profile.photos[0].value);
+      console.log('Google account details:', profile);
+      console.log('this is supposed to be the photo?', profile.photos[0].value);
       console.log(Object.keys(profile));
 
-      User.findOne({ googleID: profile.id }).then(found => {
+      User.findOne({ googleId: profile.id }).then(found => {
+        console.log(found, 'FOUNDDDD');
         if (found) {
-          // console.log(found);
+          console.log('FOUND AN EXISTING USER', found);
           done(null, found); // Found is referring to the user
         } else {
           User.create({
@@ -25,7 +26,7 @@ passport.use(
             lastName: profile.name.familyName,
             displayName: profile.displayName,
             profilePic: profile.photos[0].value,
-            googleId: profile.id
+            googleId: profile.id,
           }).then(createdUser => {
             done(null, createdUser);
           });

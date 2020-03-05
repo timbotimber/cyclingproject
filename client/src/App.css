@@ -92,13 +92,15 @@ p {
 } */
 
 .button-ghost {
-  height: 44px;
+  height: 100px;
+  width: 250px;
+  font-size: large;
   padding: 0px 24px;
-  border: 2px solid var(--dusk);
+  border: 2px solid #fff;
   border-radius: 6px;
-  background-color: var(--white);
-  color: var(--dusk);
-  font-size: 14px;
+  background-color: var(--sunrise);
+  color: #fff;
+  font-size: 25px;
   font-weight: bold;
   min-width: 120px;
   margin: 12px 0px;
@@ -374,6 +376,7 @@ nav a {
   height: 200px;
 }
 .primary-content {
+  display: flex;
   text-align: left;
   margin-bottom: 16px;
 }
@@ -393,6 +396,15 @@ nav a {
   align-items: flex-start;
   text-align: left;
 }
+
+.favebutton {
+  justify-content: space-evenly;
+}
+
+.heart {
+  width: 50px;
+}
+
 .trips-list {
   width: 100%;
   margin-bottom: 150px;

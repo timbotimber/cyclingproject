@@ -21,7 +21,7 @@ export default class TripCard extends React.Component {
       // let faveChecker
       // this.checkFave();
       this.setState({
-        userInfo: response.data[0].liked_trips
+        userInfo: response.data
       });
     });
   };
@@ -52,14 +52,38 @@ export default class TripCard extends React.Component {
           return (
             <div className="trip-card">
               <div className="primary-content">
-                <h2>
-                  <Link to={`/trip/${trip._id}`}>{trip.title}</Link>
-                </h2>
-                <p>From: {trip.origin_name}</p>
-                <p>To: {trip.destination_name}</p>
-                {/* <p>Duration: {(this.props.duration / 60).toFixed(2)} hours</p> */}
+                <div>
+                  <h2>
+                    <Link to={`/trip/${trip._id}`}>{trip.title}</Link>
+                  </h2>
+                  <p>From: {trip.origin_name}</p>
+                  <p>To: {trip.destination_name}</p>
+                  {/* <p>Duration: {(this.props.duration / 60).toFixed(2)} hours</p> */}
+                </div>
+                <div className="favebutton">
+                  <div onClick={() => this.faveTrip(trip._id, trip)}>
+                    {this.state.userInfo.includes(trip._id) ? (
+                      <>
+                        <p className="caption">unfavourite this route</p>
+                        <img
+                          className="heart"
+                          src="./img/heart.png"
+                          alt="heart"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <p className="caption">favourite this route</p>
+                        <img
+                          className="heart"
+                          src="./img/empty_heart.png"
+                          alt="empty heart"
+                        />
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
-
               <div className="secondary-content">
                 <div>
                   <p className="caption">Difficulty</p>
@@ -83,24 +107,6 @@ export default class TripCard extends React.Component {
                 <div>
                   <p className="caption">Elevation gain</p>
                   <p className="attribute">100m</p>
-                </div>
-                <div>
-                  <p className="caption">favourite</p>
-                  <p className="attribute">
-                    <button onClick={() => this.faveTrip(trip._id, trip)}>
-                      {this.state.userInfo.includes(trip._id)
-                        ? "Unfave"
-                        : "fave"}
-                    </button>
-                  </p>
-                  {/* <p className="caption">test</p>
-                  <p className="attribute">
-                    <button onClick={() => this.getData()}>
-
-
-
-                    </button>
-                  </p> */}
                 </div>
               </div>
             </div>
