@@ -238,7 +238,7 @@ export default class PlotView extends React.Component {
           'line-cap': 'round',
         },
         paint: {
-          'line-color': '#888',
+          'line-color': '#ff6962',
           'line-width': 8,
         },
       });
@@ -384,9 +384,10 @@ export default class PlotView extends React.Component {
         {this.state.distance && (
           <div className="sidebar">
             {tripReviewCard}
-            <button className="button-ghost" onClick={this.goToReviewTrip}>
-              {text}
-            </button>
+            
+              <button className="button-ghost" onClick={this.goToReviewTrip}>
+                {text}
+              </button>{' '}
           </div>
         )}
         {!this.state.distance && (

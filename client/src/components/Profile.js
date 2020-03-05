@@ -25,12 +25,17 @@ class Profile extends React.Component {
     });
   };
 
-  // showFavorites = id => {
-  //
-  // };
-
-  // showMyTrips = id => {
-  //
+  // showFavorites = () => {
+  //   axios.get('/api/auth/likedtrips').then(response => {
+  //     this.setState(
+  //       {
+  //         trips: response.data,
+  //       },
+  //       () => {
+  //         console.log('Marcel is testing this shiz', this.state.trips);
+  //       }
+  //     );
+  //   });
   // };
 
   render() {
@@ -57,10 +62,7 @@ class Profile extends React.Component {
             >
               My Trips
             </button>
-            <button
-              className="sort-button"
-              // onClick={() => this.showFavorites()}
-            >
+            <button className="sort-button" onClick={this.showFavorites()}>
               My Favorites
             </button>
           </div>

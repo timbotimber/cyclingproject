@@ -27,18 +27,6 @@ router.get('/user', (req, res) => {
     });
 });
 
-router.get('/gid', (req, res) => {
-  Trip.find({ user: req.googleId })
-    .then(trip => {
-      res.json(trip);
-    })
-    .catch(err => {
-      res.status(500).json({
-        message: err.message,
-      });
-    });
-});
-
 router.get('/trip/:id', (req, res) => {
   const tripId = req.params.id;
   console.log('hi', req);
@@ -92,26 +80,22 @@ router.post('/addTrip', (req, res, next) => {
 //   console.log("req.body", req.body);
 // });
 
-router.post("/updatefaves/:id", (req, res, next) => {
+router.post('/updatefaves/:id', (req, res, next) => {
   const tripId = req.params.id;
-  console.log(tripId, "TRIPPPPID ");
+  console.log(tripId, 'TRIPPPPID ');
   User.findById({ _id: req.user._id }).then(user => {
     if (user.liked_trips.includes(tripId)) {
-      User.findByIdAndUpdate(
-        user._id,
-        { $pull: { liked_trips: tripId } },
-        { new: true }
-      ).then(res => {
-        console.log(res);
+      User.findByIdAndUpdate(user._id, { $pull: { liked_trips: tripId } }, { new: true }).then(result => {
+        console.log('RESULT', result);
+        res.json(result);
       });
     } else {
-      User.findByIdAndUpdate(
-        { _id: req.user._id },
-        { $addToSet: { liked_trips: tripId } },
-        { new: true }
-      ).then(res => {
-        console.log(res);
-      });
+      User.findByIdAndUpdate({ _id: req.user._id }, { $addToSet: { liked_trips: tripId } }, { new: true }).then(
+        result => {
+          console.log('MARKUS', result);
+          res.json(result);
+        }
+      );
     }
   });
 });

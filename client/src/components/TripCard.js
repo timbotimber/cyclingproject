@@ -4,33 +4,47 @@ import { Link } from "react-router-dom";
 
 export default class TripCard extends React.Component {
   state = {
-    liked_trips: []
+    userInfo: [],
+    fave: true
   };
+
+  // checkFave = () => {
+  //   this.state.userInfo.includes(trip._id) ? true : false;
+  // };
 
   componentDidMount() {
     this.getData();
-    // this.tripsFilter();
   }
   getData = () => {
     axios.get("/api/auth/likedtrips").then(response => {
+      console.log("this is the response.data", response.data);
+      // let faveChecker
+      // this.checkFave();
       this.setState({
-        liked_trips: response.data
+        userInfo: response.data[0].liked_trips
       });
-      console.log("testee user", response.data);
     });
   };
 
   faveTrip = id => {
-    console.log(id, "IDDDD");
+    console.log("Markus");
     axios.post(`/api/trips/updatefaves/${id}`).then(response => {
-      this.setState({
-        posts: response.data
-      });
+      console.log("Heldrup", response.data.liked_trips);
+
+      this.setState(
+        {
+          // posts: response.data,
+          userInfo: response.data.liked_trips
+        },
+        () => {
+          console.log(this.state.userInfo);
+        }
+      );
     });
   };
 
   render() {
-    console.log("these are our user's props", this.props.user);
+    console.log("is this the liked trip?", this.state);
 
     return (
       <div className="trips-list">
@@ -68,21 +82,23 @@ export default class TripCard extends React.Component {
 
                 <div>
                   <p className="caption">Elevation gain</p>
-                  <p className="attribute">
-                    {Math.floor(Math.random() * (400 - 20) + 20)}m
-                  </p>
+                  <p className="attribute">100m</p>
                 </div>
                 <div>
-                  <p className="caption">favourite this trip</p>
+                  <p className="caption">favourite</p>
                   <p className="attribute">
-                    <button onClick={() => this.faveTrip(trip._id)}>
-                      click to favourite
+                    <button onClick={() => this.faveTrip(trip._id, trip)}>
+                      {this.state.userInfo.includes(trip._id)
+                        ? "Unfave"
+                        : "fave"}
                     </button>
                   </p>
                   {/* <p className="caption">test</p>
                   <p className="attribute">
                     <button onClick={() => this.getData()}>
-                      click to test
+
+
+
                     </button>
                   </p> */}
                 </div>
