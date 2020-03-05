@@ -78,9 +78,9 @@ const TripReview = props => {
 
   // if this.state.redirect --> return <Redirect to="/profile" />
 
-  const renderRedirect = () => {
-    return <Redirect to="/profile" />;
-  };
+  // const renderRedirect = () => {
+  //   return <Redirect to="/profile" />;
+  // };
 
   return (
     <div>
@@ -124,8 +124,8 @@ const TripReview = props => {
           <br />
           {/* <p>Waypoints: {waypoints}</p> */}
           {/* {renderRedirect()} */}
-          <button className="button-solid">Save this trip</button>
-          {/* {renderRedirect()} */}
+          {/* <button className="button-solid">Save this trip</button>
+          {renderRedirect()} */}
         </div>
       </form>
     </div>
