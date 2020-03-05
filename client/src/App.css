@@ -1,4 +1,9 @@
 /* GLOBAL */
+
+*:focus {
+  outline: none;
+}
+
 :root {
   /* Primary */
   --white: #ffffff;
@@ -114,6 +119,12 @@ p {
   font-size: 12px;
   font-family: "Spartan", sans-serif;
   font-weight: 500;
+}
+
+.button-pill:hover {
+  background-color: var(--white);
+  color: var(--dusk);
+  border: 2px solid var(--white);
 }
 
 .input-text {
@@ -373,7 +384,9 @@ nav a {
   height: 200px;
 }
 .primary-content {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   text-align: left;
   margin-bottom: 16px;
 }
@@ -399,7 +412,8 @@ nav a {
 }
 
 .heart {
-  width: 50px;
+  width: 30px;
+  margin-top: 12px;
   cursor: pointer;
 }
 
@@ -413,7 +427,7 @@ nav a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 .auth-box {
   width: 300px;
@@ -460,9 +474,27 @@ nav a {
   background-color: var(--sunrise);
   padding: 0;
 }
+
+#or-google {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--night);
+  margin: 2px 0;
+}
+
 .google-btn {
   background-color: var(--sky);
 }
+
+.auth-links {
+  text-decoration: none;
+  color: var(--sky);
+}
+
+#auth-line {
+  margin: 0px;
+}
+
 /* HOME */
 /* .parallax {
   background-image: url("https://wallpaperplay.com/walls/full/6/0/0/60353.jpg");
@@ -543,20 +575,6 @@ nav a {
   width: 100%;
 }
 
-/* .home-btn {
-  width: 230px;
-  height: 45px;
-  border: 1px solid var(--cloud);
-  border-radius: 7px;
-  font-size: 18px;
-  color: #f5f0f0;
-  background-color: var(--sunrise);
-  padding: 0;
-  margin: 0;
-}
-.home-btns a {
-  text-decoration: none;
-} */
 /* PROFILE */
 .profile-wrapper {
   width: 38%;
@@ -577,6 +595,10 @@ nav a {
   justify-content: flex-start;
   align-items: center;
 }
+
+/* .profile-img-wrapper {
+  margin-top: 10px;
+} */
 
 .profile-img {
   width: 60%;
@@ -616,7 +638,7 @@ nav a {
   color: var(--white);
 }
 
-.sort-button:active {
+.sort-button-active {
   background-color: var(--sunrise);
   border: 2px solid var(--sunrise);
 }

@@ -64,7 +64,6 @@ export default class TripCard extends React.Component {
                   <div onClick={() => this.faveTrip(trip._id, trip)}>
                     {this.state.userInfo.includes(trip._id) ? (
                       <>
-                        <p className="caption">unfavourite</p>
                         <img
                           className="heart"
                           src="./img/heart.png"
@@ -73,7 +72,6 @@ export default class TripCard extends React.Component {
                       </>
                     ) : (
                       <>
-                        <p className="caption">favourite</p>
                         <img
                           className="heart"
                           src="./img/empty_heart.png"
