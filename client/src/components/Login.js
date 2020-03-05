@@ -73,7 +73,7 @@ export default class Login extends Component {
                 </button>
               </div>
             </form>
-            <p>or...</p>
+            <p id="or-google">or</p>
             <div>
               <a href={`${process.env.REACT_APP_SERVER_URL}/api/auth/google`}>
                 {" "}
@@ -82,6 +82,12 @@ export default class Login extends Component {
                 </button>
               </a>
             </div>
+            <p>
+              No account yet?{" "}
+              <Link className="auth-links" to="/signup">
+                Signup
+              </Link>
+            </p>
           </div>
           {this.state.message && <p>{this.state.message}</p>}
         </div>

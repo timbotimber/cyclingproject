@@ -50,7 +50,7 @@ export default class Signup extends Component {
                   type="text"
                   id="firstName"
                   name="firstName"
-                  placeholder="first name (like Marcel)"
+                  placeholder="First name"
                   value={this.state.firstName}
                   onChange={this.handleChange}
                 />
@@ -62,7 +62,7 @@ export default class Signup extends Component {
                   type="text"
                   id="lastName"
                   name="lastName"
-                  placeholder="last name (like Riek)"
+                  placeholder="Last name"
                   value={this.state.lastName}
                   onChange={this.handleChange}
                 />
@@ -97,7 +97,7 @@ export default class Signup extends Component {
                 </button>
               </div>
             </form>
-            <p>or...</p>
+            <p id="or-google">or</p>
             <div>
               <a href={`${process.env.REACT_APP_SERVER_URL}/api/auth/google`}>
                 {" "}
@@ -106,6 +106,12 @@ export default class Signup extends Component {
                 </button>
               </a>
             </div>
+            <p>
+              Already have an account?{" "}
+              <Link className="auth-links" to="/login">
+                Login
+              </Link>
+            </p>
           </div>
           {this.state.message && <p>{this.state.message}</p>}
         </div>

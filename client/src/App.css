@@ -415,7 +415,7 @@ nav a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 8%;
 }
 .auth-box {
   width: 300px;
@@ -462,8 +462,21 @@ nav a {
   background-color: var(--sunrise);
   padding: 0;
 }
+
+#or-google {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--night);
+  margin: 8px 0;
+}
+
 .google-btn {
   background-color: var(--sky);
+}
+
+.auth-links {
+  text-decoration: none;
+  color: var(--sky);
 }
 /* HOME */
 /* .parallax {
@@ -579,6 +592,10 @@ nav a {
   justify-content: flex-start;
   align-items: center;
 }
+
+/* .profile-img-wrapper {
+  margin-top: 10px;
+} */
 
 .profile-img {
   width: 60%;
