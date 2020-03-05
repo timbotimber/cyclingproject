@@ -369,6 +369,7 @@ nav a {
   height: 200px;
 }
 .primary-content {
+  display: flex;
   text-align: left;
   margin-bottom: 16px;
 }
@@ -388,6 +389,15 @@ nav a {
   align-items: flex-start;
   text-align: left;
 }
+
+.favebutton {
+  justify-content: space-evenly;
+}
+
+.heart {
+  width: 50px;
+}
+
 .trips-list {
   width: 100%;
   margin-bottom: 150px;
