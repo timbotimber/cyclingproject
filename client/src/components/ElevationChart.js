@@ -87,7 +87,7 @@ export default class ElevationChart extends Component {
 
   render() {
     return (
-      <div>
+      <div className="chart">
         <canvas id="myChart" ref={this.chartRef} />
       </div>
     );

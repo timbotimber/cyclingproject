@@ -208,6 +208,18 @@ p {
 .popUp :after {
   content: "\22B3";
 }
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#myChart {
+  /* margin-top: 24px; */
+  height: 90vh !important;
+  width: 100vw !important;
+}
+
 /* NAV BAR */
 nav {
   width: 100vw;
@@ -466,13 +478,15 @@ nav a {
 }
 .auth-btn {
   width: 100%;
-  height: 100%;
-  border: 1px solid var(--cloud);
-  border-radius: 7px;
-  font-size: 16px;
-  color: var(--night);
+  height: 44px;
+  padding: 0px 24px;
+  border-radius: 6px;
   background-color: var(--sunrise);
-  padding: 0;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  letter-spacing: 0.2px;
 }
 
 #or-google {
@@ -483,7 +497,10 @@ nav a {
 }
 
 .google-btn {
-  background-color: var(--sky);
+  border: 2px solid var(--dusk);
+  border-radius: 6px;
+  background-color: var(--white);
+  color: var(--dusk);
 }
 
 .auth-links {
@@ -492,7 +509,7 @@ nav a {
 }
 
 #auth-line {
-  margin: 0px;
+  margin-top: 16px;
 }
 
 /* HOME */
