@@ -14,9 +14,11 @@ const NavBar = props => {
     console.log(props.user.email);
     return (
       <nav className="navbar">
-        <div className="nav-greeting">
-          <p>Hey {props.user.firstName}!</p>
-        </div>
+        {props.user.firstName && (
+          <div className="nav-greeting">
+            <p>Hey {props.user.firstName}!</p>
+          </div>
+        )}
         <div className="logo">
           <Link to="/">Sykkel</Link>
         </div>

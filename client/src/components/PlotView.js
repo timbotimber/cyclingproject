@@ -61,13 +61,14 @@ export default class PlotView extends React.Component {
       "?geometries=geojson&steps=true&&access_token=" +
       mapboxgl.accessToken;
     let req = new XMLHttpRequest();
-    console.log("req", req);
+    // console.log("req", req);
     req.responseType = "json";
     req.open("GET", url, true);
     req.onload = () => {
       let jsonResponse = req.response;
       let arr = jsonResponse.routes[0].geometry.coordinates;
-      console.log("jsonReponse", jsonResponse);
+      // console.log("jsonReponse", jsonResponse);
+      // CALCULATING DIFFICULTY LEVEL BASED ON DISTANCE
       let distance = jsonResponse.routes[0].distance * 0.001;
       let difficulty = "";
       if (distance < 50) {
@@ -91,13 +92,15 @@ export default class PlotView extends React.Component {
         },
         () => {
           console.log(this.state);
-          this.reverseGeocode();
           this.snapToBounds();
+          this.reverseGeocode();
+          this.getElevations();
+          console.log("coordinates", this.state.coordinates);
         }
       );
       // let distance = jsonResponse.routes[0].distance * 0.001;
       // let duration = jsonResponse.routes[0].duration / 60;
-      console.log(jsonResponse);
+      // console.log(jsonResponse);
       // document.getElementById('calculated-line').innerHTML =
       // 'Distance: ' + distance.toFixed(2) + ' km<br>Duration: ' + duration.toFixed(2) + ' minutes';
       let coords = jsonResponse.routes[0].geometry;
@@ -106,6 +109,40 @@ export default class PlotView extends React.Component {
       this.getInstructions(jsonResponse.routes[0]);
     };
     req.send();
+  };
+
+  // RETRIEVE ELEVATION DATA
+  getElevations = () => {
+    let elevations = [];
+
+    this.state.coordinates.map(coord => {
+      axios
+        .get(
+          `https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/${coord[0]},${coord[1]}.json?layers=contour&limit=50&access_token=${mapboxgl.accessToken}`
+        )
+        .then(response => {
+          response = response.data.features;
+          for (const feature of response) {
+            elevations.push(feature.properties.ele);
+          }
+        });
+    });
+    // console.log("elevations", elevations);
+    return elevations;
+  };
+
+  // CALCULATING ELEVATION GAIN
+  calculateGain = arr => {
+    let gain;
+
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] > arr[i - 1]) {
+        gain += arr[i] - arr[i - 1];
+      }
+    }
+
+    console.log("gain", gain);
+    return gain;
   };
 
   // ADD ROUTE
@@ -168,7 +205,8 @@ export default class PlotView extends React.Component {
     });
     map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: "mapbox://styles/mapbox/streets-v11",
+      // style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/outdoors-v11",
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       duration: this.state.duration,
@@ -262,9 +300,9 @@ export default class PlotView extends React.Component {
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.origin[0]},${this.state.origin[1]}.json?access_token=${mapboxgl.accessToken}`
       )
       .then(response => {
-        console.log("full", response);
+        // console.log("full", response);
         let features = response.data.features;
-        console.log(features);
+        // console.log(features);
         const locality = features.find(el =>
           el.place_type.includes("locality")
         );
@@ -337,7 +375,7 @@ export default class PlotView extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
