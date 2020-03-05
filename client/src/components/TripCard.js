@@ -64,7 +64,6 @@ export default class TripCard extends React.Component {
                   <div onClick={() => this.faveTrip(trip._id, trip)}>
                     {this.state.userInfo.includes(trip._id) ? (
                       <>
-                        <p className="caption">unfavourite</p>
                         <img
                           className="heart"
                           src="./img/heart.png"
@@ -73,7 +72,6 @@ export default class TripCard extends React.Component {
                       </>
                     ) : (
                       <>
-                        <p className="caption">favourite</p>
                         <img
                           className="heart"
                           src="./img/empty_heart.png"
@@ -107,7 +105,9 @@ export default class TripCard extends React.Component {
                 <div>
                   <p className="caption">Elevation gain</p>
                   <p className="attribute">
-                    {trip.elevation_gain ? trip.elevation_gain + " m" : "N/A"}
+                    <Link to={`chart/${trip._id}`}>
+                      {trip.elevation_gain ? trip.elevation_gain + " m" : "N/A"}
+                    </Link>
                   </p>
                 </div>
               </div>

@@ -1,18 +1,12 @@
-import React from "react";
-import axios from "axios";
-import { Link, Redirect } from "react-router-dom";
-import { Component } from "react";
+import React from 'react';
+import axios from 'axios';
+import { Link, Redirect, withRouter } from 'react-router-dom';
+import { Component } from 'react';
 const TripReview = props => {
   const handleChange = event => {
     props.updateTitle(event.target.value);
   };
-  //   handleSubmit = event => {
-  //     event.preventDefault();
-  //     // send to api
-  //     // response from api
-  //     // change state.redirect to true
-  //   };
-  // console.log('trip data here:', this.props.tripData);
+
   const handleSubmit = event => {
     event.preventDefault();
     const {
@@ -31,11 +25,11 @@ const TripReview = props => {
       elevation_gain,
       coordinates,
       uuid,
-      waypoints
+      waypoints,
     } = props.tripData;
     // const id = this.state.match.params.
     axios
-      .post("/api/trips/addTrip", {
+      .post('/api/trips/addTrip', {
         title,
         origin,
         origin_name,
@@ -51,10 +45,11 @@ const TripReview = props => {
         elevation_gain,
         coordinates,
         uuid,
-        waypoints
+        waypoints,
       })
       .then(response => {
         console.log(response);
+        props.history.push('/profile');
       });
   };
   const {
@@ -73,14 +68,8 @@ const TripReview = props => {
     elevation_gain,
     coordinates,
     uuid,
-    waypoints
+    waypoints,
   } = props.tripData;
-
-  // if this.state.redirect --> return <Redirect to="/profile" />
-
-  // const renderRedirect = () => {
-  //   return <Redirect to="/profile" />;
-  // };
 
   return (
     <div>
@@ -89,7 +78,6 @@ const TripReview = props => {
         <div className="vertical-space"></div>
         <p className="caption-strong">Trip Name:</p>
 
-        {/* <label htmlFor="title">Trip name</label> */}
         <input
           className="input-text"
           id="title"
@@ -122,13 +110,17 @@ const TripReview = props => {
             </div>
           </div>
           <br />
+<<<<<<< HEAD
           {/* <p>Waypoints: {waypoints}</p> */}
           {/* {renderRedirect()} */}
           <button className="button-solid">Save this trip</button>
           {/* {renderRedirect()} */}
+=======
+          <button className="button-solid">Save this trip</button>
+>>>>>>> d51dfb57fdbc249f29a46ae50174b55959c1401b
         </div>
       </form>
     </div>
   );
 };
-export default TripReview;
+export default withRouter(TripReview);

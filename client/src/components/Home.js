@@ -15,11 +15,11 @@ export default class Home extends Component {
               plan long-distance cycling trips in and around Europe.
             </p>
             <div className="home-btns-wrapper">
-              <Link to="/plotview">
-                <button className="button-solid-dark">Plan a new Trip</button>
-              </Link>
               <Link to="/trips">
-                <button className="button-solid">Explore saved Trips</button>
+                <button className="button-solid-dark">Explore routes</button>
+              </Link>
+              <Link to="/plotview">
+                <button className="button-solid">Plan your own</button>
               </Link>
             </div>
           </div>
