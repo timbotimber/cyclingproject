@@ -393,7 +393,7 @@ export default class PlotView extends React.Component {
         {this.state.distance && (
           <div className="sidebar">
             {tripReviewCard}
-            <button className="button-ghost" onClick={this.goToReviewTrip}>
+            <button className="button-solid" onClick={this.goToReviewTrip}>
               {text}
             </button>
           </div>
