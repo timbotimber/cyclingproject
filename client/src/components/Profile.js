@@ -6,7 +6,11 @@ import TripCard from "./TripCard";
 class Profile extends React.Component {
   state = {
     trips: [],
-    liked_trips: []
+    liked_trips: [],
+    button_state_trips: true,
+    button_style_trips: "sort-button-active",
+    button_state_favs: false,
+    button_style_favs: "sort-button"
   };
 
   componentDidMount() {
@@ -17,37 +21,29 @@ class Profile extends React.Component {
   getData = () => {
     // console.log("getData()");
     axios.get("/api/trips/user").then(response => {
-      this.setState({
-        trips: response.data
-        // filteredTrips: tripsData
-      });
-      // console.log('jason test', this.state.trips[0].user);
-      console.log("testee user", this.props.user._id);
+      if (this.state.button_state_trips) {
+        this.setState({
+          trips: response.data,
+          button_style_trips: "sort-button-active",
+          button_style_favs: "sort-button"
+        });
+      }
     });
   };
 
   showFavorites = () => {
-    let favButton = document.getElementsByClassName("sort-button");
-
     axios.get(`/api/trips/trips/likedtrips`).then(response => {
-      this.setState({
-        trips: response.data
-      });
-      favButton.className.toggle("sort-button-active");
+      if (!this.state.button_state_favs) {
+        this.setState({
+          trips: response.data,
+          button_style_favs: "sort-button-active",
+          button_style_trips: "sort-button"
+        });
+      }
+
       console.log("Marcel is testing this shiz", this.state.liked_trips);
     });
   };
-
-  // showFavorites = () => {
-  //   axios.get("/api/auth/likedtrips").then(response => {
-  //     console.log("this is the response.data", response.data);
-  //     // let faveChecker
-  //     // this.checkFave();
-  //     this.setState({
-  //       userInfo: response.data
-  //     });
-  //   });
-  // };
 
   render() {
     console.log("props", this.props.setUser);
@@ -84,11 +80,17 @@ class Profile extends React.Component {
         </div>
         <div className="trips-wrapper">
           <div className="sort-button-wrapper">
-            <button className="sort-button" onClick={this.getData}>
+            <button
+              className={this.state.button_style_trips}
+              onClick={this.getData}
+            >
               My Trips
             </button>
             {
-              <button className="sort-button" onClick={this.showFavorites}>
+              <button
+                className={this.state.button_style_favs}
+                onClick={this.showFavorites}
+              >
                 {/* {this.state.trips.includes(trip._id)} */}
                 My Favorites
               </button>

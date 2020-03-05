@@ -656,8 +656,16 @@ nav a {
 }
 
 .sort-button-active {
-  background-color: var(--sunrise);
-  border: 2px solid var(--sunrise);
+  min-width: 120px;
+  height: 44px;
+  padding: 0px 10px;
+  margin: 0px 5px;
+  border: 2px solid var(--night);
+  border-radius: 6px;
+  background-color: var(--night);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 600px) {
