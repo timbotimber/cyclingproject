@@ -106,7 +106,7 @@ export default class Signup extends Component {
                 </button>
               </a>
             </div>
-            <p>
+            <p id="auth-line">
               Already have an account?{" "}
               <Link className="auth-links" to="/login">
                 Login

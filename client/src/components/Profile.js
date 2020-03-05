@@ -27,10 +27,13 @@ class Profile extends React.Component {
   };
 
   showFavorites = () => {
+    let favButton = document.getElementsByClassName("sort-button");
+
     axios.get(`/api/trips/trips/likedtrips`).then(response => {
       this.setState({
         trips: response.data
       });
+      favButton.className.toggle("sort-button-active");
       console.log("Marcel is testing this shiz", this.state.liked_trips);
     });
   };

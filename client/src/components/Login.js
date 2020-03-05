@@ -82,7 +82,7 @@ export default class Login extends Component {
                 </button>
               </a>
             </div>
-            <p>
+            <p id="auth-line">
               No account yet?{" "}
               <Link className="auth-links" to="/signup">
                 Signup
