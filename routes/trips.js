@@ -17,8 +17,8 @@ router.get('/addTrip', (req, res) => {
 
 router.get('/user', (req, res) => {
   Trip.find({ user: req.user._id })
-    .then(trip => {
-      res.json(trip);
+    .then(trips => {
+      res.json(trips);
     })
     .catch(err => {
       res.status(500).json({
@@ -98,6 +98,21 @@ router.post('/updatefaves/:id', (req, res, next) => {
       );
     }
   });
+});
+
+router.get('/trips/likedtrips', (req, res) => {
+  console.log('DALINA', req.liked_trips);
+  User.findById(req.user._id)
+    .populate('liked_trips')
+    .then(user => {
+      console.log(user);
+      res.json(user.liked_trips);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
 });
 
 module.exports = router;

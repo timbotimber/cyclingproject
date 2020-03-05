@@ -6,6 +6,7 @@ import TripCard from './TripCard';
 class Profile extends React.Component {
   state = {
     trips: [],
+    liked_trips: [],
   };
 
   componentDidMount() {
@@ -25,16 +26,23 @@ class Profile extends React.Component {
     });
   };
 
+  showFavorites = () => {
+    axios.get(`/api/trips/trips/likedtrips`).then(response => {
+      this.setState({
+        trips: response.data,
+      });
+      console.log('Marcel is testing this shiz', this.state.liked_trips);
+    });
+  };
+
   // showFavorites = () => {
-  //   axios.get('/api/auth/likedtrips').then(response => {
-  //     this.setState(
-  //       {
-  //         trips: response.data,
-  //       },
-  //       () => {
-  //         console.log('Marcel is testing this shiz', this.state.trips);
-  //       }
-  //     );
+  //   axios.get("/api/auth/likedtrips").then(response => {
+  //     console.log("this is the response.data", response.data);
+  //     // let faveChecker
+  //     // this.checkFave();
+  //     this.setState({
+  //       userInfo: response.data
+  //     });
   //   });
   // };
 
@@ -56,15 +64,15 @@ class Profile extends React.Component {
         </div>
         <div className="trips-wrapper">
           <div className="sort-button-wrapper">
-            <button
-              className="sort-button"
-              // onClick={() => this.showMyTrips()}
-            >
+            <button className="sort-button" onClick={this.getData}>
               My Trips
             </button>
-            <button className="sort-button" onClick={this.showFavorites()}>
-              My Favorites
-            </button>
+            {
+              <button className="sort-button" onClick={this.showFavorites}>
+                {/* {this.state.trips.includes(trip._id)} */}
+                My Favorites
+              </button>
+            }
           </div>
           <TripCard trips={this.state.trips} />
         </div>
@@ -74,3 +82,11 @@ class Profile extends React.Component {
 }
 
 export default Profile;
+
+{
+  /* <button onClick={() => this.faveTrip(trip._id, trip)}>
+{this.state.userInfo.includes(trip._id)
+  ? "Unfave"
+  : "fave"}
+</button> */
+}

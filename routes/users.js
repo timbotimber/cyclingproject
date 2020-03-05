@@ -79,14 +79,15 @@ router.get(
   '/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/auth/login',
-    successRedirect: process.env.CLIENT_URL,
+    successRedirect: process.env.CLIENT_PROFILE_URL,
   })
 );
 
 router.get('/likedtrips', (req, res) => {
-  User.find({ likedtrips: req.liked_trips })
-    .then(likedTrips => {
-      res.json(likedTrips);
+  // console.log('DALINA', req.liked_trips);
+  User.findById(req.user._id)
+    .then(user => {
+      res.json(user.liked_trips);
     })
     .catch(err => {
       res.status(500).json({
