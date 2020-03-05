@@ -50,7 +50,7 @@ h3 {
 }
 p {
   font-size: 14px;
-  line-height: 0.4;
+  line-height: 1.2;
 }
 .attribute {
   color: var(--night);
@@ -58,7 +58,6 @@ p {
   font-size: 14px;
   font-weight: bold;
   margin: 0;
-  margin-top: 8px;
 }
 .button-solid {
   height: 44px;
@@ -180,7 +179,7 @@ p {
 }
 
 .review-trip-attributes div {
-  width: 50%;
+  width: 33%;
 }
 
 .popUp {

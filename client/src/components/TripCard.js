@@ -106,7 +106,9 @@ export default class TripCard extends React.Component {
 
                 <div>
                   <p className="caption">Elevation gain</p>
-                  <p className="attribute">100m</p>
+                  <p className="attribute">
+                    {trip.elevation_gain ? trip.elevation_gain + " m" : "N/A"}
+                  </p>
                 </div>
               </div>
             </div>

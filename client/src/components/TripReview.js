@@ -1,7 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
-import { Component } from 'react';
+import React from "react";
+import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
+import { Component } from "react";
 const TripReview = props => {
   const handleChange = event => {
     props.updateTitle(event.target.value);
@@ -27,13 +27,15 @@ const TripReview = props => {
       distance,
       duration,
       difficulty,
+      elevations,
+      elevation_gain,
       coordinates,
       uuid,
-      waypoints,
+      waypoints
     } = props.tripData;
     // const id = this.state.match.params.
     axios
-      .post('/api/trips/addTrip', {
+      .post("/api/trips/addTrip", {
         title,
         origin,
         origin_name,
@@ -45,9 +47,11 @@ const TripReview = props => {
         distance,
         duration,
         difficulty,
+        elevations,
+        elevation_gain,
         coordinates,
         uuid,
-        waypoints,
+        waypoints
       })
       .then(response => {
         console.log(response);
@@ -65,9 +69,11 @@ const TripReview = props => {
     distance,
     duration,
     difficulty,
+    elevations,
+    elevation_gain,
     coordinates,
     uuid,
-    waypoints,
+    waypoints
   } = props.tripData;
 
   // if this.state.redirect --> return <Redirect to="/profile" />
@@ -109,6 +115,10 @@ const TripReview = props => {
             <div>
               <p className="caption-strong">Distance:</p>
               <p>{distance.toFixed(2)} km</p>
+            </div>
+            <div>
+              <p className="caption-strong">Elevation gain:</p>
+              <p>{elevation_gain} m</p>
             </div>
           </div>
           <br />

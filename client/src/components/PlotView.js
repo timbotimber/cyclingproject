@@ -25,6 +25,8 @@ export default class PlotView extends React.Component {
     duration: "",
     distance: "",
     difficulty: "",
+    elevations: [],
+    elevation_gain: 0,
     coordinates: [],
     waypoints: [],
     reviewTrip: false,
@@ -94,15 +96,16 @@ export default class PlotView extends React.Component {
           console.log(this.state);
           this.snapToBounds();
           this.reverseGeocode();
-          this.getElevations();
-          console.log("coordinates", this.state.coordinates);
+          this.getElevations().then(response => {
+            console.log("response", response);
+
+            this.calculateGain(response);
+          });
+          // console.log(this.getElevations());
+          // console.log("coordinates", this.state.coordinates);
         }
       );
-      // let distance = jsonResponse.routes[0].distance * 0.001;
-      // let duration = jsonResponse.routes[0].duration / 60;
-      // console.log(jsonResponse);
-      // document.getElementById('calculated-line').innerHTML =
-      // 'Distance: ' + distance.toFixed(2) + ' km<br>Duration: ' + duration.toFixed(2) + ' minutes';
+
       let coords = jsonResponse.routes[0].geometry;
       // add the route to the map
       this.addRoute(coords);
@@ -112,11 +115,11 @@ export default class PlotView extends React.Component {
   };
 
   // RETRIEVE ELEVATION DATA
-  getElevations = () => {
+  getElevations = async () => {
     let elevations = [];
 
-    this.state.coordinates.map(coord => {
-      axios
+    let promises = this.state.coordinates.map(coord => {
+      return axios
         .get(
           `https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/${coord[0]},${coord[1]}.json?layers=contour&limit=50&access_token=${mapboxgl.accessToken}`
         )
@@ -127,22 +130,28 @@ export default class PlotView extends React.Component {
           }
         });
     });
-    // console.log("elevations", elevations);
+    console.log("elevations", elevations);
+    await Promise.all(promises);
+    this.setState({
+      elevations: elevations
+    });
     return elevations;
   };
 
   // CALCULATING ELEVATION GAIN
   calculateGain = arr => {
-    let gain;
-
+    console.log(arr);
+    let gain = 0;
     for (let i = 1; i < arr.length; i++) {
       if (arr[i] > arr[i - 1]) {
         gain += arr[i] - arr[i - 1];
       }
     }
-
     console.log("gain", gain);
-    return gain;
+    let realisticGain = gain / 2;
+    this.setState({
+      elevation_gain: realisticGain
+    });
   };
 
   // ADD ROUTE

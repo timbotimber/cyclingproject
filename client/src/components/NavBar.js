@@ -16,7 +16,7 @@ const NavBar = props => {
       <nav className="navbar">
         {props.user.firstName && (
           <div className="nav-greeting">
-            <p>Hey {props.user.firstName}!</p>
+            <p>👋🏻 Hey {props.user.firstName}!</p>
           </div>
         )}
         <div className="logo">
