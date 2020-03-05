@@ -114,13 +114,8 @@ const TripReview = props => {
           <br />
           {/* <p>Waypoints: {waypoints}</p> */}
           {/* {renderRedirect()} */}
-<<<<<<< HEAD
           {/* <button className="button-solid">Save this trip</button>
           {renderRedirect()} */}
-=======
-          <button className="button-solid">Save this trip</button>
-          {/* {renderRedirect()} */}
->>>>>>> 947a79032031b46ccdc55aea4b6c2740d72d2063
         </div>
       </form>
     </div>
