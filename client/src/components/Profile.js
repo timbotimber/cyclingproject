@@ -45,9 +45,19 @@ class Profile extends React.Component {
     });
   };
 
+  deleteOne = id => {
+    console.log(id);
+    let filteredArray = this.state.trips.filter(elem => {
+      console.log(elem);
+      return id !== elem._id;
+    });
+    this.setState({
+      trips: filteredArray
+    });
+  };
+
   render() {
-    console.log("props", this.props.setUser);
-    console.log("user", this.props.user);
+    console.log("the arry", this.state.trips);
     return (
       <div className="wrapper">
         <div className="profile-wrapper">
@@ -96,7 +106,7 @@ class Profile extends React.Component {
               </button>
             }
           </div>
-          <TripCard trips={this.state.trips} />
+          <TripCard deleteOne={this.deleteOne} trips={this.state.trips} />
         </div>
       </div>
     );

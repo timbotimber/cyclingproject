@@ -414,7 +414,7 @@ nav a {
   line-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: flex-start;
   text-align: left;
 }
@@ -433,6 +433,29 @@ nav a {
   width: 100%;
   margin-bottom: 150px;
 }
+
+.delete-attribute {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.delete-attribute button {
+  text-align: right;
+  width: 100%;
+  background-color: none;
+  border: none;
+  color: var(--dusk);
+  font-weight: bold;
+  padding: 0;
+}
+
+.delete-attribute img {
+  width: 24px;
+  height: auto;
+}
+
 /* SIGNUP / LOGIN */
 .auth-wrapper {
   display: flex;

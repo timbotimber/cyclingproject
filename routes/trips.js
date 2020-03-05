@@ -104,17 +104,15 @@ router.post('/updatefaves/:id', (req, res, next) => {
   });
 });
 
-router.get('/trip/:id', (req, res) => {
+router.post('/delete/:id', (req, res) => {
   const tripId = req.params.id;
-
-  Trip.findByIdAndUpdate(tripId, { $pull: {} })
-    .then(trip => {
-      res.json(trip);
+  console.log('trip id test', tripId);
+  Trip.findOneAndDelete({ _id: tripId })
+    .then(user => {
+      res.json({ message: 'deleted' });
     })
     .catch(err => {
-      res.status(500).json({
-        message: err.message,
-      });
+      console.log(err);
     });
 });
 

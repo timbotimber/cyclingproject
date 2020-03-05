@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 export default class TripCard extends React.Component {
   state = {
     userInfo: [],
-    fave: true
+    fave: true,
+    somethingDeleted: false
   };
 
   // checkFave = () => {
@@ -15,9 +16,18 @@ export default class TripCard extends React.Component {
   componentDidMount() {
     this.getData();
   }
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log(prevState, this.state);
+  //   console.log(prevProps, this.props);
+  //   if (this.state == prevState) {
+  //     console.log('updated');
+  //     this.getData();
+  //   }
+  // }
+
   getData = () => {
     axios.get("/api/auth/likedtrips").then(response => {
-      console.log("this is the response.data", response.data);
+      //  console.log('this is the response.data', response.data);
       // let faveChecker
       // this.checkFave();
       this.setState({
@@ -43,7 +53,16 @@ export default class TripCard extends React.Component {
     });
   };
 
+  deleteTrip = id => {
+    console.log(id, "test id");
+    axios.post(`/api/trips/delete/${id}`).then(response => {
+      console.log("the delete response", response);
+      this.props.deleteOne(id);
+    });
+  };
+
   render() {
+    console.log(this.props);
     console.log("is this the liked trip?", this.state);
 
     return (
@@ -109,6 +128,13 @@ export default class TripCard extends React.Component {
                       {trip.elevation_gain ? trip.elevation_gain + " m" : "N/A"}
                     </Link>
                   </p>
+                </div>
+
+                <div className="delete-attribute">
+                  <button onClick={() => this.deleteTrip(trip._id)}>
+                    {/* Delete Trip */}
+                    <img src="/img/trash_icon.png" alt="delete" />
+                  </button>
                 </div>
               </div>
             </div>
