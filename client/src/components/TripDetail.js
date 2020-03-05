@@ -26,13 +26,13 @@ export default class TripDetail extends Component {
       const trip = this.state.trip;
 
       if (!trip) {
-        return <div>No Trips Match Your Search</div>;
+        return <div>Jackie and the Ferry Boys</div>;
       }
       return (
         <>
-          <h1>{trip.title}</h1>
+          {/* <h1>{trip.title}</h1>
           <p>{trip.duration}</p>
-          <p>{trip.distance}</p>
+          <p>{trip.distance}</p> */}
           <MapView coordinates={trip.coordinates} origin={trip.origin} />
         </>
       );
