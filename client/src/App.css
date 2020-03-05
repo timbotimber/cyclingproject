@@ -396,6 +396,7 @@ nav a {
 
 .heart {
   width: 50px;
+  cursor: pointer;
 }
 
 .trips-list {
