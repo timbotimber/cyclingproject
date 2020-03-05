@@ -1,11 +1,12 @@
-import React from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class TripCard extends React.Component {
   state = {
     userInfo: [],
-    fave: true
+    fave: true,
+    somethingDeleted: false,
   };
 
   // checkFave = () => {
@@ -15,26 +16,35 @@ export default class TripCard extends React.Component {
   componentDidMount() {
     this.getData();
   }
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log(prevState, this.state);
+  //   console.log(prevProps, this.props);
+  //   if (this.state == prevState) {
+  //     console.log('updated');
+  //     this.getData();
+  //   }
+  // }
+
   getData = () => {
-    axios.get("/api/auth/likedtrips").then(response => {
-      console.log("this is the response.data", response.data);
+    axios.get('/api/auth/likedtrips').then(response => {
+      //  console.log('this is the response.data', response.data);
       // let faveChecker
       // this.checkFave();
       this.setState({
-        userInfo: response.data
+        userInfo: response.data,
       });
     });
   };
 
   faveTrip = id => {
-    console.log("Markus");
+    console.log('Markus');
     axios.post(`/api/trips/updatefaves/${id}`).then(response => {
-      console.log("Heldrup", response.data.liked_trips);
+      console.log('Heldrup', response.data.liked_trips);
 
       this.setState(
         {
           // posts: response.data,
-          userInfo: response.data.liked_trips
+          userInfo: response.data.liked_trips,
         },
         () => {
           console.log(this.state.userInfo);
@@ -43,8 +53,17 @@ export default class TripCard extends React.Component {
     });
   };
 
+  deleteTrip = id => {
+    console.log(id, 'test id');
+    axios.post(`/api/trips/delete/${id}`).then(response => {
+      console.log('the delete response', response);
+      this.props.deleteOne(id);
+    });
+  };
+
   render() {
-    console.log("is this the liked trip?", this.state);
+    console.log(this.props);
+    console.log('is this the liked trip?', this.state);
 
     return (
       <div className="trips-list">
@@ -65,20 +84,12 @@ export default class TripCard extends React.Component {
                     {this.state.userInfo.includes(trip._id) ? (
                       <>
                         <p className="caption">unfavourite</p>
-                        <img
-                          className="heart"
-                          src="./img/heart.png"
-                          alt="heart"
-                        />
+                        <img className="heart" src="./img/heart.png" alt="heart" />
                       </>
                     ) : (
                       <>
                         <p className="caption">favourite</p>
-                        <img
-                          className="heart"
-                          src="./img/empty_heart.png"
-                          alt="empty heart"
-                        />
+                        <img className="heart" src="./img/empty_heart.png" alt="empty heart" />
                       </>
                     )}
                   </div>
@@ -87,9 +98,7 @@ export default class TripCard extends React.Component {
               <div className="secondary-content">
                 <div>
                   <p className="caption">Difficulty</p>
-                  <p className="attribute">
-                    {trip.difficulty ? trip.difficulty : "N/A"}
-                  </p>
+                  <p className="attribute">{trip.difficulty ? trip.difficulty : 'N/A'}</p>
                 </div>
 
                 <div>
@@ -99,16 +108,15 @@ export default class TripCard extends React.Component {
 
                 <div>
                   <p className="caption">Duration</p>
-                  <p className="attribute">
-                    {(trip.duration / 60).toFixed(2)} hrs
-                  </p>
+                  <p className="attribute">{(trip.duration / 60).toFixed(2)} hrs</p>
                 </div>
 
                 <div>
                   <p className="caption">Elevation gain</p>
-                  <p className="attribute">
-                    {trip.elevation_gain ? trip.elevation_gain + " m" : "N/A"}
-                  </p>
+                  <p className="attribute">{trip.elevation_gain ? trip.elevation_gain + ' m' : 'N/A'}</p>
+                </div>
+                <div>
+                  <button onClick={() => this.deleteTrip(trip._id)}>Delete Trip</button>
                 </div>
               </div>
             </div>
