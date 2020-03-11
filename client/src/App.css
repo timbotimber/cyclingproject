@@ -536,14 +536,7 @@ nav a {
 }
 
 /* HOME */
-/* .parallax {
-  background-image: url("https://wallpaperplay.com/walls/full/6/0/0/60353.jpg");
-  height: 300px;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
+
 .home-container {
   /* background-image: url("https://github.com/timbotimber/cyclingproject/blob/master/client/public/img/bike4.jpeg?raw=true"); */
   height: 100vh;
