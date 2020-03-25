@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { Link, Redirect, withRouter } from "react-router-dom";
-import { Component } from "react";
+import { withRouter } from "react-router-dom";
+
 const TripReview = props => {
   const handleChange = event => {
     props.updateTitle(event.target.value);
@@ -54,21 +54,11 @@ const TripReview = props => {
   };
   const {
     title,
-    origin,
     origin_name,
-    destination,
     destination_name,
-    lng,
-    lat,
-    zoom,
     distance,
     duration,
-    difficulty,
-    elevations,
-    elevation_gain,
-    coordinates,
-    uuid,
-    waypoints
+    elevation_gain
   } = props.tripData;
 
   return (

@@ -2,7 +2,6 @@ import React from 'react';
 import mapboxgl from 'mapbox-gl';
 import MapBoxGLDraw from 'mapbox-gl-draw';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import TripReview from './TripReview';
 mapboxgl.accessToken =
   'pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g';
@@ -48,7 +47,6 @@ export default class PlotView extends React.Component {
   updateRoute = () => {
     this.removeRoute(); // overwrite any existing layers
     let data = this.state.draw.getAll();
-    let answer = document.getElementById('calculated-line');
     let lastFeature = data.features.length - 1;
     let coords = data.features[lastFeature].geometry.coordinates;
     let newCoords = coords.join(';');
@@ -187,7 +185,6 @@ export default class PlotView extends React.Component {
   // GET NAVIGATION INSTRUCTIONS
   getInstructions = data => {
     // Target the sidebar to add the instructions
-    let directions = document.getElementById('directions');
     let legs = data.legs;
     let tripDirections = [];
     // Output the instructions for each step of each leg in the response object

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Search from "./Search";
 
 export default class FilterPanel extends React.Component {

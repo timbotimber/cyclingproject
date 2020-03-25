@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TripCard from './TripCard';
-import Search from './Search';
 import FilterPanel from './FilterPanel';
 import axios from 'axios';
 
@@ -73,8 +72,8 @@ export default class Trips extends Component {
         (this.state.Intermediate && trip.difficulty === 'Intermediate') ||
         (this.state.Advanced && trip.difficulty === 'Advanced') ||
         (this.state.oneDay && trip.duration <= 360) ||
-        (this.state.threeDay && 360 < trip.duration <= 1080) ||
-        (this.state.oneWeek && 1080 < trip.duration <= 2520) ||
+        (this.state.threeDay && 360 <= trip.duration <= 1080) ||
+        (this.state.oneWeek && 1080 <= trip.duration <= 2520) ||
         (this.state.hardcore && trip.duration > 2520)
       );
     });
