@@ -1,43 +1,43 @@
-import React from "react";
-import mapboxgl from "mapbox-gl";
-import MapBoxGLDraw from "mapbox-gl-draw";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import TripReview from "./TripReview";
+import React from 'react';
+import mapboxgl from 'mapbox-gl';
+import MapBoxGLDraw from 'mapbox-gl-draw';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import TripReview from './TripReview';
 mapboxgl.accessToken =
-  "pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g";
+  'pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g';
 
 let map;
 
 export default class PlotView extends React.Component {
   state = {
-    title: "",
+    title: '',
     origin: [],
-    origin_name: "",
+    origin_name: '',
     destination: [],
-    destination_name: "",
+    destination_name: '',
     map: null,
     draw: null,
-    lng: 5,
-    lat: 34,
-    zoom: 4,
-    uuid: "",
-    duration: "",
-    distance: "",
-    difficulty: "",
+    lng: 13,
+    lat: 52,
+    zoom: 6,
+    uuid: '',
+    duration: '',
+    distance: '',
+    difficulty: '',
     elevations: [],
     elevation_gain: 0,
     coordinates: [],
     waypoints: [],
     reviewTrip: false,
-    user: ""
+    user: '',
   };
 
   // REMOVE ROUTE
   removeRoute = () => {
-    if (this.state.map.getSource("route")) {
-      this.state.map.removeLayer("route");
-      this.state.map.removeSource("route");
+    if (this.state.map.getSource('route')) {
+      this.state.map.removeLayer('route');
+      this.state.map.removeSource('route');
       //  document.getElementById('calculated-line').innerHTML = '';
     } else {
       return;
@@ -48,37 +48,37 @@ export default class PlotView extends React.Component {
   updateRoute = () => {
     this.removeRoute(); // overwrite any existing layers
     let data = this.state.draw.getAll();
-    let answer = document.getElementById("calculated-line");
+    let answer = document.getElementById('calculated-line');
     let lastFeature = data.features.length - 1;
     let coords = data.features[lastFeature].geometry.coordinates;
-    let newCoords = coords.join(";");
+    let newCoords = coords.join(';');
     this.getMatch(newCoords);
   };
 
   // RENDERING MATCHED ROUTE
   getMatch = e => {
     let url =
-      "https://api.mapbox.com/directions/v5/mapbox/cycling/" +
+      'https://api.mapbox.com/directions/v5/mapbox/cycling/' +
       e +
-      "?geometries=geojson&steps=true&&access_token=" +
+      '?geometries=geojson&steps=true&&access_token=' +
       mapboxgl.accessToken;
     let req = new XMLHttpRequest();
     // console.log("req", req);
-    req.responseType = "json";
-    req.open("GET", url, true);
+    req.responseType = 'json';
+    req.open('GET', url, true);
     req.onload = () => {
       let jsonResponse = req.response;
       let arr = jsonResponse.routes[0].geometry.coordinates;
       // console.log("jsonReponse", jsonResponse);
       // CALCULATING DIFFICULTY LEVEL BASED ON DISTANCE
       let distance = jsonResponse.routes[0].distance * 0.001;
-      let difficulty = "";
+      let difficulty = '';
       if (distance < 50) {
-        difficulty = "Easy";
+        difficulty = 'Easy';
       } else if (distance >= 150) {
-        difficulty = "Advanced";
+        difficulty = 'Advanced';
       } else {
-        difficulty = "Intermediate";
+        difficulty = 'Intermediate';
       }
       this.setState(
         {
@@ -88,16 +88,15 @@ export default class PlotView extends React.Component {
           uuid: jsonResponse.uuid,
           waypoints: jsonResponse.waypoints,
           origin: jsonResponse.routes[0].geometry.coordinates[0],
-          destination:
-            jsonResponse.routes[0].geometry.coordinates[arr.length - 1],
-          difficulty: difficulty
+          destination: jsonResponse.routes[0].geometry.coordinates[arr.length - 1],
+          difficulty: difficulty,
         },
         () => {
           console.log(this.state);
           this.snapToBounds();
           this.reverseGeocode();
           this.getElevations().then(response => {
-            console.log("response", response);
+            console.log('response', response);
 
             this.calculateGain(response);
           });
@@ -130,10 +129,10 @@ export default class PlotView extends React.Component {
           }
         });
     });
-    console.log("elevations", elevations);
+    console.log('elevations', elevations);
     await Promise.all(promises);
     this.setState({
-      elevations: elevations
+      elevations: elevations,
     });
     return elevations;
   };
@@ -147,40 +146,40 @@ export default class PlotView extends React.Component {
         gain += arr[i] - arr[i - 1];
       }
     }
-    console.log("gain", gain);
+    console.log('gain', gain);
     let realisticGain = gain / 2;
     this.setState({
-      elevation_gain: realisticGain
+      elevation_gain: realisticGain,
     });
   };
 
   // ADD ROUTE
   addRoute = coords => {
     // check if the route is already loaded
-    if (this.state.map.getSource("route")) {
-      this.state.map.removeLayer("route");
-      this.state.map.removeSource("route");
+    if (this.state.map.getSource('route')) {
+      this.state.map.removeLayer('route');
+      this.state.map.removeSource('route');
     } else {
       this.state.map.addLayer({
-        id: "route",
-        type: "line",
+        id: 'route',
+        type: 'line',
         source: {
-          type: "geojson",
+          type: 'geojson',
           data: {
-            type: "Feature",
+            type: 'Feature',
             properties: {},
-            geometry: coords
-          }
+            geometry: coords,
+          },
         },
         layout: {
-          "line-join": "round",
-          "line-cap": "round"
+          'line-join': 'round',
+          'line-cap': 'round',
         },
         paint: {
-          "line-color": "#ff6962",
-          "line-width": 8,
-          "line-opacity": 0.8
-        }
+          'line-color': '#ff6962',
+          'line-width': 8,
+          'line-opacity': 0.8,
+        },
       });
     }
   };
@@ -188,16 +187,14 @@ export default class PlotView extends React.Component {
   // GET NAVIGATION INSTRUCTIONS
   getInstructions = data => {
     // Target the sidebar to add the instructions
-    let directions = document.getElementById("directions");
+    let directions = document.getElementById('directions');
     let legs = data.legs;
     let tripDirections = [];
     // Output the instructions for each step of each leg in the response object
     for (let i = 0; i < legs.length; i++) {
       let steps = legs[i].steps;
       for (let j = 0; j < steps.length; j++) {
-        tripDirections.push(
-          "<br><li>" + steps[j].maneuver.instruction + "</li>"
-        );
+        tripDirections.push('<br><li>' + steps[j].maneuver.instruction + '</li>');
       }
     }
     // directions.innerHTML = '<br><h2>Trip duration: ' + Math.floor(data.duration / 60) + ' min.</h2>' + tripDirections;
@@ -207,95 +204,81 @@ export default class PlotView extends React.Component {
   componentDidMount = () => {
     const id = this.props.match.params.id;
     axios.get(`/api/trips/trip/${id}`).then(response => {
-      console.log("response", response);
+      console.log('response', response);
       this.setState({
-        trip: response.data
+        trip: response.data,
       });
     });
     map = new mapboxgl.Map({
       container: this.mapContainer,
       // style: "mapbox://styles/mapbox/streets-v11",
-      style: "mapbox://styles/mapbox/outdoors-v11",
+      style: 'mapbox://styles/mapbox/outdoors-v11',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       duration: this.state.duration,
-      distance: this.state.distance
+      distance: this.state.distance,
     });
     // console.log('duration', duration);
     const draw = new MapBoxGLDraw({
       displayControlsDefault: false,
       controls: {
         line_string: true,
-        trash: true
+        trash: true,
       },
       styles: [
         // ACTIVE (being drawn)
         // line stroke
         {
-          id: "gl-draw-line",
-          type: "line",
-          filter: [
-            "all",
-            ["==", "$type", "LineString"],
-            ["!=", "mode", "static"]
-          ],
+          id: 'gl-draw-line',
+          type: 'line',
+          filter: ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
           layout: {
-            "line-cap": "round",
-            "line-join": "round"
+            'line-cap': 'round',
+            'line-join': 'round',
           },
           paint: {
-            "line-color": "#ff6962", // Color: "sky"
-            "line-dasharray": [0.2, 2],
-            "line-width": 4,
-            "line-opacity": 1.0
-          }
+            'line-color': '#ff6962', // Color: "sky"
+            'line-dasharray': [0.2, 2],
+            'line-width': 4,
+            'line-opacity': 1.0,
+          },
         },
         // vertex point halos
         {
-          id: "gl-draw-polygon-and-line-vertex-halo-active",
-          type: "circle",
-          filter: [
-            "all",
-            ["==", "meta", "vertex"],
-            ["==", "$type", "Point"],
-            ["!=", "mode", "static"]
-          ],
+          id: 'gl-draw-polygon-and-line-vertex-halo-active',
+          type: 'circle',
+          filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
           paint: {
-            "circle-radius": 10,
-            "circle-color": "#FFF"
-          }
+            'circle-radius': 10,
+            'circle-color': '#FFF',
+          },
         },
         // vertex points
         {
-          id: "gl-draw-polygon-and-line-vertex-active",
-          type: "circle",
-          filter: [
-            "all",
-            ["==", "meta", "vertex"],
-            ["==", "$type", "Point"],
-            ["!=", "mode", "static"]
-          ],
+          id: 'gl-draw-polygon-and-line-vertex-active',
+          type: 'circle',
+          filter: ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
           paint: {
-            "circle-radius": 6,
-            "circle-color": "#ff6962"
-          }
-        }
-      ]
+            'circle-radius': 6,
+            'circle-color': '#ff6962',
+          },
+        },
+      ],
     });
     this.setState({ map, draw }, () => {
       const { map, draw } = this.state;
       // add the draw tool to the map
       map.addControl(draw);
       // add create, update, or delete actions
-      map.on("draw.create", this.updateRoute);
-      map.on("draw.update", this.updateRoute);
-      map.on("draw.delete", this.removeRoute);
+      map.on('draw.create', this.updateRoute);
+      map.on('draw.update', this.updateRoute);
+      map.on('draw.delete', this.removeRoute);
       // Storing new coordinate (whatever the user interacts with)
-      map.on("move", () => {
+      map.on('move', () => {
         this.setState({
           lng: map.getCenter().lng.toFixed(4),
           lat: map.getCenter().lat.toFixed(4),
-          zoom: map.getZoom().toFixed(2)
+          zoom: map.getZoom().toFixed(2),
         });
       });
     });
@@ -312,19 +295,17 @@ export default class PlotView extends React.Component {
         // console.log("full", response);
         let features = response.data.features;
         // console.log(features);
-        const locality = features.find(el =>
-          el.place_type.includes("locality")
-        );
+        const locality = features.find(el => el.place_type.includes('locality'));
         if (locality) {
           this.setState({ origin_name: locality.place_name });
           return;
         }
-        const place = features.find(el => el.place_type.includes("place"));
+        const place = features.find(el => el.place_type.includes('place'));
         if (place) {
           this.setState({ origin_name: place.place_name });
           return;
         }
-        const region = features.find(el => el.place_type.includes("region"));
+        const region = features.find(el => el.place_type.includes('region'));
         if (region) {
           this.setState({ origin_name: region.place_name });
           return;
@@ -337,19 +318,17 @@ export default class PlotView extends React.Component {
       )
       .then(response => {
         let features = response.data.features;
-        const locality = features.find(el =>
-          el.place_type.includes("locality")
-        );
+        const locality = features.find(el => el.place_type.includes('locality'));
         if (locality) {
           this.setState({ destination_name: locality.place_name });
           return;
         }
-        const place = features.find(el => el.place_type.includes("place"));
+        const place = features.find(el => el.place_type.includes('place'));
         if (place) {
           this.setState({ destination_name: place.place_name });
           return;
         }
-        const region = features.find(el => el.place_type.includes("region"));
+        const region = features.find(el => el.place_type.includes('region'));
         if (region) {
           this.setState({ destination_name: region.place_name });
           return;
@@ -360,14 +339,14 @@ export default class PlotView extends React.Component {
   // TOGGLE MAP SIDEBAR VIEW
   goToReviewTrip = () => {
     this.setState({
-      reviewTrip: !this.state.reviewTrip
+      reviewTrip: !this.state.reviewTrip,
     });
   };
 
   // UPDATE TITLE OF TRIP
   updateTitle = text => {
     this.setState({
-      title: text
+      title: text,
     });
   };
 
@@ -379,7 +358,7 @@ export default class PlotView extends React.Component {
     }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
 
     map.fitBounds(bounds, {
-      padding: 100
+      padding: 100,
     });
   };
 
@@ -388,14 +367,14 @@ export default class PlotView extends React.Component {
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
-      text = "Go Back";
+      text = 'Go Back';
       tripReviewCard = (
         <div className="sidebarReview">
           <TripReview tripData={this.state} updateTitle={this.updateTitle} />
         </div>
       );
     } else {
-      text = "Check out your Details!";
+      text = 'Check out your Details!';
     }
     return (
       <div>
@@ -409,9 +388,7 @@ export default class PlotView extends React.Component {
         )}
         {!this.state.distance && (
           <div className="popUp">
-            <p className="caption-strong">
-              Plot out your trip and press enter{" "}
-            </p>
+            <p className="caption-strong">Plot out your trip and press enter </p>
           </div>
         )}
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />
