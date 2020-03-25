@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import TripCard from "./TripCard";
 
@@ -71,13 +70,13 @@ class Profile extends React.Component {
                 <img
                   className="profile-img"
                   src={this.props.user.profilePic}
-                  alt="Profile Image"
+                  alt="Profile"
                 />
               ) : (
                 <img
                   className="profile-img"
                   src="./img/user_avatar.png"
-                  alt="Profile Image"
+                  alt="Profile"
                 />
               )}
             </div>
@@ -114,11 +113,3 @@ class Profile extends React.Component {
 }
 
 export default Profile;
-
-{
-  /* <button onClick={() => this.faveTrip(trip._id, trip)}>
-{this.state.userInfo.includes(trip._id)
-  ? "Unfave"
-  : "fave"}
-</button> */
-}

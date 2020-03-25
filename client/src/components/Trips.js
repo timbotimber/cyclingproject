@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import TripCard from './TripCard';
-import Search from './Search';
-import FilterPanel from './FilterPanel';
-import axios from 'axios';
+import React, { Component } from "react";
+import TripCard from "./TripCard";
+import FilterPanel from "./FilterPanel";
+import axios from "axios";
 
 export default class Trips extends Component {
   state = {
     trips: [],
-    query: '',
+    query: "",
     filteredTrips: [],
     Easy: false,
     Intermediate: false,
@@ -15,7 +14,7 @@ export default class Trips extends Component {
     oneDay: false,
     threeDay: false,
     oneWeek: false,
-    hardcore: false,
+    hardcore: false
   };
 
   componentDidMount() {
@@ -24,18 +23,18 @@ export default class Trips extends Component {
 
   getData = () => {
     // console.log("getData()");
-    axios.get('/api/trips/addTrip').then(response => {
+    axios.get("/api/trips/addTrip").then(response => {
       this.setState({
         trips: response.data,
-        filteredTrips: response.data,
+        filteredTrips: response.data
       });
     });
   };
 
   updateSearchText = text => {
-    console.log('onchange query', text);
+    console.log("onchange query", text);
     this.setState({
-      query: text,
+      query: text
     });
   };
 
@@ -50,10 +49,10 @@ export default class Trips extends Component {
       }
     });
 
-    console.log('filtered', filteredTrips);
+    console.log("filtered", filteredTrips);
 
     this.setState({
-      filteredTrips: filteredTrips,
+      filteredTrips: filteredTrips
     });
   };
 
@@ -69,18 +68,18 @@ export default class Trips extends Component {
 
     let filteredTrips = this.state.trips.filter(trip => {
       return (
-        (this.state.Easy && trip.difficulty === 'Easy') ||
-        (this.state.Intermediate && trip.difficulty === 'Intermediate') ||
-        (this.state.Advanced && trip.difficulty === 'Advanced') ||
+        (this.state.Easy && trip.difficulty === "Easy") ||
+        (this.state.Intermediate && trip.difficulty === "Intermediate") ||
+        (this.state.Advanced && trip.difficulty === "Advanced") ||
         (this.state.oneDay && trip.duration <= 360) ||
-        (this.state.threeDay && 360 < trip.duration <= 1080) ||
-        (this.state.oneWeek && 1080 < trip.duration <= 2520) ||
+        (this.state.threeDay && 360 <= trip.duration <= 1080) ||
+        (this.state.oneWeek && 1080 <= trip.duration <= 2520) ||
         (this.state.hardcore && trip.duration > 2520)
       );
     });
 
     this.setState({
-      filteredTrips: filteredTrips,
+      filteredTrips: filteredTrips
     });
 
     // let query = {};
@@ -143,7 +142,7 @@ export default class Trips extends Component {
       return id !== elem._id;
     });
     this.setState({
-      filteredTrips: filteredArray,
+      filteredTrips: filteredArray
     });
   };
 
@@ -171,7 +170,10 @@ export default class Trips extends Component {
           executeSearch={this.executeSearch}
         /> */}
         <div className="trips-wrapper">
-          <TripCard deleteOne={this.deleteOne} trips={this.state.filteredTrips} />
+          <TripCard
+            deleteOne={this.deleteOne}
+            trips={this.state.filteredTrips}
+          />
         </div>
       </div>
     );

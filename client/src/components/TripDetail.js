@@ -22,20 +22,15 @@ export default class TripDetail extends Component {
   }
 
   render() {
-    {
-      const trip = this.state.trip;
+    const trip = this.state.trip;
 
-      if (!trip) {
-        return <div>Jackie and the Ferry Boys</div>;
-      }
-      return (
-        <>
-          {/* <h1>{trip.title}</h1>
-          <p>{trip.duration}</p>
-          <p>{trip.distance}</p> */}
-          <MapView coordinates={trip.coordinates} origin={trip.origin} />
-        </>
-      );
+    if (!trip) {
+      return <div>Jackie and the Ferry Boys</div>;
     }
+    return (
+      <>
+        <MapView coordinates={trip.coordinates} origin={trip.origin} />
+      </>
+    );
   }
 }

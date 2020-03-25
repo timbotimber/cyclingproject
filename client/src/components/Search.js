@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 export default class Search extends React.Component {
   handleChange = e => {
@@ -27,13 +26,3 @@ export default class Search extends React.Component {
     );
   }
 }
-
-// locations (very very vague)
-// duration
-// distance
-// difficulty
-
-// difficulty logic:
-// Easy: < 50km
-// Advance: > 150 km
-// Intermediate: 51 < x < 149

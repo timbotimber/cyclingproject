@@ -1,7 +1,6 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import App from "../App";
 
 const NavBar = props => {
   const logout = () => {
@@ -16,7 +15,12 @@ const NavBar = props => {
       <nav className="navbar">
         {props.user.firstName && (
           <div className="nav-greeting">
-            <p>👋🏻 Hey {props.user.firstName}!</p>
+            <p>
+              <span role="img" aria-label="wave">
+                👋🏻
+              </span>
+              Hey {props.user.firstName}!
+            </p>
           </div>
         )}
         <div className="logo">

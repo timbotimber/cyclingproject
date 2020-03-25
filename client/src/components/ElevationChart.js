@@ -1,23 +1,25 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "chart.js";
 import axios from "axios";
 
-export default class ElevationChart extends Component {
-  chartRef = React.createRef();
+const ElevationChart = props => {
+  const [elevations, setElevations] = useState([]);
+  const [origin, setOrigin] = useState([]);
+  const [destination, setDestination] = useState([]);
 
-  state = {
-    elevations: [],
-    Origin: [],
-    Destination: []
-  };
+  // state = {
+  //   elevations: [],
+  //   Origin: [],
+  //   Destination: []
+  // };
+  const chartRef = React.createRef();
 
-  createChart = () => {
-    console.log("this is the state in the function call", this.state);
-    const myChartRef = this.chartRef.current.getContext("2d");
+  const createChart = () => {
+    const myChartRef = chartRef.current.getContext("2d");
 
     let xAxis = [];
 
-    for (let i = 0; i < this.state.elevations.length; i += 1) {
+    for (let i = 0; i < elevations.length; i += 1) {
       xAxis.push(" ");
     }
 
@@ -29,7 +31,9 @@ export default class ElevationChart extends Component {
         datasets: [
           {
             label: "elevation / m",
-            data: this.state.elevations,
+            data: elevations,
+            // this might not work?
+
             fill: true,
             backgroundColor: "rgba(255, 105, 98, 0.2)",
             borderColor: "#ff6962",
@@ -65,31 +69,32 @@ export default class ElevationChart extends Component {
     });
   };
 
-  getData = () => {
-    const id = this.props.match.params.id;
+  const getData = () => {
+    const id = props.match.params.id;
     return axios.get(`/api/trips/trip/${id}`).then(trip => {
       console.log("trip?!", trip.data.elevations);
-      this.setState({
-        elevations: trip.data.elevations,
-        Origin: trip.data.origin,
-        Destination: trip.data.destination
-      });
+      setElevations(trip.data.elevations);
+      setOrigin(trip.data.origin);
+      setDestination(trip.data.destination);
+      // setState({
+      //   elevations: trip.data.elevations,
+      //   Origin: trip.data.origin,
+      //   Destination: trip.data.destination
+      // });
     });
-    console.log("the getData fn ran");
   };
 
-  componentDidMount() {
-    this.getData().then(res => {
-      this.createChart();
+  useEffect(() => {
+    getData().then(res => {
+      createChart();
     });
-    console.log("this is the id", this.props.match.params.id);
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="chart">
-        <canvas id="myChart" ref={this.chartRef} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="chart">
+      <canvas id="myChart" ref={chartRef} />
+    </div>
+  );
+};
+
+export default ElevationChart;
