@@ -1,10 +1,134 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+// import TripCard from './TripCard';
+// import FilterPanel from './FilterPanel';
+// import axios from 'axios';
+
+// export default class Trips extends Component {
+//   // state = {
+//   //   trips: [],
+//   //   query: '',
+//   //   filteredTrips: [],
+//   //   Easy: false,
+//   //   Intermediate: false,
+//   //   Advanced: false,
+//   //   oneDay: false,
+//   //   threeDay: false,
+//   //   oneWeek: false,
+//   //   hardcore: false,
+//   // };
+
+//   // componentDidMount() {
+//   //   getData();
+//   // }
+
+//   // getData = () => {
+//   //   // console.log("getData()");
+//   //   axios.get('/api/trips/addTrip').then(response => {
+//   //     setState({
+//   //       trips: response.data,
+//   //       filteredTrips: response.data,
+//   //     });
+//   //   });
+//   // };
+
+//   updateSearchText = text => {
+//     console.log('onchange query', text);
+//     setState({
+//       query: text,
+//     });
+//   };
+
+//   executeSearch = () => {
+//     let filteredTrips = state.trips.filter(obj => {
+//       if (
+//         obj.title.includes(state.query) ||
+//         obj.origin_name.includes(state.query) ||
+//         obj.destination_name.includes(state.query)
+//       ) {
+//         return true;
+//       }
+//     });
+
+//     console.log('filtered', filteredTrips);
+
+//     setState({
+//       filteredTrips: filteredTrips,
+//     });
+//   };
+
+//   mutateCheckboxBoolean = e => {
+//     let key = e.target.name;
+//     setState({ [key]: !state[key] }, () => {
+//       console.log(key, state[key]);
+//     });
+//   };
+
+//   executeFilter = e => {
+//     e.preventDefault();
+
+//     let filteredTrips = state.trips.filter(trip => {
+//       return (
+//         (state.Easy && trip.difficulty === 'Easy') ||
+//         (state.Intermediate && trip.difficulty === 'Intermediate') ||
+//         (state.Advanced && trip.difficulty === 'Advanced') ||
+//         (state.oneDay && trip.duration <= 360) ||
+//         (state.threeDay && 360 <= trip.duration <= 1080) ||
+//         (state.oneWeek && 1080 <= trip.duration <= 2520) ||
+//         (state.hardcore && trip.duration > 2520)
+//       );
+//     });
+
+//     setState({
+//       filteredTrips: filteredTrips,
+//     });
+//   };
+
+//   deleteOne = id => {
+//     console.log(id);
+//     let filteredArray = state.filteredTrips.filter(elem => {
+//       console.log(elem);
+//       return id !== elem._id;
+//     });
+//     setState({
+//       filteredTrips: filteredArray,
+//     });
+//   };
+
+//   render() {
+
+//     console.log(state.filteredTrips);
+//     return (
+//       <div className="wrapper">
+//         <div className="filter-wrapper">
+//           <FilterPanel
+//             updateSearchText={updateSearchText}
+//             easy={state.easy}
+//             mutate={mutateCheckboxBoolean}
+//             query={state.query}
+//             executeSearch={executeSearch}
+//             executeFilter={executeFilter}
+//           />
+//         </div>
+//         {/* <Search
+//           updateSearchText={updateSearchText}
+//           query={state.query}
+//           executeSearch={executeSearch}
+//         /> */}
+//         <div className="trips-wrapper">
+//           <TripCard deleteOne={deleteOne} trips={state.filteredTrips} />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+import React, { useState, useEffect } from 'react';
 import TripCard from './TripCard';
 import FilterPanel from './FilterPanel';
 import axios from 'axios';
 
-export default class Trips extends Component {
-  state = {
+const Trips = () => {
+  const [state, setState] = useState({
     trips: [],
     query: '',
     filteredTrips: [],
@@ -15,164 +139,91 @@ export default class Trips extends Component {
     threeDay: false,
     oneWeek: false,
     hardcore: false,
-  };
+  });
 
-  componentDidMount() {
-    this.getData();
-  }
+  useEffect(() => {
+    getData();
+  }, []);
 
-  getData = () => {
-    // console.log("getData()");
+  const getData = () => {
     axios.get('/api/trips/addTrip').then(response => {
-      this.setState({
-        trips: response.data,
-        filteredTrips: response.data,
-      });
+      setState({ ...state, trips: response.data, filteredTrips: response.data });
     });
   };
 
-  updateSearchText = text => {
+  const updateSearchText = text => {
     console.log('onchange query', text);
-    this.setState({
-      query: text,
-    });
+    setState({ ...state, query: text });
   };
 
-  executeSearch = () => {
-    let filteredTrips = this.state.trips.filter(obj => {
+  const executeSearch = () => {
+    let filteredTrips = state.trips.filter(obj => {
       if (
-        obj.title.includes(this.state.query) ||
-        obj.origin_name.includes(this.state.query) ||
-        obj.destination_name.includes(this.state.query)
+        obj.title.includes(state.query) ||
+        obj.origin_name.includes(state.query) ||
+        obj.destination_name.includes(state.query)
       ) {
         return true;
       }
     });
-
-    console.log('filtered', filteredTrips);
-
-    this.setState({
-      filteredTrips: filteredTrips,
-    });
+    setState({ ...state, filteredTrips: filteredTrips });
   };
 
-  mutateCheckboxBoolean = e => {
+  const mutateCheckboxBoolean = e => {
     let key = e.target.name;
-    this.setState({ [key]: !this.state[key] }, () => {
-      console.log(key, this.state[key]);
-    });
+    setState({ [key]: !state[key] }, () => {});
   };
 
-  executeFilter = e => {
+  const executeFilter = e => {
     e.preventDefault();
 
-    let filteredTrips = this.state.trips.filter(trip => {
+    let filteredTrips = state.trips.filter(trip => {
       return (
-        (this.state.Easy && trip.difficulty === 'Easy') ||
-        (this.state.Intermediate && trip.difficulty === 'Intermediate') ||
-        (this.state.Advanced && trip.difficulty === 'Advanced') ||
-        (this.state.oneDay && trip.duration <= 360) ||
-        (this.state.threeDay && 360 <= trip.duration <= 1080) ||
-        (this.state.oneWeek && 1080 <= trip.duration <= 2520) ||
-        (this.state.hardcore && trip.duration > 2520)
+        (state.Easy && trip.difficulty === 'Easy') ||
+        (state.Intermediate && trip.difficulty === 'Intermediate') ||
+        (state.Advanced && trip.difficulty === 'Advanced') ||
+        (state.oneDay && trip.duration <= 360) ||
+        (state.threeDay && 360 <= trip.duration <= 1080) ||
+        (state.oneWeek && 1080 <= trip.duration <= 2520) ||
+        (state.hardcore && trip.duration > 2520)
       );
     });
 
-    this.setState({
+    setState({
       filteredTrips: filteredTrips,
     });
-
-    // let query = {};
-
-    // Object.keys(this.state).forEach(key => {
-    //   console.log("object values", key);
-    //   if (this.state[key] === true) {
-    //     query[key] = this.state[key];
-    //     // queryKeys.push(key);
-    //   }
-    //   return query;
-    // });
-    // console.log("done arr", query);
-
-    // let filteredResults = this.state.trips.filter(search, query);
-
-    // function search(trip) {
-    //   return Object.keys(this).every(key => trip[key] === this[key]);
-    // }
-
-    // console.log("filteredResults", filteredResults);
-
-    // let filteredList = this.state.trips.filter(trip => {
-    //   for (const key in truthy) {
-    //     if (trip[key] !== truthy[key]) return false;
-    //   }
-    //   return true;
-    // });
-
-    // console.log("filtered list:", filteredList);
-
-    // users= users.filter(function(item) {
-    //   for (var key in filter) {
-    //     if (item[key] === undefined || item[key] != filter[key])
-    //       return false;
-    //   }
-    //   return true;
-    // });
-
-    // const place = features.find(el => el.place_type.includes("place"));
-    // if (place) {
-    //   this.setState({ destination_name: place.place_name });
-    //   return;
-    // }
-
-    // let filteredList = this.state.trips.filter(trip => {
-    //   for (const key of arr) {
-    //     if (trip.key) {
-    //       return true;
-    //     }
-    //   }
-    // });
-    // console.log(filteredList);
   };
 
-  deleteOne = id => {
-    console.log(id);
-    let filteredArray = this.state.filteredTrips.filter(elem => {
+  const deleteOne = id => {
+    let filteredArray = state.filteredTrips.filter(elem => {
       console.log(elem);
       return id !== elem._id;
     });
-    this.setState({
-      filteredTrips: filteredArray,
-    });
+    setState({ ...state, filteredTrips: filteredArray });
   };
 
-  render() {
-    // let filterTrips;
-    // this.state.trips.map(trip => {
-    //   //
-    // });
-    console.log(this.state.filteredTrips);
-    return (
-      <div className="wrapper">
-        <div className="filter-wrapper">
-          <FilterPanel
-            updateSearchText={this.updateSearchText}
-            easy={this.state.easy}
-            mutate={this.mutateCheckboxBoolean}
-            query={this.state.query}
-            executeSearch={this.executeSearch}
-            executeFilter={this.executeFilter}
-          />
-        </div>
-        {/* <Search
-          updateSearchText={this.updateSearchText}
-          query={this.state.query}
-          executeSearch={this.executeSearch}
-        /> */}
-        <div className="trips-wrapper">
-          <TripCard deleteOne={this.deleteOne} trips={this.state.filteredTrips} />
-        </div>
+  return (
+    <div className="wrapper">
+      <div className="filter-wrapper">
+        <FilterPanel
+          updateSearchText={updateSearchText}
+          easy={state.easy}
+          mutate={mutateCheckboxBoolean}
+          query={state.query}
+          executeSearch={executeSearch}
+          executeFilter={executeFilter}
+        />
       </div>
-    );
-  }
-}
+      {/* <Search
+        updateSearchText={updateSearchText}
+        query={state.query}
+        executeSearch={executeSearch}
+      /> */}
+      <div className="trips-wrapper">
+        <TripCard deleteOne={deleteOne} trips={state.filteredTrips} />
+      </div>
+    </div>
+  );
+};
+
+export default Trips;

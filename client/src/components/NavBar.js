@@ -1,16 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const NavBar = props => {
   const logout = () => {
-    axios.delete("/api/auth/logout").then(() => {
+    axios.delete('/api/auth/logout').then(() => {
       props.setUser(null);
     });
   };
 
   if (props.user) {
-    console.log(props.user.email);
     return (
       <nav className="navbar">
         {props.user.firstName && (

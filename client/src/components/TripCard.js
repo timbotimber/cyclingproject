@@ -1,146 +1,96 @@
-import React from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-export default class TripCard extends React.Component {
-  state = {
-    userInfo: [],
-    fave: true,
-    somethingDeleted: false
-  };
+const TripCard = props => {
+  const [userInfo, setUserInfo] = useState([]);
 
-  // checkFave = () => {
-  //   this.state.userInfo.includes(trip._id) ? true : false;
-  // };
+  useEffect(() => {
+    getData();
+  }, []);
 
-  componentDidMount() {
-    this.getData();
-  }
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log(prevState, this.state);
-  //   console.log(prevProps, this.props);
-  //   if (this.state == prevState) {
-  //     console.log('updated');
-  //     this.getData();
-  //   }
-  // }
-
-  getData = () => {
-    axios.get("/api/auth/likedtrips").then(response => {
-      //  console.log('this is the response.data', response.data);
-      // let faveChecker
-      // this.checkFave();
-      this.setState({
-        userInfo: response.data
-      });
+  const getData = () => {
+    axios.get('/api/auth/likedtrips').then(response => {
+      setUserInfo(response.data);
     });
   };
 
-  faveTrip = id => {
-    console.log("Markus");
+  const faveTrip = id => {
     axios.post(`/api/trips/updatefaves/${id}`).then(response => {
-      console.log("Heldrup", response.data.liked_trips);
-
-      this.setState(
-        {
-          // posts: response.data,
-          userInfo: response.data.liked_trips
-        },
-        () => {
-          console.log(this.state.userInfo);
-        }
-      );
+      setUserInfo(response.data.liked_trips);
     });
   };
 
-  deleteTrip = id => {
-    console.log(id, "test id");
+  const deleteTrip = id => {
     axios.post(`/api/trips/delete/${id}`).then(response => {
-      console.log("the delete response", response);
-      this.props.deleteOne(id);
+      console.log('the delete response', response);
+      props.deleteOne(id);
     });
   };
 
-  render() {
-    console.log(this.props);
-    console.log("is this the liked trip?", this.state);
-
-    return (
-      <div className="trips-list">
-        {this.props.trips.map(trip => {
-          return (
-            <div className="trip-card">
-              <div className="primary-content">
-                <div>
-                  <h2>
-                    <Link to={`/trip/${trip._id}`}>{trip.title}</Link>
-                  </h2>
-                  <p>From: {trip.origin_name}</p>
-                  <p>To: {trip.destination_name}</p>
-                  {/* <p>Duration: {(this.props.duration / 60).toFixed(2)} hours</p> */}
-                </div>
-                <div className="favebutton">
-                  <div onClick={() => this.faveTrip(trip._id, trip)}>
-                    {this.state.userInfo.includes(trip._id) ? (
-                      <>
-                        <img
-                          className="heart"
-                          src="./img/heart.png"
-                          alt="heart"
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <img
-                          className="heart"
-                          src="./img/empty_heart.png"
-                          alt="empty heart"
-                        />
-                      </>
-                    )}
-                  </div>
-                </div>
+  return (
+    <div className="trips-list">
+      {props.trips.map(trip => {
+        return (
+          <div className="trip-card">
+            <div className="primary-content">
+              <div>
+                <h2>
+                  <Link to={`/trip/${trip._id}`}>{trip.title}</Link>
+                </h2>
+                <p>From: {trip.origin_name}</p>
+                <p>To: {trip.destination_name}</p>
+                {/* <p>Duration: {(props.duration / 60).toFixed(2)} hours</p> */}
               </div>
-              <div className="secondary-content">
-                <div>
-                  <p className="caption">Difficulty</p>
-                  <p className="attribute">
-                    {trip.difficulty ? trip.difficulty : "N/A"}
-                  </p>
-                </div>
-
-                <div>
-                  <p className="caption">Distance</p>
-                  <p className="attribute">{trip.distance.toFixed(2)} km</p>
-                </div>
-
-                <div>
-                  <p className="caption">Duration</p>
-                  <p className="attribute">
-                    {(trip.duration / 60).toFixed(2)} hrs
-                  </p>
-                </div>
-
-                <div>
-                  <p className="caption">Elevation gain</p>
-                  <p className="attribute">
-                    <Link to={`chart/${trip._id}`}>
-                      {trip.elevation_gain ? trip.elevation_gain + " m" : "N/A"}
-                    </Link>
-                  </p>
-                </div>
-
-                <div className="delete-attribute">
-                  <button onClick={() => this.deleteTrip(trip._id)}>
-                    {/* Delete Trip */}
-                    <img src="/img/trash_icon.png" alt="delete" />
-                  </button>
+              <div className="favebutton">
+                <div onClick={() => faveTrip(trip._id, trip)}>
+                  {userInfo.includes(trip._id) ? (
+                    <>
+                      <img className="heart" src="./img/heart.png" alt="heart" />
+                    </>
+                  ) : (
+                    <>
+                      <img className="heart" src="./img/empty_heart.png" alt="empty heart" />
+                    </>
+                  )}
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
-    );
-  }
-}
+            <div className="secondary-content">
+              <div>
+                <p className="caption">Difficulty</p>
+                <p className="attribute">{trip.difficulty ? trip.difficulty : 'N/A'}</p>
+              </div>
+
+              <div>
+                <p className="caption">Distance</p>
+                <p className="attribute">{trip.distance.toFixed(2)} km</p>
+              </div>
+
+              <div>
+                <p className="caption">Duration</p>
+                <p className="attribute">{(trip.duration / 60).toFixed(2)} hrs</p>
+              </div>
+
+              <div>
+                <p className="caption">Elevation gain</p>
+                <p className="attribute">
+                  <Link to={`chart/${trip._id}`}>{trip.elevation_gain ? trip.elevation_gain + ' m' : 'N/A'}</Link>
+                </p>
+              </div>
+
+              <div className="delete-attribute">
+                <button onClick={() => deleteTrip(trip._id)}>
+                  {/* Delete Trip */}
+                  <img src="/img/trash_icon.png" alt="delete" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default TripCard;
