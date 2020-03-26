@@ -1,28 +1,28 @@
-import React from "react";
+import React from 'react';
 
-export default class Search extends React.Component {
-  handleChange = e => {
-    this.props.updateSearchText(e.target.value);
+const Search = props => {
+  const handleChange = e => {
+    props.updateSearchText(e.target.value);
   };
 
-  submitSearch = e => {
-    this.props.executeSearch();
+  const submitSearch = e => {
+    props.executeSearch();
   };
 
-  render() {
-    return (
-      <div className="search-wrapper">
-        <input
-          type="text"
-          placeholder="Title, origin, or destination"
-          className="search-input"
-          value={this.props.query}
-          onChange={this.handleChange}
-        />
-        <button className="search-button" onClick={this.submitSearch}>
-          Search
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="search-wrapper">
+      <input
+        type="text"
+        placeholder="Title, origin, or destination"
+        className="search-input"
+        value={props.query}
+        onChange={handleChange}
+      />
+      <button className="search-button" onClick={submitSearch}>
+        Search
+      </button>
+    </div>
+  );
+};
+
+export default Search;

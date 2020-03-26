@@ -171,7 +171,7 @@ const Trips = () => {
 
   const mutateCheckboxBoolean = e => {
     let key = e.target.name;
-    setState({ [key]: !state[key] }, () => {});
+    setState({ ...state, [key]: !state[key] }, () => {});
   };
 
   const executeFilter = e => {

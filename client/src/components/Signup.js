@@ -1,121 +1,115 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-export default class Signup extends Component {
-  state = {
-    email: "",
-    password: "",
-    message: ""
+const Signup = props => {
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+    message: '',
+  });
+
+  const handleChange = event => {
+    setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post("/api/auth/signup", {
-        email: this.state.email,
-        password: this.state.password
+      .post('/api/auth/signup', {
+        email: state.email,
+        password: state.password,
       })
       .then(response => {
         // redirect
         // update state for user in <App/>
-        this.props.setUser(response.data);
-        this.props.history.push("/");
+        props.setUser(response.data);
+        props.history.push('/');
       })
       .catch(err => {
-        console.log("error test", err.response.data.message);
-        this.setState({
-          message: err.response.data.message
-        });
+        console.log('error test', err.response.data.message);
+        setState({ ...state, message: err.response.data.message });
       });
   };
 
-  render() {
-    return (
-      <div className="auth-wrapper">
-        <div className="auth-box">
-          <h2>Create an Account</h2>
+  return (
+    <div className="auth-wrapper">
+      <div className="auth-box">
+        <h2>Create an Account</h2>
 
-          <div className="auth-form">
-            <form onSubmit={this.handleSubmit}>
-              <div>
-                <label htmlFor="firstName"></label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="First name"
-                  value={this.state.firstName}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="lastName"></label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="Last name"
-                  value={this.state.lastName}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email"></label>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password"></label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <button className="auth-btn" type="submit">
-                  Sign up
-                </button>
-              </div>
-            </form>
-            <p id="or-google">or</p>
+        <div className="auth-form">
+          <form onSubmit={handleSubmit}>
             <div>
-              <a href={`${process.env.REACT_APP_SERVER_URL}/api/auth/google`}>
-                {" "}
-                <button className="auth-btn sort-button">
-                  Sign up with Google
-                </button>
-              </a>
+              <label htmlFor="firstName"></label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="First name"
+                value={state.firstName}
+                onChange={handleChange}
+              />
             </div>
-            <p id="auth-line">
-              Already have an account?{" "}
-              <Link className="auth-links" to="/login">
-                Login
-              </Link>
-            </p>
+
+            <div>
+              <label htmlFor="lastName"></label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Last name"
+                value={state.lastName}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email"></label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Email"
+                value={state.email}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password"></label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                value={state.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <button className="auth-btn" type="submit">
+                Sign up
+              </button>
+            </div>
+          </form>
+          <p id="or-google">or</p>
+          <div>
+            <a href={`${process.env.REACT_APP_SERVER_URL}/api/auth/google`}>
+              {' '}
+              <button className="auth-btn sort-button">Sign up with Google</button>
+            </a>
           </div>
-          {this.state.message && <p>{this.state.message}</p>}
+          <p id="auth-line">
+            Already have an account?{' '}
+            <Link className="auth-links" to="/login">
+              Login
+            </Link>
+          </p>
         </div>
+        {state.message && <p>{state.message}</p>}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Signup;
