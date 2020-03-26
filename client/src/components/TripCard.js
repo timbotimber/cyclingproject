@@ -33,7 +33,7 @@ const TripCard = props => {
       {props.trips.map(trip => {
         return (
           <div className="trip-card">
-            <div className="primary-content">
+            <div key={trip._id} className="primary-content">
               <div>
                 <h2>
                   <Link to={`/trip/${trip._id}`}>{trip.title}</Link>

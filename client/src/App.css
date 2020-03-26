@@ -21,7 +21,7 @@ body {
 }
 .App {
   position: fixed;
-  font-family: "Work Sans", sans-serif;
+  font-family: 'Work Sans', sans-serif;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -44,7 +44,7 @@ body {
   /* letter-spacing: 1px; */
 }
 h2 {
-  font-family: "Spartan", sans-serif;
+  font-family: 'Spartan', sans-serif;
   font-weight: 700;
   color: var(--night);
   margin-top: 12px;
@@ -59,7 +59,7 @@ p {
 }
 .attribute {
   color: var(--night);
-  font-family: "Spartan", sans-serif;
+  font-family: 'Spartan', sans-serif;
   font-size: 14px;
   font-weight: bold;
   margin: 0;
@@ -117,7 +117,7 @@ p {
   padding: 0px 16px;
   color: var(--white);
   font-size: 12px;
-  font-family: "Spartan", sans-serif;
+  font-family: 'Spartan', sans-serif;
   font-weight: 500;
 }
 
@@ -206,7 +206,7 @@ p {
   border-radius: 4px;
 }
 .popUp :after {
-  content: "\22B3";
+  content: '\22B3';
 }
 .chart {
   display: flex;
@@ -247,7 +247,7 @@ nav a {
 }
 .logo {
   width: 33%;
-  font-family: "Bitter", sans-serif;
+  font-family: 'Bitter', sans-serif;
   font-weight: 400;
   font-size: 26px;
   letter-spacing: 0.7px;
@@ -265,7 +265,7 @@ nav a {
   padding-right: 32px;
 }
 .nav-links a {
-  font-family: "Spartan", sans-serif;
+  font-family: 'Spartan', sans-serif;
   padding-left: 32px;
   text-decoration: none;
   color: var(--white);
@@ -583,7 +583,7 @@ nav a {
   width: auto;
 }
 .main h1 {
-  font-family: "Spartan", sans-serif;
+  font-family: 'Spartan', sans-serif;
   font-size: 80px;
   font-weight: 800;
   line-height: 0.7;
@@ -688,15 +688,73 @@ nav a {
   /* div.info-wrapper {
     display: none;
   } */
+
+  .main h1 {
+    font-size: 30px;
+  }
+
+  .home-container {
+    background-color: #d3d3df;
+  }
+
+  .home-left {
+    width: 0%;
+  }
+
+  .home-right img {
+    width: 0%;
+  }
+
   .wrapper {
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    /* height: 100%; */
     /* position: fixed; */
-    margin: 8px auto;
-    display: flex;
+    /* margin: 8px auto; */
+    /* display: flex; */
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+    /* justify-content: space-between; */
+    /* align-items: flex-start; */
+  }
+
+  .secondary-content {
+    flex-direction: column;
+  }
+
+  nav {
+    flex-direction: column;
+    justify-content: center;
+    /* height: 55px; */
+  }
+
+  .nav-links {
+    padding: 5px 0px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-links a {
+    padding: 0 20px;
+  }
+
+  .nav-greeting {
+    display: none;
+  }
+
+  .home-btns-wrapper a {
+    width: 28%;
+  }
+
+  .button-solid {
+    padding: 0 10px;
+    height: 32px;
+    font-size: 80%;
+  }
+
+  .button-solid-dark {
+    height: 32px;
+    padding: 0 10px;
+    min-width: 0px;
+    font-size: 80%;
   }
 
   /* .profile-wrapper {

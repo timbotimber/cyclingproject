@@ -47,7 +47,7 @@ export default class PlotView extends React.Component {
   updateRoute = () => {
     this.removeRoute(); // overwrite any existing layers
     let data = this.state.draw.getAll();
-    let answer = document.getElementById('calculated-line');
+    // let answer = document.getElementById('calculated-line');
     let lastFeature = data.features.length - 1;
     let coords = data.features[lastFeature].geometry.coordinates;
     let newCoords = coords.join(';');
@@ -91,12 +91,9 @@ export default class PlotView extends React.Component {
           difficulty: difficulty,
         },
         () => {
-          console.log(this.state);
           this.snapToBounds();
           this.reverseGeocode();
           this.getElevations().then(response => {
-            console.log('response', response);
-
             this.calculateGain(response);
           });
         }
@@ -126,7 +123,6 @@ export default class PlotView extends React.Component {
           }
         });
     });
-    console.log('elevations', elevations);
     await Promise.all(promises);
     this.setState({
       elevations: elevations,
@@ -136,14 +132,12 @@ export default class PlotView extends React.Component {
 
   // CALCULATING ELEVATION GAIN
   calculateGain = arr => {
-    console.log(arr);
     let gain = 0;
     for (let i = 1; i < arr.length; i++) {
       if (arr[i] > arr[i - 1]) {
         gain += arr[i] - arr[i - 1];
       }
     }
-    console.log('gain', gain);
     let realisticGain = gain / 2;
     this.setState({
       elevation_gain: realisticGain,
@@ -184,7 +178,7 @@ export default class PlotView extends React.Component {
   // GET NAVIGATION INSTRUCTIONS
   getInstructions = data => {
     // Target the sidebar to add the instructions
-    let directions = document.getElementById('directions');
+    // let directions = document.getElementById('directions');
     let legs = data.legs;
     let tripDirections = [];
     // Output the instructions for each step of each leg in the response object

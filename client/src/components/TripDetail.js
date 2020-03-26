@@ -7,11 +7,8 @@ const TripDetail = props => {
 
   useEffect(() => {
     const id = props.match.params.id;
-    console.log('ide value', id);
     axios.get(`/api/trips/trip/${id}`).then(response => {
-      console.log('response', response);
       setTrip(response.data);
-      console.log('Test the state:', trip);
     });
   }, []);
 
