@@ -199,13 +199,6 @@ export default class PlotView extends React.Component {
 
   // COMPONENT DID MOUNT
   componentDidMount = () => {
-    const id = this.props.match.params.id;
-    axios.get(`/api/trips/trip/${id}`).then(response => {
-      console.log('response', response);
-      this.setState({
-        trip: response.data,
-      });
-    });
     map = new mapboxgl.Map({
       container: this.mapContainer,
       // style: "mapbox://styles/mapbox/streets-v11",
@@ -279,6 +272,17 @@ export default class PlotView extends React.Component {
         });
       });
     });
+  };
+
+  componentDidUpdate = prevState => {
+    const id = this.props.match.params.id;
+    if (prevState.trip !== this.state.trip)
+      axios.get(`/api/trips/trip/${id}`).then(response => {
+        console.log('response', response);
+        this.setState({
+          trip: response.data,
+        });
+      });
   };
 
   // REVERSE GEOCODING: GETTING LOCATION NAME FROM COORDINATES
@@ -393,4 +397,5 @@ export default class PlotView extends React.Component {
     );
   }
 }
+
 // ReactDOM.render(<App />, document.getElementById('app'));

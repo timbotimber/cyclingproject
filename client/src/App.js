@@ -1,62 +1,42 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import "./App.css";
-import PlotView from "./components/PlotView";
-import NavBar from "./components/NavBar";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Trips from "./components/Trips";
-import Profile from "./components/Profile";
-import TripDetail from "./components/TripDetail";
-import Home from "./components/Home";
-import ElevationChart from "./components/ElevationChart";
+import React, { useState } from 'react';
+import { Route } from 'react-router-dom';
+import './App.css';
+import PlotView from './components/PlotView';
+import NavBar from './components/NavBar';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Trips from './components/Trips';
+import Profile from './components/Profile';
+import TripDetail from './components/TripDetail';
+import Home from './components/Home';
+import ElevationChart from './components/ElevationChart';
 
-class App extends React.Component {
-  state = {
-    user: this.props.user
+const App = props => {
+  const [state, setState] = useState({
+    user: props.user,
+  });
+
+  const setUser = userObj => {
+    setState({ ...state, user: userObj });
   };
 
-  setUser = userObj => {
-    this.setState({
-      user: userObj
-    });
-  };
-
-  render() {
-    // const id = this.props.match.params.tripId;
-    return (
-      // <MyProvider>
-      <div className="App">
-        <NavBar setUser={this.setUser} user={this.state.user} />
-        <div className="content">
-          <Route exact path="/" component={Home} />
-          <Route path="/plotview" component={PlotView} />
-          <Route
-            path="/login"
-            render={props => (
-              <Login history={props.history} setUser={this.setUser} />
-            )}
-          />
-          <Route
-            path="/signup"
-            render={props => (
-              <Signup history={props.history} setUser={this.setUser} />
-            )}
-          />
-          <Route exact path="/trips" component={Trips} />
-          <Route path="/chart/:id" component={ElevationChart} />
-          <Route path="/trip/:id" component={TripDetail} />
-          <Route
-            path="/profile"
-            render={props => (
-              <Profile setUser={this.setUser} user={this.state.user} />
-            )}
-          />
-        </div>
+  return (
+    // <MyProvider>
+    <div className="App">
+      <NavBar setUser={setUser} user={state.user} />
+      <div className="content">
+        <Route exact path="/" component={Home} />
+        <Route path="/plotview" component={PlotView} />
+        <Route path="/login" render={props => <Login history={props.history} setUser={setUser} />} />
+        <Route path="/signup" render={props => <Signup history={props.history} setUser={setUser} />} />
+        <Route exact path="/trips" component={Trips} />
+        <Route path="/chart/:id" component={ElevationChart} />
+        <Route path="/trip/:id" component={TripDetail} />
+        <Route path="/profile" render={props => <Profile setUser={setUser} user={state.user} />} />
       </div>
-      // </MyProvider>
-    );
-  }
-}
+    </div>
+    // </MyProvider>
+  );
+};
 
 export default App;
