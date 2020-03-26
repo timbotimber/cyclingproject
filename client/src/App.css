@@ -693,6 +693,10 @@ nav a {
     font-size: 30px;
   }
 
+  .main p {
+    padding-top: 80px;
+  }
+
   .home-container {
     background-color: #d3d3df;
   }
@@ -702,7 +706,8 @@ nav a {
   }
 
   .home-right img {
-    width: 0%;
+    width: 90%;
+    height: 25%;
   }
 
   .wrapper {
@@ -742,6 +747,7 @@ nav a {
 
   .home-btns-wrapper a {
     width: 28%;
+    margin-top: 0%;
   }
 
   .button-solid {
@@ -757,6 +763,53 @@ nav a {
     font-size: 80%;
   }
 
+  /* Profile */
+
+  .profile-wrapper {
+    width: 30%;
+  }
+
+  .info-wrapper p {
+    font-size: 60%;
+  }
+
+  .sort-button-wrapper {
+    padding-left: 20px;
+  }
+
+  .sort-button {
+    min-width: 80px;
+    height: 32px;
+    font-size: 80%;
+  }
+
+  .sort-button-active {
+    min-width: 80px;
+    height: 32px;
+    font-size: 80%;
+  }
+
+  /* PlotView */
+
+  .sidebarReview {
+    padding: 6px 12px;
+  }
+
+  .vertical-space {
+    display: none;
+  }
+
+  .review-trip-attributes {
+    flex-direction: column;
+  }
+
+  .input-text {
+    font-size: 70%;
+  }
+
+  .divider {
+    display: none;
+  }
   /* .profile-wrapper {
     width: 38%;
     height: 100%;
