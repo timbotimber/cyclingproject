@@ -32,8 +32,8 @@ const TripCard = props => {
     <div className="trips-list">
       {props.trips.map(trip => {
         return (
-          <div className="trip-card">
-            <div key={trip._id} className="primary-content">
+          <div key={trip._id} className="trip-card">
+            <div className="primary-content">
               <div>
                 <h2>
                   <Link to={`/trip/${trip._id}`}>{trip.title}</Link>
@@ -42,7 +42,7 @@ const TripCard = props => {
                 <p>To: {trip.destination_name}</p>
                 {/* <p>Duration: {(props.duration / 60).toFixed(2)} hours</p> */}
               </div>
-              <div className="favebutton">
+              <div key={trip._id} className="favebutton">
                 <div onClick={() => faveTrip(trip._id, trip)}>
                   {userInfo.includes(trip._id) ? (
                     <>

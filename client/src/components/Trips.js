@@ -148,13 +148,10 @@ const Trips = props => {
   const getData = () => {
     axios.get('/api/trips/addTrip').then(response => {
       setState({ ...state, trips: response.data, filteredTrips: response.data });
-      console.log(props.user);
-      console.log();
     });
   };
 
   const updateSearchText = text => {
-    console.log('onchange query', text);
     setState({ ...state, query: text });
   };
 
@@ -198,7 +195,6 @@ const Trips = props => {
 
   const deleteOne = id => {
     let filteredArray = state.filteredTrips.filter(elem => {
-      console.log(elem);
       return id !== elem._id;
     });
     setState({ ...state, filteredTrips: filteredArray });

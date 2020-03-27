@@ -110,7 +110,7 @@ const Profile = props => {
       if (buttonStateTrips) {
         setTrips(response.data);
         setButtonStyleTrips('sort-button-active');
-        setButtonStateFav('sort-button');
+        // setButtonStateFav('sort-button');
       }
     });
   };
@@ -119,7 +119,7 @@ const Profile = props => {
     axios.get(`/api/trips/trips/likedtrips`).then(response => {
       if (!buttonStateFav) {
         setTrips(response.data);
-        setButtonStyleTrips('sort-button-active');
+        // setButtonStyleTrips('sort-button-active');
         setButtonStateFav('sort-button');
       }
     });
