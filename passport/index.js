@@ -1,3 +1,6 @@
 require("./serializers");
 require("./localStrategy");
-require("./google");
+// Only use google if in prod
+if (process.env.NODE_ENV == 'production') {
+  require("./google");
+}
