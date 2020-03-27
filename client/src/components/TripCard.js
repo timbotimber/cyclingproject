@@ -81,10 +81,10 @@ const TripCard = props => {
 
               <div className="delete-attribute">
                 {}
-                <button onClick={() => deleteTrip(trip._id)}>
+                {/* <button onClick={() => deleteTrip(trip._id)}>
                   {/* Delete Trip */}
-                  <img src="/img/trash_icon.png" alt="delete" />
-                </button>
+                {/* <img src="/img/trash_icon.png" alt="delete" /> */}
+                {/* </button>  */}
               </div>
             </div>
           </div>

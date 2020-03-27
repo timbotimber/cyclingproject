@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef, useRef } from 'react';
 import Chart from 'chart.js';
 import axios from 'axios';
 
@@ -6,13 +6,9 @@ const ElevationChart = props => {
   const [elevations, setElevations] = useState([]);
   const [origin, setOrigin] = useState([]);
   const [destination, setDestination] = useState([]);
+  const [chart, setChart] = useState(false);
 
-  // state = {
-  //   elevations: [],
-  //   Origin: [],
-  //   Destination: []
-  // };
-  const chartRef = React.createRef();
+  const chartRef = useRef();
 
   const createChart = () => {
     const myChartRef = chartRef.current.getContext('2d');
@@ -32,8 +28,6 @@ const ElevationChart = props => {
           {
             label: 'elevation / m',
             data: elevations,
-            // this might not work?
-
             fill: true,
             backgroundColor: 'rgba(255, 105, 98, 0.2)',
             borderColor: '#ff6962',
@@ -67,6 +61,7 @@ const ElevationChart = props => {
         },
       },
     });
+    setChart(true);
   };
 
   const getData = () => {
@@ -75,11 +70,6 @@ const ElevationChart = props => {
       setElevations(trip.data.elevations);
       setOrigin(trip.data.origin);
       setDestination(trip.data.destination);
-      // setState({
-      //   elevations: trip.data.elevations,
-      //   Origin: trip.data.origin,
-      //   Destination: trip.data.destination
-      // });
     });
   };
 
@@ -87,7 +77,7 @@ const ElevationChart = props => {
     getData().then(res => {
       createChart();
     });
-  }, []);
+  }, [chart]);
 
   return (
     <div className="chart">
