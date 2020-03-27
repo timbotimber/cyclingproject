@@ -732,7 +732,7 @@ nav a {
   }
 
   .nav-links {
-    padding: 5px 0px;
+    padding: 0px 0px;
     justify-content: center;
     width: 100%;
   }
@@ -810,6 +810,38 @@ nav a {
   .divider {
     display: none;
   }
+
+  /* explore */
+
+  .filter-panel {
+    width: 100%;
+    padding: 10px 10px;
+  }
+
+  .filter-panel label {
+    margin: 3px 0px;
+    font-size: 12px;
+  }
+
+  .secondary-content div {
+    width: 50%;
+  }
+
+  /* Plotview */
+
+  .sidebarReview {
+    width: 50vw;
+  }
+
+  .review-trip-attributes div {
+    width: 50%;
+  }
+
+  .sidebar button {
+    height: 50px;
+    width: 200px;
+  }
+
   /* .profile-wrapper {
     width: 38%;
     height: 100%;

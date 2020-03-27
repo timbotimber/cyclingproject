@@ -127,7 +127,7 @@ import TripCard from './TripCard';
 import FilterPanel from './FilterPanel';
 import axios from 'axios';
 
-const Trips = () => {
+const Trips = props => {
   const [state, setState] = useState({
     trips: [],
     query: '',
@@ -148,6 +148,8 @@ const Trips = () => {
   const getData = () => {
     axios.get('/api/trips/addTrip').then(response => {
       setState({ ...state, trips: response.data, filteredTrips: response.data });
+      console.log(props.user);
+      console.log();
     });
   };
 
@@ -220,7 +222,7 @@ const Trips = () => {
         executeSearch={executeSearch}
       /> */}
       <div className="trips-wrapper">
-        <TripCard deleteOne={deleteOne} trips={state.filteredTrips} />
+        <TripCard user={props.user} deleteOne={deleteOne} trips={state.filteredTrips} />
       </div>
     </div>
   );
