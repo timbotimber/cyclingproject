@@ -4,14 +4,24 @@ import { Link } from 'react-router-dom';
 
 const TripCard = props => {
   const [userInfo, setUserInfo] = useState([]);
+  const [userTrips, setUserTrips] = useState([]);
 
   useEffect(() => {
     getData();
+    getUserTrips();
   }, []);
 
   const getData = () => {
     axios.get('/api/auth/likedtrips').then(response => {
       setUserInfo(response.data);
+      console.log(response.data, 'this is the setuser');
+    });
+  };
+
+  const getUserTrips = () => {
+    axios.get('/api/auth/usertrips').then(response => {
+      setUserTrips(response.data);
+      console.log('this are the user trips', response.data._id);
     });
   };
 
@@ -23,7 +33,6 @@ const TripCard = props => {
 
   const deleteTrip = id => {
     axios.post(`/api/trips/delete/${id}`).then(response => {
-      console.log('the delete response', response);
       props.deleteOne(id);
     });
   };
@@ -80,11 +89,13 @@ const TripCard = props => {
               </div>
 
               <div className="delete-attribute">
-                {}
-                {/* <button onClick={() => deleteTrip(trip._id)}>
-                  {/* Delete Trip */}
-                {/* <img src="/img/trash_icon.png" alt="delete" /> */}
-                {/* </button>  */}
+                {userTrips._id === trip.user ? (
+                  <button onClick={() => deleteTrip(trip._id)}>
+                    <img src="/img/trash_icon.png" alt="delete" />
+                  </button>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>

@@ -19,7 +19,7 @@ export default class PlotView extends React.Component {
     draw: null,
     lng: 13,
     lat: 52,
-    zoom: 6,
+    zoom: 5,
     uuid: '',
     duration: '',
     distance: '',

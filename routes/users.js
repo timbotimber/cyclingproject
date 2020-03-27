@@ -96,4 +96,17 @@ router.get('/likedtrips', (req, res) => {
     });
 });
 
+router.get('/usertrips', (req, res) => {
+  // console.log('DALINA', req.liked_trips);
+  User.findById(req.user._id)
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: err.message,
+      });
+    });
+});
+
 module.exports = router;

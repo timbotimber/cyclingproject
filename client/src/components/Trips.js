@@ -129,6 +129,7 @@ import axios from 'axios';
 
 const Trips = props => {
   const [state, setState] = useState({
+    user: props.user,
     trips: [],
     query: '',
     filteredTrips: [],
@@ -218,7 +219,7 @@ const Trips = props => {
         executeSearch={executeSearch}
       /> */}
       <div className="trips-wrapper">
-        <TripCard user={props.user} deleteOne={deleteOne} trips={state.filteredTrips} />
+        <TripCard user={state.user} deleteOne={deleteOne} trips={state.filteredTrips} />
       </div>
     </div>
   );
