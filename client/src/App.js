@@ -29,10 +29,10 @@ const App = props => {
         <Route path="/plotview" component={PlotView} />
         <Route path="/login" render={props => <Login history={props.history} setUser={setUser} />} />
         <Route path="/signup" render={props => <Signup history={props.history} setUser={setUser} />} />
-        <Route exact path="/trips" render={props => <Trips user={state.user} />} />
+        <Route exact path="/trips" render={() => <Trips user={state.user} />} />
         <Route path="/chart/:id" component={ElevationChart} />
         <Route path="/trip/:id" component={TripDetail} />
-        <Route path="/profile" render={props => <Profile setUser={setUser} user={state.user} />} />
+        <Route path="/profile" render={() => <Profile setUser={setUser} user={state.user} />} />
       </div>
     </div>
     // </MyProvider>

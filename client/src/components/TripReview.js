@@ -48,8 +48,7 @@ const TripReview = props => {
         waypoints
       })
       .then(response => {
-        console.log(response);
-        props.history.push("/profile");
+        // props.history.push("/profile");
       });
   };
   const {
@@ -100,7 +99,7 @@ const TripReview = props => {
             </div>
           </div>
           <br />
-          <button className="button-solid">Save this trip</button>
+          <submit className="button-solid">Save this trip</submit>
         </div>
       </form>
     </div>

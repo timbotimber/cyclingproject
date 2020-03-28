@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import TripCard from './TripCard';
+import api from '../api';
 
 const Profile = props => {
   const [trips, setTrips] = useState([]);
-  const [likedTrips, setLikedTrips] = useState([]);
   const [buttonStateTrips, setButtonStateTrips] = useState(true);
   const [buttonStyleTrips, setButtonStyleTrips] = useState('sort-button-active');
   const [buttonStateFav, setButtonStateFav] = useState(false);
@@ -15,7 +14,7 @@ const Profile = props => {
   }, []);
 
   const getData = () => {
-    axios.get('/api/trips/user').then(response => {
+    api.getUserTrips.then(response => {
       if (buttonStateTrips) {
         setTrips(response.data);
         setButtonStyleTrips('sort-button-active');
@@ -24,7 +23,7 @@ const Profile = props => {
   };
 
   const showFavorites = () => {
-    axios.get(`/api/trips/trips/likedtrips`).then(response => {
+    api.getLikedTrips().then(response => {
       if (!buttonStateFav) {
         setTrips(response.data);
         setButtonStateFav('sort-button');
@@ -33,7 +32,6 @@ const Profile = props => {
   };
 
   const deleteOne = id => {
-    console.log(id);
     let filteredArray = trips.filter(elem => {
       return id !== elem._id;
     });

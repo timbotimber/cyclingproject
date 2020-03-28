@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import MapBoxGLDraw from 'mapbox-gl-draw';
 import axios from 'axios';
 import TripReview from './TripReview';
+import api from '../api';
 mapboxgl.accessToken =
   'pk.eyJ1IjoiamFjcXVlbGluZWNoZW4iLCJhIjoiY2s2ZHB5Y2RxMDkxbzNkbXA2bXVzM3JvbiJ9.pUyDxtMWjGqmGgX4JAdL7g';
 
@@ -62,14 +63,11 @@ export default class PlotView extends React.Component {
       '?geometries=geojson&steps=true&&access_token=' +
       mapboxgl.accessToken;
     let req = new XMLHttpRequest();
-    // console.log("req", req);
     req.responseType = 'json';
     req.open('GET', url, true);
     req.onload = () => {
       let jsonResponse = req.response;
       let arr = jsonResponse.routes[0].geometry.coordinates;
-      // console.log("jsonReponse", jsonResponse);
-      // CALCULATING DIFFICULTY LEVEL BASED ON DISTANCE
       let distance = jsonResponse.routes[0].distance * 0.001;
       let difficulty = '';
       if (distance < 50) {
@@ -195,14 +193,12 @@ export default class PlotView extends React.Component {
   componentDidMount = () => {
     map = new mapboxgl.Map({
       container: this.mapContainer,
-      // style: "mapbox://styles/mapbox/streets-v11",
       style: 'mapbox://styles/mapbox/outdoors-v11',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       duration: this.state.duration,
       distance: this.state.distance,
     });
-    // console.log('duration', duration);
     const draw = new MapBoxGLDraw({
       displayControlsDefault: false,
       controls: {
@@ -271,8 +267,7 @@ export default class PlotView extends React.Component {
   componentDidUpdate = prevState => {
     const id = this.props.match.params.id;
     if (prevState.trip !== this.state.trip)
-      axios.get(`/api/trips/trip/${id}`).then(response => {
-        console.log('response', response);
+      api.getTrip(id).then(response => {
         this.setState({
           trip: response.data,
         });
@@ -358,7 +353,6 @@ export default class PlotView extends React.Component {
   };
 
   render() {
-    // console.log(this.state);
     let tripReviewCard;
     let text;
     if (this.state.reviewTrip) {
@@ -391,5 +385,3 @@ export default class PlotView extends React.Component {
     );
   }
 }
-
-// ReactDOM.render(<App />, document.getElementById('app'));
