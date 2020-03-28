@@ -14,14 +14,12 @@ const TripCard = props => {
   const getData = () => {
     axios.get('/api/auth/likedtrips').then(response => {
       setUserInfo(response.data);
-      console.log(response.data, 'this is the setuser');
     });
   };
 
   const getUserTrips = () => {
     axios.get('/api/auth/usertrips').then(response => {
       setUserTrips(response.data);
-      console.log('this are the user trips', response.data._id);
     });
   };
 

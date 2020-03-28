@@ -12,16 +12,13 @@ const Profile = props => {
 
   useEffect(() => {
     getData();
-    console.log(props.user);
   }, []);
 
   const getData = () => {
     axios.get('/api/trips/user').then(response => {
       if (buttonStateTrips) {
         setTrips(response.data);
-        console.log(response.data, 'this is it');
         setButtonStyleTrips('sort-button-active');
-        // setButtonStateFav('sort-button');
       }
     });
   };
@@ -30,7 +27,6 @@ const Profile = props => {
     axios.get(`/api/trips/trips/likedtrips`).then(response => {
       if (!buttonStateFav) {
         setTrips(response.data);
-        // setButtonStyleTrips('sort-button-active');
         setButtonStateFav('sort-button');
       }
     });
@@ -39,7 +35,6 @@ const Profile = props => {
   const deleteOne = id => {
     console.log(id);
     let filteredArray = trips.filter(elem => {
-      console.log(elem);
       return id !== elem._id;
     });
     setTrips(filteredArray);
@@ -49,10 +44,6 @@ const Profile = props => {
     <div className="wrapper">
       <div className="profile-wrapper">
         <div className="info-wrapper">
-          {/* <div>
-          <img className="profile-img" src={props.user.profilePic} alt="Profile Image" />
-        </div> */}
-
           <div className="profile-img-wrapper">
             {props.user.profilePic ? (
               <img className="profile-img" src={props.user.profilePic} alt="Profile" />
