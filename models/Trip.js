@@ -13,30 +13,7 @@ const tripSchema = new Schema({
   difficulty: String,
   elevations: Array,
   elevation_gain: Number,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }, // Auto generated
-  //   difficulty: {
-  //     enum: ["Easy", "Intermediate", "Advanced"],
-  //     type: String
-  //   },
-  //   emissions: Number,
-  waypoints: Array
-  // [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Waypoint"
-  //   }
-  // ], // Comes from Mapbox, but needs modification...
-  //   comments: [
-  //     {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: "Comment"
-  //     }
-  //   ],
-  //   likes_count: Number, //
-  //   established_route: Boolean
+  waypoints: Array,
 });
 
 const Trip = mongoose.model("Trip", tripSchema);

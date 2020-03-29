@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import api from '../api';
 
 const TripCard = props => {
   const [userInfo, setUserInfo] = useState([]);
@@ -12,25 +12,25 @@ const TripCard = props => {
   }, []);
 
   const getData = () => {
-    axios.get('/api/auth/likedtrips').then(response => {
+    api.getLikedTrips().then(response => {
       setUserInfo(response.data);
     });
   };
 
   const getUserTrips = () => {
-    axios.get('/api/auth/usertrips').then(response => {
+    api.getUserTrips().then(response => {
       setUserTrips(response.data);
     });
   };
 
   const faveTrip = id => {
-    axios.post(`/api/trips/updatefaves/${id}`).then(response => {
+    api.faveTrip(id).then(response => {
       setUserInfo(response.data.liked_trips);
     });
   };
 
   const deleteTrip = id => {
-    axios.post(`/api/trips/delete/${id}`).then(response => {
+    api.deleteTrip(id).then(response => {
       props.deleteOne(id);
     });
   };

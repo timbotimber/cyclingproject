@@ -27,7 +27,6 @@ const Signup = props => {
         props.history.push('/');
       })
       .catch(err => {
-        console.log('error test', err.response.data.message);
         setState({ ...state, message: err.response.data.message });
       });
   };

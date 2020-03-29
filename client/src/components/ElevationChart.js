@@ -1,11 +1,9 @@
 import React, { useState, useEffect, createRef, useRef } from 'react';
 import Chart from 'chart.js';
-import axios from 'axios';
+import api from '../api';
 
 const ElevationChart = props => {
   const [elevations, setElevations] = useState([]);
-  const [origin, setOrigin] = useState([]);
-  const [destination, setDestination] = useState([]);
   const [chart, setChart] = useState(false);
 
   const chartRef = useRef();
@@ -66,10 +64,8 @@ const ElevationChart = props => {
 
   const getData = () => {
     const id = props.match.params.id;
-    return axios.get(`/api/trips/trip/${id}`).then(trip => {
+    return api.getTrip(id).then(trip => {
       setElevations(trip.data.elevations);
-      setOrigin(trip.data.origin);
-      setDestination(trip.data.destination);
     });
   };
 

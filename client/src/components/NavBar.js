@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 
 const NavBar = props => {
   const logout = () => {
-    axios.delete('/api/auth/logout').then(() => {
+    api.logoutUser().then(() => {
       props.setUser(null);
     });
   };
