@@ -18,7 +18,7 @@ const TripCard = props => {
   };
 
   const getUserTrips = () => {
-    axios.get('/api/auth/usertrips').then(response => {
+    api.getUserTrips().then(response => {
       setUserTrips(response.data);
     });
   };
