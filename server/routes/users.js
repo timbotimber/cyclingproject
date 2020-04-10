@@ -3,9 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const User = require('../models/User');
-// const Login = require("../client/src/components/Login")
-
-/* Here we'll write the routes dedicated to handle the user logic (auth) */
 
 router.post('/signup', (req, res) => {
   const { email, password } = req.body;
@@ -17,7 +14,6 @@ router.post('/signup', (req, res) => {
     return res.status(400).json({ message: 'password is too short' });
   }
 
-  // Later: change this to email
   User.findOne({ email: email })
     .then(found => {
       if (found) {
@@ -25,23 +21,16 @@ router.post('/signup', (req, res) => {
       }
       return bcrypt
         .genSalt()
-        .then(salt => {
-          return bcrypt.hash(password, salt);
-        })
-        .then(hash => {
-          return User.create({ email: email, password: hash });
-        })
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => User.create({ email: email, password: hash }))
         .then(newUser => {
-          // passport login
           req.login(newUser, err => {
             if (err) res.status(500).json({ message: 'Error while logging in' });
             else res.json(newUser);
           });
         });
     })
-    .catch(err => {
-      res.status(500).json({ message: 'Error while authorizing' });
-    });
+    .catch(() => res.status(500).json({ message: 'Error while authorizing' }));
 });
 
 router.post('/login', (req, res, next) => {
@@ -50,10 +39,8 @@ router.post('/login', (req, res, next) => {
       return res.status(500).json({ message: 'Error while authenticating' });
     }
     if (!user) {
-      // no user found with email or password didn't match
       return res.status(400).json({ message: info.message });
     }
-    // passport req.login
     req.login(user, err => {
       if (err) {
         return res.status(500).json({ message: 'Error while logging in' });
@@ -64,7 +51,6 @@ router.post('/login', (req, res, next) => {
 });
 
 router.delete('/logout', (req, res) => {
-  // passport logout function
   req.logout();
   res.json({ message: 'Successful logout' });
 });
@@ -85,9 +71,7 @@ router.get(
 
 router.get('/likedtrips', (req, res) => {
   User.findById(req.user._id)
-    .then(user => {
-      res.json(user.liked_trips);
-    })
+    .then(user => res.json(user.liked_trips))
     .catch(err => {
       res.status(500).json({
         message: err.message,
@@ -96,7 +80,6 @@ router.get('/likedtrips', (req, res) => {
 });
 
 router.get('/usertrips', (req, res) => {
-  // console.log('DALINA', req.liked_trips);
   User.findById(req.user._id)
     .then(user => {
       res.json(user);

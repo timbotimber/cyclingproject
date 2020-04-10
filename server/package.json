@@ -5,16 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "dynalite && nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-serverless-express": "^3.3.8",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^3.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "dynamoose": "^1.11.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "mongoose": "^5.9.2",
@@ -24,9 +26,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0"
   },
-  "nodemonConfig": {
-    "ignore": [
-      "client/*"
-    ]
+  "devDependencies": {
+    "dynalite": "^3.1.6",
+    "nodemon": "^2.0.3"
   }
 }
