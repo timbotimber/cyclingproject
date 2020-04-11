@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "dynalite && nodemon server.js"
+    "dev": "nodemon app.local.js"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +27,9 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "aws-sdk": "^2.656.0",
     "dynalite": "^3.1.6",
+    "dynamodb-admin": "^4.0.0",
     "nodemon": "^2.0.3"
   }
 }

@@ -1,12 +1,6 @@
-require('dotenv').config();
-
-require('./db'); // will run the code in `./db/index.js` (which is the database connection logic)
-require('./passport');
-
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors')
-
 const app = express();
 
 app.use(cors())
@@ -21,6 +15,4 @@ require('./session')(app);
 const routes = require('./routes'); // this is our controller and will manage all the routes so we don't have to register any new route handler here
 app.use(routes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Express server listening to: ${process.env.PORT}`);
-});
+module.exports = app;

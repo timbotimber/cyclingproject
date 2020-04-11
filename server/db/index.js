@@ -1,21 +1,17 @@
-const mongoose = require("mongoose");
+// Load the AWS SDK for Node.js
+const AWS = require('aws-sdk');
+if (process.env.NODE_ENV === 'development') {
+  require('./local');
+}
 
-// mongoose.set("useNewUrlParser", true);
-// mongoose.set("useFindAndModify", false);
-// mongoose.set("useCreateIndex", true);
-// mongoose.set("useUnifiedTopology", true);
+const dynamoConfig = {
+  apiVersion: '2012-08-10'
+}
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(conn => {
-    console.log(`Connected to ${conn.connections[0].name}`);
-  })
-  .catch(err => {
-    console.log(`Error connecting to the DB: ${err}`);
-  });
+if (process.env.NODE_ENV == 'development') {
+  dynamoConfig.endpoint = process.env.DYNALITE_ADDRESS
+}
 
-module.exports = {
-  disconnect: () => {
-    mongoose.connection.close();
-  }
-};
+const dynamo = new AWS.DynamoDB(dynamoConfig);
+
+module.exports = dynamo;

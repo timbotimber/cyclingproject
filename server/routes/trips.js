@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-const Trip = require('../models/Trip');
-const UserTrip = require('../models/UserTrip');
+const User = require('../models/users');
+const Trip = require('../models/trips');
+const UserTrip = require('../models/user_trips');
 
 router.get('/addTrip', (req, res) => {
   Trip.find()
