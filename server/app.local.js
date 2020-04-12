@@ -16,25 +16,24 @@ const dynaAdminServer = dynsAdminApp.listen(process.env.DYNA_ADMIN_PORT);
 
 asyncGetTableList()
   .then(async resp => {
-    if (resp.TableNames.length <= 0) {
-      const table_schemas = Object.values(models);
-      for (ts of table_schemas) {
-        dynamodb.createTable(ts, (err) => {
+    const table_schemas = Object.values(models);
+    for (ts of table_schemas) {
+      if (!resp.TableNames.includes(ts.TableName)) {
+        dynamodb.createTable(ts, (err, data) => {
           if (err) {
             return console.log(err);
           }
-          console.log(ts.TableName);
+          console.log(`Created table: ${data.TableDescription.TableName}`);
         })
       }
     }
   });
 
 
-
 dynaAdminServer.on('listening', () => {
   const address = dynaAdminServer.address();
-  console.log(`Dyna Admin listening on http://0.0.0.0:${address.port}\n`);
+  console.log(`Dyna Admin listening on http://0.0.0.0:${address.port}`);
 });
 app.listen(process.env.PORT, () => {
-  console.log(`Express server listening to: ${process.env.PORT}`);
+  console.log(`Express server listening to: http://127.0.0.1:${process.env.PORT}`);
 });
