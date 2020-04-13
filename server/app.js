@@ -1,6 +1,9 @@
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors')
+
+require('./passport');
+
 const app = express();
 
 app.use(cors())

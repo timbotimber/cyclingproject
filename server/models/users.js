@@ -1,22 +1,14 @@
 const schema = {
   AttributeDefinitions: [
     {
-      AttributeName: 'id',
-      AttributeType: 'S'
-    },
-    {
       AttributeName: 'email',
       AttributeType: 'S'
     }
   ],
   KeySchema: [
     {
-      AttributeName: 'id',
-      KeyType: 'HASH'
-    },
-    {
       AttributeName: 'email',
-      KeyType: 'RANGE'
+      KeyType: 'HASH'
     }
   ],
   ProvisionedThroughput: {

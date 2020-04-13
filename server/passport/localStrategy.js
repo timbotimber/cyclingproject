@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
-const User = require("../models/User");
+const { users } = require('../db');
 
 // We'll need to pass email parameters through later:
 passport.use(
@@ -9,7 +9,7 @@ passport.use(
     { usernameField: "email", passwordField: "password" },
     (email, password, done) => {
       // Look for an existing user with the given email
-      User.findOne({ email: email })
+      users.getUserByEmail(email)
         .then(userDocument => {
           // If user doesn't exist, return error
           if (!userDocument) {
@@ -23,7 +23,6 @@ passport.use(
               done(null, false, { message: "Incorrect credentials" });
               return;
             }
-            console.log(userDocument);
             // If user exists and password matches then log the user in
             done(null, userDocument);
           });

@@ -1,8 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
-const User = require('../models/users');
+'use strict';
+const express     = require('express');
+const router      = express.Router();
+const bcrypt      = require('bcryptjs');
+const passport    = require('passport');
+const { users } = require('../db');
+const User        = require('../models/users');
 
 router.post('/signup', (req, res) => {
   const { email, password } = req.body;
@@ -14,23 +16,34 @@ router.post('/signup', (req, res) => {
     return res.status(400).json({ message: 'password is too short' });
   }
 
-  User.findOne({ email: email })
-    .then(found => {
-      if (found) {
+  users.getUserByEmail(email)
+    .catch(() => res.status(500).json({ message: 'Error while authorizing' }))
+    .then(user => {
+      if (user !== false) {
         return res.status(400).json({ message: 'email is already in use' });
       }
-      return bcrypt
+      bcrypt
         .genSalt()
         .then(salt => bcrypt.hash(password, salt))
-        .then(hash => User.create({ email: email, password: hash }))
+        .then(hash => users.createUser({ email: email, password: hash }))
         .then(newUser => {
           req.login(newUser, err => {
-            if (err) res.status(500).json({ message: 'Error while logging in' });
-            else res.json(newUser);
+            if (err) {
+              throw err;
+            }
+            else {
+              res.json({
+                id: newUser.id,
+                email: newUser.email
+              });
+            }
           });
+        })
+        .catch(err => {
+          console.log(err);
+          return res.status(500).json({ message: 'error while trying to register user'})
         });
-    })
-    .catch(() => res.status(500).json({ message: 'Error while authorizing' }));
+    });
 });
 
 router.post('/login', (req, res, next) => {

@@ -1,16 +1,16 @@
 require('dotenv').config();
-const util = require('util');
-const AWS = require('aws-sdk');
+const util             = require('util');
+const AWS              = require('aws-sdk');
 const { createServer } = require('dynamodb-admin');
-const dynamodb = require('./db');
-const app = require('./app');
-const models = require('./models');
+const { db }           = require('./db');
+const app              = require('./app');
+const models           = require('./models');
 
 // Have to bind otherwise this isn't point to active dynamodb
-const asyncGetTableList = util.promisify(dynamodb.listTables.bind(dynamodb));
+const asyncGetTableList = util.promisify(db.listTables.bind(db));
 
-const dynClient = new AWS.DynamoDB.DocumentClient({ service: dynamodb });
-const dynsAdminApp = createServer(dynamodb, dynClient);
+const dynClient = new AWS.DynamoDB.DocumentClient({ service: db });
+const dynsAdminApp = createServer(db, dynClient);
 const dynaAdminServer = dynsAdminApp.listen(process.env.DYNA_ADMIN_PORT);
 
 
@@ -19,7 +19,7 @@ asyncGetTableList()
     const table_schemas = Object.values(models);
     for (ts of table_schemas) {
       if (!resp.TableNames.includes(ts.TableName)) {
-        dynamodb.createTable(ts, (err, data) => {
+        db.createTable(ts, (err, data) => {
           if (err) {
             return console.log(err);
           }
