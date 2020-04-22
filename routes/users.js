@@ -84,6 +84,7 @@ router.get(
 );
 
 router.get('/likedtrips', (req, res) => {
+  // console.log('DALINA', req.liked_trips);
   User.findById(req.user._id)
     .then(user => {
       res.json(user.liked_trips);

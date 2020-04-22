@@ -220,6 +220,31 @@ export default class PlotView extends React.Component {
           'line-opacity': 0.8,
         },
       });
+
+      // map.addSource("route", {
+      //   type: "geojson",
+      //   data: {
+      //     type: "Feature",
+      //     properties: {},
+      //     geometry: {
+      //       type: "LineString",
+      //       coordinates: [userCoords]
+      //     }
+      //   }
+      // });
+      // map.addLayer({
+      //   id: "route",
+      //   type: "line",
+      //   source: "route",
+      //   layout: {
+      //     "line-join": "round",
+      //     "line-cap": "round"
+      //   },
+      //   paint: {
+      //     "line-color": "#888",
+      //     "line-width": 8
+      //   }
+      // });
     });
 
     this.setState({ map, draw }, () => {
@@ -343,3 +368,5 @@ export default class PlotView extends React.Component {
     );
   }
 }
+
+// ReactDOM.render(<App />, document.getElementById('app'));

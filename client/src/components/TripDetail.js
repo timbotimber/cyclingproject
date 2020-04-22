@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import MapView from './MapViewDetail';
-import api from '../api';
 
 const TripDetail = props => {
   const [trip, setTrip] = useState(null);
 
   useEffect(() => {
     const id = props.match.params.id;
-    api.getTrip(id).then(response => {
+    axios.get(`/api/trips/trip/${id}`).then(response => {
       setTrip(response.data);
     });
   }, []);
